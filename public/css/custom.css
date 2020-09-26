@@ -1,0 +1,15 @@
+.red
+{
+	text-align:center; 
+	font-weight:bold;
+	color:red;
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+  .modal-md {
+    width: 600px;
+  }
+}
