@@ -22,7 +22,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Location Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="location_name" placeholder="Enter Location">
+                                    <input class="form-control" type="text" name="location_name" placeholder="Enter Location" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->
@@ -31,7 +31,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Location Short Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="location_short_name" placeholder="Enter Short Name">
+                                    <input class="form-control" type="text" name="location_short_name" placeholder="Enter Short Name" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->

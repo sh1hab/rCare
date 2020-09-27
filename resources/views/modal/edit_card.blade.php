@@ -18,7 +18,7 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label class="form-control-label"> Card Name: <span class="tx-danger">*</span></label>
-                        <input class="form-control card_name" type="text" name="card_name" placeholder="Enter Bank Card Name">
+                        <input class="form-control card_name" type="text" name="card_name" placeholder="Enter Bank Card Name" required="">
                     </div>
                 </div><!-- col-4 -->
             </div><!-- row -->

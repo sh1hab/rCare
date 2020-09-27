@@ -23,7 +23,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Bank Short Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="short_name" placeholder="Enter Bank Short Name">
+                                    <input class="form-control" type="text" name="short_name" placeholder="Enter Bank Short Name" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->
@@ -32,7 +32,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Bank Full Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="full_name" placeholder="Enter Bank Full Name">
+                                    <input class="form-control" type="text" name="full_name" placeholder="Enter Bank Full Name" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->

@@ -24,7 +24,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Supplier Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="supplier_name" placeholder="Enter Supplier Name">
+                                    <input class="form-control" type="text" name="supplier_name" placeholder="Enter Supplier Name" required="">
                                 </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Supplier Contact: <span class="tx-danger">*</span></label>
-                                    <input class="form-control supplier_contact" type="text" name="supplier_contact" placeholder="Enter Supplier Contact Number">
+                                    <input class="form-control supplier_contact" type="text" name="supplier_contact" placeholder="Enter Supplier Contact Number" required="">
                                 </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Asset Type: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="asset_type" placeholder="Enter Asset Type Name">
+                                    <input class="form-control" type="text" name="asset_type" placeholder="Enter Asset Type Name" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->

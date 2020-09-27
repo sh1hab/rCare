@@ -19,7 +19,7 @@
                 <div class="col-md-10">
                     <div class="form-group mg-b-0">
                         <label> Service : <span class="tx-danger">*</span></label>
-                        <input type="text" name="service_name" class="form-control name" placeholder="Enter firstname" required>
+                        <input type="text" name="service_name" class="form-control name" placeholder="Enter firstname" required="">
                     </div>
                 </div><!-- col-4 -->
             </div><!-- row -->

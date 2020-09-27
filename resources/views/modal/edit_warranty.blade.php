@@ -12,7 +12,7 @@
                             <div class="col-md-10">
                                 <div class="form-group mg-b-0">
                                     <label> Warranty Period: <span class="tx-danger">*</span></label>
-                                    <input type="text" name="warranty_period" class="form-control warranty_period" placeholder="Enter firstname" required>
+                                    <input type="text" name="warranty_period" class="form-control warranty_period" placeholder="Enter firstname" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->

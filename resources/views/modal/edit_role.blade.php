@@ -18,7 +18,7 @@
                 <div class="col-md-10">
                     <div class="form-group mg-b-0">
                         <label> Role : <span class="tx-danger">*</span></label>
-                        <input type="text" name="role_name" class="form-control role_name" placeholder="Enter firstname" required>
+                        <input type="text" name="role_name" class="form-control role_name" placeholder="Enter firstname" required="">
                     </div>
                 </div><!-- col-4 -->
             </div><!-- row -->

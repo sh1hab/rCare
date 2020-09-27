@@ -18,7 +18,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Category: <span class="tx-danger">*</span></label>
-                        <select class="form-control selectpicker category_id" data-live-search="true" title="Select Parts Category" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="category_id">
+                        <select class="form-control selectpicker category_id" data-live-search="true" title="Select Parts Category" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="category_id" required="">
                             @foreach ($data['category'] as $category)
                             <option data-subtext="{{$category->category_code}}" value="{{ $category->id }}">{{$category->category_name}}</option>
                             @endforeach
@@ -31,7 +31,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Compatible Brand: <span class="tx-danger">*</span></label>
-                        <select class="form-control selectpicker brand_id" data-live-search="true" title="Select Compatible Brand" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="compatible_brand_id">
+                        <select class="form-control selectpicker brand_id" data-live-search="true" title="Select Compatible Brand" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="compatible_brand_id" required="">
                             @foreach ($data['brand'] as $brand)
                             <option data-subtext="{{$brand->brand_code}}" value="{{ $brand->id }}">{{$brand->brand_name}}</option>
                             @endforeach
@@ -45,7 +45,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Parts/Accessories Name: <span class="tx-danger">*</span></label>
-                        <input class="form-control parts_name" type="text" name="parts_name" placeholder="Enter Parts/Accessories Name">
+                        <input class="form-control parts_name" type="text" name="parts_name" placeholder="Enter Parts/Accessories Name" required="">
                     </div>
                 </div>
             {{-- </div>
@@ -54,7 +54,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Average Price: <span class="tx-danger">*</span></label>
-                        <input class="form-control avg_price" type="text" name="avg_price" placeholder="Enter Parts/Accessories Avg. Price">
+                        <input class="form-control avg_price" type="text" name="avg_price" placeholder="Enter Parts/Accessories Avg. Price" required="">
                     </div>
                 </div>
             {{-- </div>
@@ -63,7 +63,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Margin: <span class="tx-danger">*</span></label>
-                        <input class="form-control margin" type="text" name="margin" placeholder="Enter Margin Price">
+                        <input class="form-control margin" type="text" name="margin" placeholder="Enter Margin Price" required="">
                     </div>
                 </div>
             {{-- </div>
@@ -72,7 +72,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Sale Price: <span class="tx-danger">*</span></label>
-                        <input class="form-control sales_price" type="text" name="sales_price" placeholder="Enter Parts/Accessories Sale Price">
+                        <input class="form-control sales_price" type="text" name="sales_price" placeholder="Enter Parts/Accessories Sale Price" required="">
                     </div>
                 </div>
             {{-- </div>
@@ -81,7 +81,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Warranty Status: <span class="tx-danger">*</span></label>
-                        <select class="form-control selectpicker warranty_id" data-live-search="true" title="Select Warranty Status" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="warranty_id">
+                        <select class="form-control selectpicker warranty_id" data-live-search="true" title="Select Warranty Status" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="warranty_id" required="">
                             @foreach ($data['warranties'] as $warranty)
                             <option value="{{ $warranty->id }}">{{$warranty->warranty_period}}</option>
                             @endforeach

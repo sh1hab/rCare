@@ -24,7 +24,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="user_name" placeholder="Enter Full Name">
+                                    <input class="form-control" type="text" name="user_name" placeholder="Enter Full Name" required="">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -36,19 +36,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Contact Number: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="contact_no" placeholder="Enter Contact Number">
+                                    <input class="form-control" type="text" name="contact_no" placeholder="Enter Contact Number" required="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> RS ID: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="rs_id" placeholder="Enter RS ID">
+                                    <input class="form-control" type="text" name="rs_id" placeholder="Enter RS ID" required="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Email: </label>
-                                    <input class="form-control" type="text" name="email" placeholder="Enter Email Address">
+                                    <input class="form-control" type="text" name="email" placeholder="Enter Email Address" required="">
                                 </div>
                             </div>
 
@@ -57,7 +57,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> User Role: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="-------- Select |Role ---------" tabindex="-1" aria-hidden="true" name="role_id">
+                                    <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="-------- Select |Role ---------" tabindex="-1" aria-hidden="true" name="role_id" required="">
                                         @foreach ($data['role'] as $role)
                                         <option value="{{ $role->id }}"> {{ $role->role_name }} </option>
                                         @endforeach
@@ -76,7 +76,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label"> User Location: <span class="tx-danger">*</span></label>
-                                        <select class="form-control selectpicker" data-live-search="true" title="Select Location Name" data-placeholder="-------- Select Location ---------" tabindex="-1" aria-hidden="true" name="location_id">
+                                        <select class="form-control selectpicker" data-live-search="true" title="Select Location Name" data-placeholder="-------- Select Location ---------" tabindex="-1" aria-hidden="true" name="location_id" required="">
                                             @foreach ($data['location'] as $location)
                                             <option data-subtext="{{$location->location_short_name}}" value="{{ $location->id }}"> {{ $location->location_name }} </option>
                                             @endforeach
@@ -95,13 +95,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-control-label"> Username: <span class="tx-danger">*</span></label>
-                                            <input class="form-control" type="text" name="username" placeholder="Enter username">
+                                            <input class="form-control" type="text" name="username" placeholder="Enter username" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-control-label"> Password: <span class="tx-danger">*</span></label>
-                                            <input class="form-control" type="password" name="password" placeholder="Enter Password">
+                                            <input class="form-control" type="password" name="password" placeholder="Enter Password" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

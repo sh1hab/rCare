@@ -224,7 +224,7 @@ class SetupController extends Controller
         $brand->brand_name = $request->get('brand_name'); 
         $brand->brand_code = $request->get('brand_code');  
         $brand->brand_details = $request->get('brand_details');  
-        $brand->categories = $request->get('categories');
+        $brand->categories = json_encode($request->get('categories'));
         $brand->status = $request->get('status');
         $brand->create_by = Auth::user()->id;
         $brand->update_by = Auth::user()->id;

@@ -24,7 +24,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Brand Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="brand_name" placeholder="Enter Brand Name">
+                                    <input class="form-control" type="text" name="brand_name" placeholder="Enter Brand Name" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->
@@ -33,7 +33,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Brand Code: <span class="tx-danger">*</span></label>
-                                    <input class="form-control brand_code" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="brand_code" placeholder="Enter Brand Code">
+                                    <input class="form-control brand_code" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="brand_code" placeholder="Enter Brand Code" required="">
 
                                     <div class="red code_error" hidden>
                                         Brand code already exist!!!
@@ -47,7 +47,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Categories of This Brand: <span class="tx-danger">*</span></label>
-                                    <select class="selectpicker" name="categories[]" multiple data-live-search="true" title="Select Categories Under This Brand" data-width="100%">
+                                    <select class="selectpicker" name="categories[]" multiple data-live-search="true" title="Select Categories Under This Brand" data-width="100%" required="">
                                         @foreach ($data['categories'] as $category)
                                             <option value="{{$category->id}}"> {{ $category->category_name }} </option>                                            
                                         @endforeach

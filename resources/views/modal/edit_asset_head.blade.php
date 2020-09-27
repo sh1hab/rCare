@@ -19,7 +19,7 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label class="form-control-label"> Asset Type: </label>
-                        <select class="form-control select2 select2-hidden-accessible asset_type" title="Select Asset Type" data-placeholder="Choose one" tabindex="-1" aria-hidden="true" name="asset_type">
+                        <select class="form-control select2 select2-hidden-accessible asset_type" title="Select Asset Type" data-placeholder="Choose one" tabindex="-1" aria-hidden="true" name="asset_type" required="">
                             @foreach ($data['asset_type'] as $asset_type)
                                 <option value="{{ $asset_type->id }}">{{$asset_type->asset_type}}</option>
                             @endforeach
@@ -32,7 +32,7 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label class="form-control-label"> Asset Head: <span class="tx-danger">*</span></label>
-                        <input class="form-control head" type="text" name="asset_head" placeholder="Enter Asset Head Name">
+                        <input class="form-control head" type="text" name="asset_head" placeholder="Enter Asset Head Name" required="">
                     </div>
                 </div><!-- col-4 -->
             </div><!-- row -->

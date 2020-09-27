@@ -30,7 +30,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Category Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="category_name" placeholder="Enter Category">
+                                    <input class="form-control" type="text" name="category_name" placeholder="Enter Category" required="">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->
@@ -39,7 +39,7 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-control-label"> Category Code: <span class="tx-danger">*</span></label>
-                                    <input class="form-control category_code" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="category_code" placeholder="Category Code Ex. 08">
+                                    <input class="form-control category_code" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" name="category_code" placeholder="Category Code Ex. 08" required="">
 
                                     <div class="red code_error" hidden>
                                         Category code already exist!!!

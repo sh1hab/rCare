@@ -47,7 +47,7 @@
                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Parts/Accessories List </h6>
                     </div>
                     <div class="col-md-4 text-center">
-                        <button type="btn" class="btn btn-primary add_new_parts">Add New Parts</button>
+                        <button type="btn" class="btn btn-primary add_new_parts"><i class="fa fa-plus"> </i> Add New Parts</button>
                     </div>
                     <div class="col-md-4">
                         

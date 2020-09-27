@@ -29,7 +29,7 @@
                     <div class="col-md-10">
                       <div class="form-group mg-b-0">
                         <label> Service: <span class="tx-danger">*</span></label>
-                        <input type="text" name="service_name" class="form-control" placeholder="Enter Service Name" required>
+                        <input type="text" name="service_name" class="form-control" placeholder="Enter Service Name" required="">
                       </div>
                     </div><!-- col-4 -->
                   </div><!-- row -->
@@ -38,7 +38,7 @@
                       <div class="col-md-10">
                           <div class="form-group">
                               <label class="form-control-label"> Service Details:<span class="tx-danger">*</span> </label>
-                              <textarea rows="3" class="form-control" name="service_details" placeholder="Enter Service Details"></textarea>
+                              <textarea rows="3" class="form-control" name="service_details" placeholder="Enter Service Details" required=""></textarea>
                           </div>
                       </div><!-- col-4 -->
                   </div><!-- row -->
