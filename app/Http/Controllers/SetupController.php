@@ -19,6 +19,7 @@ use App\Supplier;
 use App\User;
 
 use Session;
+use Hash;
 use Auth;
 use Validator;
 use Redirect;
@@ -27,9 +28,25 @@ use DataTables;
 
 class SetupController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function dashboard()
     {
+        //dmd(Auth::user());
         return view('home');
     }
 
@@ -41,7 +58,6 @@ class SetupController extends Controller
 
     public function add_bank(Request $request)
     {
-        //dmd($_POST, $_SERVER['REQUEST_URI'], explode("/", $_SERVER['HTTP_REFERER']));
 
         $input_rules['short_name'] = 'required';
         $input_rules['full_name'] = 'required';
@@ -66,8 +82,8 @@ class SetupController extends Controller
         $bank->opening_balance = $request->get('opening_balance');  
         $bank->remarks = $request->get('remarks');
         $bank->status = $request->get('status');
-        $bank->create_by = 1;
-        $bank->update_by = 1;
+        $bank->create_by = Auth::user()->id;
+        $bank->update_by = Auth::user()->id;
 
         if($bank->save()){
                 return redirect()->back()->with('success_message', 'Bank Successfully Created');
@@ -112,8 +128,8 @@ class SetupController extends Controller
         $location->location_type = $request->get('location_type');
         $location->location_opening_balance = $request->get('location_opening_balance');
         $location->location_status = $request->get('location_status');
-        $location->create_by = 1;
-        $location->update_by = 1;
+        $location->create_by = Auth::user()->id;
+        $location->update_by = Auth::user()->id;
 
         if($location->save()){
             return redirect()->back()->with('success_message', 'Location Successfully Saved');
@@ -154,8 +170,8 @@ class SetupController extends Controller
         $category->category_details = $request->get('category_details');  
         $category->serial = $request->get('serial');
         $category->status = $request->get('status');
-        $category->create_by = 1;
-        $category->update_by = 1;
+        $category->create_by = Auth::user()->id;
+        $category->update_by = Auth::user()->id;
 
         if($category->save()){
             return redirect()->back()->with('success_message', 'Category Successfully Saved');
@@ -210,8 +226,8 @@ class SetupController extends Controller
         $brand->brand_details = $request->get('brand_details');  
         $brand->categories = $request->get('categories');
         $brand->status = $request->get('status');
-        $brand->create_by = 1;
-        $brand->update_by = 1;
+        $brand->create_by = Auth::user()->id;
+        $brand->update_by = Auth::user()->id;
 
         if($brand->save()){
             return redirect()->back()->with('success_message', 'Brand Successfully Saved');
@@ -268,8 +284,8 @@ class SetupController extends Controller
         $bank_account->opening_balance = $request->get('opening_balance');
         $bank_account->remarks = $request->get('remarks');
         $bank_account->status = $request->get('status');
-        $bank_account->create_by = 1;
-        $bank_account->update_by = 1;
+        $bank_account->create_by = Auth::user()->id;
+        $bank_account->update_by = Auth::user()->id;
 
         if($bank_account->save()){
             return redirect()->back()->with('success_message', 'Bank Account Successfully Saved');
@@ -305,8 +321,8 @@ class SetupController extends Controller
             $card = new Card();
 
         $card->card_name = $request->get('card_name');
-        $card->create_by = 1;
-        $card->update_by = 1;
+        $card->create_by = Auth::user()->id;
+        $card->update_by = Auth::user()->id;
         $card->status = $request->get('status');  
 
         if($card->save()){
@@ -344,8 +360,8 @@ class SetupController extends Controller
 
         $asset_type->asset_type = $request->get('asset_type');
         $asset_type->status = $request->get('status');
-        $asset_type->create_by = 1;
-        $asset_type->update_by = 1;
+        $asset_type->create_by = Auth::user()->id;
+        $asset_type->update_by = Auth::user()->id;
 
         if($asset_type->save()){
             return redirect()->back()->with('success_message', 'Asset Type Successfully Saved');
@@ -377,8 +393,8 @@ class SetupController extends Controller
         $asset_head->asset_type_id = $request->get('asset_type');
         $asset_head->asset_head = $request->get('asset_head');
         $asset_head->status = $request->get('status');
-        $asset_head->create_by = 1;
-        $asset_head->update_by = 1;
+        $asset_head->create_by = Auth::user()->id;
+        $asset_head->update_by = Auth::user()->id;
 
         if($asset_head->save()){
             return redirect()->back()->with('success_message', 'Asset Head Successfully Saved');
@@ -457,8 +473,8 @@ class SetupController extends Controller
         $parts->sales_price = $request->get('sales_price');
         $parts->warranty_id = $request->get('warranty_id');
         $parts->status = $request->get('status');
-        $parts->create_by = 1;
-        $parts->update_by = 1;
+        $parts->create_by = Auth::user()->id;
+        $parts->update_by = Auth::user()->id;
 
         if($parts->save()){
             return redirect()->back()->with('success_message', 'Parts/Accessories Successfully Saved');
@@ -607,8 +623,8 @@ class SetupController extends Controller
         $supplier->supplier_contact = $request->get('supplier_contact');
         $supplier->supplier_address = $request->get('supplier_address');
         $supplier->opening_amount = $request->get('opening_amount');
-        $supplier->create_by = 1;
-        $supplier->update_by = 1;
+        $supplier->create_by = Auth::user()->id;
+        $supplier->update_by = Auth::user()->id;
         $supplier->status = $request->get('status');  
 
         if($supplier->save()){
@@ -648,8 +664,8 @@ class SetupController extends Controller
 
         $service->service_name = $request->get('service_name');
         $service->service_details = $request->get('service_details');
-        $service->create_by = 1;
-        $service->update_by = 1;
+        $service->create_by = Auth::user()->id;
+        $service->update_by = Auth::user()->id;
         $service->status = $request->get('status');  
 
         if($service->save()){
@@ -660,16 +676,82 @@ class SetupController extends Controller
 
     }
 
-    public function user()
+    public function users()
     {
         $data['users'] = User::all();
         $data['role'] = Role::all();
         $data['location'] = Location::all();
+        $data['users'] = User::all();
+
+        return view('setup.user_list')->with('data', $data);
+    }
+
+    public function add_user()
+    {
+        $data['users'] = User::all();
+        $data['role'] = Role::all();
+        $data['location'] = Location::all();
+        $data['users'] = User::all();
+
         return view('setup.user')->with('data', $data);
     }
 
-    public function add_user(Request $request)
+    public function post_add_user(Request $request)
     {
-        dmd($_POST);
+
+        $input_rules['user_name'] = 'required';
+        $input_rules['designation'] = 'required';
+        $input_rules['contact_no'] = 'required';
+        $input_rules['rs_id'] = 'required';
+        $input_rules['role_id'] = 'required';
+        $input_rules['location_id'] = 'required';
+        $input_rules['username'] = 'required';
+        $input_rules['password'] = 'required';
+        $input_rules['email'] = 'required';
+
+        $validator = Validator::make($request->all(), $input_rules);
+
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+
+        $fileName = 'default';
+
+        if (request()->hasFile('file')) {
+            $file = request()->file('file');
+            $fileName = md5($file->getClientOriginalName() . time()) . "." . $file->getClientOriginalExtension();
+            $file->move('./uploads/user_image/', $fileName);    
+        }
+
+        //dmd(request()->hasFile('file'));
+
+        if(isset($_POST['user_id']) && $_POST['user_id'])
+            $user = User::find($request->get('user_id'));
+        else
+            $user = new User();
+
+        $user->name = $request->get('user_name');
+        $user->designation = $request->get('designation');
+        $user->contact_no = $request->get('contact_no');
+        $user->rs_id = $request->get('rs_id');
+        $user->user_role_id = $request->get('role_id');
+        $user->location_id = $request->get('location_id');
+        $user->username = $request->get('username');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->get('password'));
+        $user->image = $fileName;
+        $user->create_by = Auth::user()->id;
+        $user->update_by = Auth::user()->id;
+        $user->status = $request->get('status');  
+
+        if($user->save()){
+            return redirect()->back()->with('success_message', 'Service Successfully Saved');
+        }else{
+            return redirect()->back()->with('error_message', 'Failed to Save Service');
+        }
     }
 }

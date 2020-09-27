@@ -94,7 +94,7 @@
             <div class="br-section-wrapper">          
                 <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Supplier List </h6>
 
-                <table class="table table-bordered table-colored table-info">
+                <table class="table table-striped table-info" id="sample_1"><!-- table2 -->
                     <thead>
                         <tr>
                             <th class="wd-5p"> SL </th>
@@ -163,6 +163,14 @@
 
 @section('custom_js')
 <script type="text/javascript">
+
+    $('#sample_1').DataTable({
+        "iDisplayLength": 10,
+        "aLengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "all"]
+        ]
+    });
     
     $(document).on('click', '.edit_supplier', function(e){
         var supplier_id = $(this).attr("data-id");

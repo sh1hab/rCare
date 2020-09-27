@@ -17,11 +17,11 @@ class CreateBanksTable extends Migration
             $table->id();
             $table->string('short_name');
             $table->string('full_name');
-            $table->double('opening_balance');
-            $table->longText('remarks');
+            $table->double('opening_balance')->nullable();
+            $table->longText('remarks')->nullable();
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

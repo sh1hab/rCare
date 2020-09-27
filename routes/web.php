@@ -21,6 +21,8 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('logout', 'Auth\LoginController@logout');
+
 Auth::routes();
 
 
@@ -72,5 +74,5 @@ Route::post('/setup/add_bank_account', 'SetupController@add_bank_account');
 Route::get('/setup/service', 'SetupController@service')->name('add-service');
 Route::post('/setup/add_service', 'SetupController@add_service');
 
-Route::get('/setup/user', 'SetupController@user')->name('add-user');
-Route::post('/setup/add_user', 'SetupController@add_user');
+Route::get('/setup/add_user', 'SetupController@add_user')->name('add-user');
+Route::get('/setup/users', 'SetupController@users')->name('users');

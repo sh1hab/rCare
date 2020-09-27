@@ -37,146 +37,22 @@
 </div>
 <div class="br-pagebody">
 
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-
-            <form class="form-horizontal" action="{{ URL::to('setup/add_parts_accessoris') }}" id="" role="form" method="post" data-parsley-validate>
-                @csrf
-
-                <div class="br-section-wrapper">
-                    <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> Add Parts/Accessories </h6>
-                    <div class="form-layout form-layout-1">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Category: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Parts Category" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="category_id">
-                                        @foreach ($data['category'] as $category)
-                                        <option data-subtext="{{$category->category_code}}" value="{{ $category->id }}">{{$category->category_name}}</option>
-                                        @endforeach
-                                    </select>                          
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Compatible Brand: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Compatible Brand" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="compatible_brand_id">
-                                        @foreach ($data['brand'] as $brand)
-                                        <option data-subtext="{{$brand->brand_code}}" value="{{ $brand->id }}">{{$brand->brand_name}}</option>
-                                        @endforeach
-                                    </select>                          
-                                </div>
-                            </div>
-                        {{-- </div>
-
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Parts/Accessories Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control parts_name" type="text" name="parts_name" placeholder="Enter Parts/Accessories Name">
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Average Price: <span class="tx-danger">*</span></label>
-                                    <input class="form-control avg_price" type="text" name="avg_price" placeholder="Enter Parts/Accessories Avg. Price">
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Margin: <span class="tx-danger">*</span></label>
-                                    <input class="form-control mrgin" type="text" name="margin" placeholder="Enter Margin Price">
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Sale Price: <span class="tx-danger">*</span></label>
-                                    <input class="form-control sales_price" type="text" name="sales_price" placeholder="Enter Parts/Accessories Sale Price">
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Warranty Status: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Warranty Status" data-placeholder="Select Category" tabindex="-1" aria-hidden="true" name="warranty_id">
-                                        @foreach ($data['warranties'] as $warranty)
-                                        <option value="{{ $warranty->id }}">{{$warranty->warranty_period}}</option>
-                                        @endforeach
-                                    </select>                          
-                                </div>
-                            </div>
-                        {{-- </div>
-
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Details: </label>
-                                    <textarea rows="3" class="form-control remarks" name="details" placeholder="Details of Product"></textarea>
-                                </div>
-                            </div>
-                        {{-- </div>
-
-                        <div class="row"> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Status: <span class="tx-danger">*</span></label>
-                                    <div class="row mg-t-10">
-                                        <div class="col-lg-4">
-                                            <label class="rdiobox">
-                                                <input name="status" value="1" type="radio" checked="">
-                                                <span> Active </span>
-                                            </label>
-                                        </div><!-- col-3 -->
-                                        <div class="col-lg-4">
-                                            <label class="rdiobox">
-                                                <input name="status" value="0" type="radio">
-                                                <span> Inactive </span>
-                                            </label>
-                                        </div><!-- col-3 -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-layout-footer">
-                            <button type="submit parts_name" class="btn btn-info">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
-                        </div><!-- form-layout-footer -->
-
-                    </div>
-                </div><!-- form-layout -->
-            </form>
-
-        </div>
-        <div class="col-md-3"></div>       
-    </div>
-
-    <br>
+    
 
     <div class="row">
         <div class="col-md-12">
-            <div class="br-section-wrapper">          
-                <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Parts/Accessories List </h6>
+            <div class="br-section-wrapper">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Parts/Accessories List </h6>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button type="btn" class="btn btn-primary add_new_parts">Add New Parts</button>
+                    </div>
+                    <div class="col-md-4">
+                        
+                    </div>
+                </div>                
 
                 <table class="table table-striped table-info" id="sample_1"><!-- table2 -->
                     <thead>
@@ -283,6 +159,10 @@
                 }
             });
         }
+    });
+
+    $(document).on('click', '.add_new_parts', function(e){
+        $('#edit_parts_modal').modal('show');
     });
 
 

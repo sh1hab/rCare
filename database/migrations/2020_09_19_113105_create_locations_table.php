@@ -17,12 +17,12 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->string('location_name');
             $table->string('location_short_name');
-            $table->longText('location_details');
+            $table->longText('location_details')->nullable();
             $table->tinyInteger('location_type');
-            $table->double('location_opening_balance');
+            $table->double('location_opening_balance')->nullable();
             $table->tinyInteger('location_status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

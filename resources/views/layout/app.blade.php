@@ -93,7 +93,7 @@
 
         <a href="#" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+            <i class="menu-item-icon icon icon ion-help-circled tx-24"></i>
             <span class="menu-item-label"> Customer Claim </span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -106,7 +106,7 @@
 
         <a href="#" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+            <i class="menu-item-icon icon ion-link tx-24"></i>
             <span class="menu-item-label"> Product</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -139,7 +139,7 @@
 
         <a href="#" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon ion-ios-redo-outline tx-24"></i>
+            <i class="menu-item-icon icon ion-clipboard tx-24"></i>
             <span class="menu-item-label">Accounts</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -161,12 +161,12 @@
         </ul>
 
         <?php 
-            $setup = array('setup', 'setup/bank', 'setup/location', 'setup/category', 'setup/brand', 'setup/card', 'setup/bank', 'setup/bank', 'setup/employee_role', 'setup/supplier', 'setup/bank_account', 'setup/service', 'setup/asset', 'setup/parts_accessories', 'setup/warranty', 'setup/permission', 'setup/service', 'setup/user');
+            $setup = array('setup', 'setup/bank', 'setup/location', 'setup/category', 'setup/brand', 'setup/card', 'setup/bank', 'setup/bank', 'setup/employee_role', 'setup/supplier', 'setup/bank_account', 'setup/service', 'setup/asset', 'setup/parts_accessories', 'setup/warranty', 'setup/permission', 'setup/service');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $setup) ? 'sub-show' : '' }}">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
+            <i class="menu-item-icon icon icon ion-settings tx-24"></i>
             <span class="menu-item-label"> Setup </span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -187,12 +187,11 @@
           <li class="nav-item"><a href="{{ route('add-supplier') }}" class="nav-link {{ Request::path() == 'setup/supplier' ? 'active' : '' }}"> Supplier </a></li>
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'setup/permisssions' ? 'active' : '' }}"> Permissions </a></li>
           <li class="nav-item"><a href="{{ route('add-service') }}" class="nav-link {{ Request::path() == 'setup/service' ? 'active' : '' }}"> Service Type </a></li>
-          <li class="nav-item"><a href="{{ route('add-user') }}" class="nav-link {{ Request::path() == 'setup/user' ? 'active' : '' }}"> User </a></li>
         </ul>
 
         <a href="#" class="br-menu-link">
           <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
+            <i class="menu-item-icon icon fa fa-exchange tx-20"></i>
             <span class="menu-item-label">Interchange</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -218,6 +217,23 @@
           <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
+        </ul>
+
+        <?php 
+            $user_setup = array('setup/add_user', 'setup/users');
+        ?>
+
+        <a href="#" class="br-menu-link {{ in_array(Request::path(), $user_setup) ? 'sub-show' : '' }}">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-person-stalker tx-20 "></i>
+            <span class="menu-item-label">User</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+        <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $user_setup) ? 'display: block' : '' }}">
+          <li class="nav-item"><a href="{{ route('add-user') }}" class="nav-link {{ Request::path() == 'setup/add_user' ? 'active' : '' }}"> New User </a></li>
+          <li class="nav-item"><a href="{{ route('users') }}" class="nav-link {{ Request::path() == 'setup/users' ? 'active' : '' }}"> User List </a></li>
         </ul>
 
       </div><!-- br-sideleft-menu -->
@@ -370,16 +386,17 @@
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
           <div class="dropdown">
+
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name hidden-md-down"> Shahriar </span>
-              <img src="http://via.placeholder.com/64x64" class="wd-32 rounded-circle" alt="">
+              <span class="logged-name hidden-md-down"> {{ Auth::user()->username }} </span>
+              <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt="">
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
                 <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                 <li><a href=""><i class="icon ion-ios-gear"></i> Settings</a></li>
-                <li><a href=""><i class="icon ion-power"></i> Sign Out</a></li>
+                <li><a href="{{ URL::to('/logout') }}"><i class="icon ion-power"></i> Sign Out </a></li>
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
@@ -816,8 +833,6 @@
       @if (Session::has('success_message'))
         <div class="alert alert-bordered alert-success">{{ Session::get('success_message') }}</div>
       @endif
-
-      <div class="alert m-t-sm hide ajax_msg"></div>
 
       @yield('content')
 
