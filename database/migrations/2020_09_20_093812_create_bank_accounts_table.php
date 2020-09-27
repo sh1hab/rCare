@@ -18,13 +18,13 @@ class CreateBankAccountsTable extends Migration
             $table->string('account_number');
             $table->bigInteger('bank_id')->unsigned();
             $table->foreign('bank_id')->references('id')->on('banks');
-            $table->string('branch_name');
-            $table->string('route_number');
+            $table->string('branch_name')->nullable();
+            $table->string('route_number')->nullable();
             $table->string('opening_balance');
-            $table->longText('remarks');
+            $table->longText('remarks')->nullable();
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

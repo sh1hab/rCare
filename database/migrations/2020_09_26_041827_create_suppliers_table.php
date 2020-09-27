@@ -17,12 +17,12 @@ class CreateSuppliersTable extends Migration
             $table->id();
             $table->string('supplier_name');
             $table->string('supplier_contact');
-            $table->string('supplier_address');
-            $table->float('opening_amount');
-            $table->float('paid_amount');
+            $table->string('supplier_address')->nullable();
+            $table->float('opening_amount')->nullable();
+            $table->float('paid_amount')->nullable();
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

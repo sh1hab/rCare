@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('category_name');
             $table->string('category_code');
-            $table->longText('category_details');
+            $table->longText('category_details')->nullable();
             $table->string('serial');
             $table->tinyInteger('status');
             $table->integer('create_by');

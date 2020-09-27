@@ -18,7 +18,7 @@ class CreateAssetTypesTable extends Migration
             $table->string('asset_type');
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

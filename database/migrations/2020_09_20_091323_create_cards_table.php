@@ -18,7 +18,7 @@ class CreateCardsTable extends Migration
             $table->string('card_name');
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

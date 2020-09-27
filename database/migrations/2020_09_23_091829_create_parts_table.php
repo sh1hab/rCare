@@ -21,14 +21,14 @@ class CreatePartsTable extends Migration
             $table->string('parts_code');
             $table->string('full_code');
             $table->string('parts_name');
-            $table->longText('details');
+            $table->longText('details')->nullable();
             $table->double('avg_price');
             $table->double('margin');
             $table->double('sales_price');
             $table->integer('warranty_id');
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateAssetHeadsTable extends Migration
             $table->string('asset_head');
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }

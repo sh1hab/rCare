@@ -17,11 +17,11 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('brand_name');
             $table->string('brand_code');
-            $table->longText('brand_details');
+            $table->longText('brand_details')->nullable();
             $table->json('categories')->nullable();
             $table->tinyInteger('status');
             $table->integer('create_by');
-            $table->integer('update_by');
+            $table->integer('update_by')->nullable();
             $table->timestamps();
         });
     }
