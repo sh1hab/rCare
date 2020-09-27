@@ -11,7 +11,7 @@
    
     <div class="row">        
         <div class="col-md-12">
-            <div class="br-section-wrapper">
+            <div class="br-section-wrapper" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-md-6">
                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All User List </h6>
@@ -64,7 +64,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="javascript:void(0);" data-id="{{ $user->id }}" class="btn btn-info btn-icon">
+                                <a href="{{ route('edit-user', ['id'=>$user->id]) }}" class="btn btn-info btn-icon">
                                     <div><i class="fa fa-edit" title="Edit"></i></div>
                                 </a>
                             </td>
@@ -73,7 +73,7 @@
                         @else
                         <tr>
                             <td colspan="7" class="text-center">
-                                There is no bank created
+                                There is no user created
                             </td>
                         </tr>
                         @endif

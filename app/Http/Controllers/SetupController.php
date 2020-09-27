@@ -754,4 +754,13 @@ class SetupController extends Controller
             return redirect()->back()->with('error_message', 'Failed to Save Service');
         }
     }
+
+    public function edit_user($user_id)
+    {
+        $data['user'] = User::find($user_id);
+        $data['role'] = Role::all();
+        $data['location'] = Location::all();
+
+        return view('setup.edit_user')->with('data', $data);
+    }
 }

@@ -105,7 +105,7 @@
         </div>
 
         <div class="col-md-8">
-            <div class="br-section-wrapper">          
+            <div class="br-section-wrapper" style="overflow-x:auto;">          
                 <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Category List </h6>
 
                 <table class="table table-bordered table-colored table-info">

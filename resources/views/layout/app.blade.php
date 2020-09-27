@@ -104,7 +104,7 @@
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link"> Claim List </a></li>
         </ul>
 
-        <a href="#" class="br-menu-link">
+        {{-- <a href="#" class="br-menu-link">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-link tx-24"></i>
             <span class="menu-item-label"> Product</span>
@@ -116,6 +116,24 @@
           <li class="nav-item"><a href="{{ route('add-bank') }}" class="nav-link"> Product Add </a></li>
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link"> Product Sale </a></li>
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link"> Product Return </a></li>
+        </ul> --}}
+
+        
+
+        <a href="#" class="br-menu-link">
+          <div class="br-menu-item">
+            <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+            <span class="menu-item-label">Purchase</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+
+        <ul class="br-menu-sub nav flex-column">
+          <li class="nav-item"><a href="" class="nav-link"> Entry </a></li>
+          <li class="nav-item"><a href="" class="nav-link"> Request </a></li>
+          <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
+          <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
+          <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>
 
         <a href="#" class="br-menu-link">
@@ -204,23 +222,8 @@
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>
 
-        <a href="#" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-            <span class="menu-item-label">Purchase</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- br-menu-link -->
-
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link"> Request </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
-        </ul>
-
         <?php 
-            $user_setup = array('setup/add_user', 'setup/users');
+            $user_setup = array('setup/add_user', 'setup/users', 'setup/edit-user');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $user_setup) ? 'sub-show' : '' }}">

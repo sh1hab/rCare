@@ -41,7 +41,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="br-section-wrapper">
+            <div class="br-section-wrapper" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-md-4">
                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Parts/Accessories List </h6>
