@@ -29,7 +29,7 @@ Auth::routes();
 // Setup -----------------------------
 
 Route::group(['middleware' => 'auth'], function () {
-	
+
     // Route::get('/', function ()    {
     //     // Uses Auth Middleware
     // });
@@ -89,6 +89,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/setup/users', 'SetupController@users')->name('users');
 	Route::get('/setup/add_user', 'SetupController@add_user')->name('add-user');
 	Route::get('/setup/edit_user/{id}', 'SetupController@edit_user')->name('edit-user');
+
+
+	// ----------------------- purchase ---------------
+
+	Route::get('/purchase/entry', 'PurchaseController@entry')->name('entry');
+	//Route::post('/setup/add_bank', 'SetupController@add_bank');
 
 });
 

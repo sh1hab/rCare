@@ -118,9 +118,13 @@
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link"> Product Return </a></li>
         </ul> --}}
 
-        
 
-        <a href="#" class="br-menu-link">
+
+        <?php 
+            $purchase = array('purchase', 'purchase/entry', 'purchase/request', 'purchase/challan', 'purchase/confirm');
+        ?>
+
+        <a href="#" class="br-menu-link {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
             <span class="menu-item-label">Purchase</span>
@@ -128,8 +132,8 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link"> Entry </a></li>
+        <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
+          <li class="nav-item"><a href="{{ route('entry') }}" class="nav-link {{ Request::path() == 'purchase/entry' ? 'active' : '' }}"> Entry </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Request </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
@@ -155,7 +159,7 @@
           <li class="nav-item"><a href="" class="nav-link">Supplier Dues Report</a></li>
         </ul>
 
-        <a href="#" class="br-menu-link">
+        <a href="#" class="br-menu-link" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
           <div class="br-menu-item">
             <i class="menu-item-icon icon ion-clipboard tx-24"></i>
             <span class="menu-item-label">Accounts</span>
