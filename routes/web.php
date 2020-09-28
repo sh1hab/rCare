@@ -88,12 +88,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/setup/users', 'SetupController@users')->name('users');
 	Route::get('/setup/add_user', 'SetupController@add_user')->name('add-user');
+	Route::post('/setup/post_add_user', 'SetupController@post_add_user');
 	Route::get('/setup/edit_user/{id}', 'SetupController@edit_user')->name('edit-user');
 
 
 	// ----------------------- purchase ---------------
 
-	Route::get('/purchase/entry', 'PurchaseController@entry')->name('entry');
+	Route::get('/purchase/request', 'PurchaseController@request')->name('create-request');
 	//Route::post('/setup/add_bank', 'SetupController@add_bank');
 
 });

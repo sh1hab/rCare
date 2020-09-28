@@ -13,7 +13,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
 
-            <form class="form-horizontal" action="{{ URL::to('setup/add_user') }}" id="" role="form" method="post" data-parsley-validate enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{ URL::to('setup/post_add_user') }}" id="" role="form" method="post" data-parsley-validate enctype="multipart/form-data">
                 @csrf
 
                 <div class="br-section-wrapper">

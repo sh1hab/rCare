@@ -44,11 +44,12 @@ class PurchaseController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function entry()
+    public function request()
     {
         $data['location'] = Location::all();
         $data['parts'] = Parts::all();
-        
-        return view('purchase.entry')->with('data', $data);
+        $data['suppliers'] = Supplier::all();
+
+        return view('purchase.request_create')->with('data', $data);
     }
 }

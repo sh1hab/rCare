@@ -40,11 +40,13 @@
     <link href="{{asset('admin/lib/chartist/chartist.css')}}" rel="stylesheet">
 
 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="{{asset('admin/css/bracket.css')}}">
@@ -133,8 +135,8 @@
         </a><!-- br-menu-link -->
 
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
-          <li class="nav-item"><a href="{{ route('entry') }}" class="nav-link {{ Request::path() == 'purchase/entry' ? 'active' : '' }}"> Entry </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Request </a></li>
+          <li class="nav-item"><a href="{{ route('create-request') }}" class="nav-link {{ Request::path() == 'purchase/request' ? 'active' : '' }}"> Create Request </a></li>
+          <li class="nav-item"><a href="" class="nav-link"> Request List </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
@@ -905,6 +907,9 @@
     <script type="text/javascript"  src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
     <script src="{{asset('js/custom.js')}}"></script>
 
     @yield('custom_js')

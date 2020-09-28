@@ -410,7 +410,7 @@ class SetupController extends Controller
         $data['warranties'] = Warranty::all();
         $data['parts'] = Parts::all();
 
-        
+
         $data['supplier'] = Supplier::all();
 
         return view('setup.parts_accessories')->with('data', $data);
@@ -751,9 +751,9 @@ class SetupController extends Controller
         $user->status = $request->get('status');  
 
         if($user->save()){
-            return redirect()->back()->with('success_message', 'Service Successfully Saved');
+            return redirect()->back()->with('success_message', 'User Successfully Saved');
         }else{
-            return redirect()->back()->with('error_message', 'Failed to Save Service');
+            return redirect()->back()->with('error_message', 'Failed to Save User');
         }
     }
 
@@ -764,5 +764,58 @@ class SetupController extends Controller
         $data['location'] = Location::all();
 
         return view('setup.edit_user')->with('data', $data);
+    }
+
+    public function post_edit_user(Request $request)
+    {
+
+        $input_rules['user_name'] = 'required';
+        $input_rules['designation'] = 'required';
+        $input_rules['contact_no'] = 'required';
+        $input_rules['rs_id'] = 'required';
+        $input_rules['role_id'] = 'required';
+        $input_rules['location_id'] = 'required';
+        $input_rules['username'] = 'required';
+        $input_rules['email'] = 'required';
+
+        $validator = Validator::make($request->all(), $input_rules);
+
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+
+        $fileName = 'default';
+
+        if (request()->hasFile('file')) {
+            $file = request()->file('file');
+            $fileName = md5($file->getClientOriginalName() . time()) . "." . $file->getClientOriginalExtension();
+            $file->move('./uploads/user_image/', $fileName);    
+        }
+
+
+        $user = User::find($request->get('user_id'));
+
+        $user->name = $request->get('user_name');
+        $user->designation = $request->get('designation');
+        $user->contact_no = $request->get('contact_no');
+        $user->rs_id = $request->get('rs_id');
+        $user->user_role_id = $request->get('role_id');
+        $user->location_id = $request->get('location_id');
+        $user->username = $request->get('username');
+        $user->email = $request->get('email');
+        $user->image = $fileName;
+        $user->create_by = Auth::user()->id;
+        $user->update_by = Auth::user()->id;
+        $user->status = $request->get('status');  
+
+        if($user->save()){
+            return redirect()->back()->with('success_message', 'User Successfully Saved');
+        }else{
+            return redirect()->back()->with('error_message', 'Failed to Save User');
+        }
     }
 }
