@@ -20,7 +20,7 @@ class CreateBankAccountsTable extends Migration
             $table->foreign('bank_id')->references('id')->on('banks');
             $table->string('branch_name')->nullable();
             $table->string('route_number')->nullable();
-            $table->string('opening_balance');
+            $table->string('opening_balance')->nullable();
             $table->longText('remarks')->nullable();
             $table->tinyInteger('status');
             $table->integer('create_by');

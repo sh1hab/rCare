@@ -104,7 +104,6 @@ class SetupController extends Controller
 
         $input_rules['location_name'] = 'required';
         $input_rules['location_short_name'] = 'required';
-        $input_rules['location_details'] = 'required';
         $input_rules['location_type'] = 'required';
         $input_rules['location_status'] = 'required';
 

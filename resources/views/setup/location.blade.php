@@ -63,7 +63,7 @@
                                     <label class="form-control-label"> Opening Balance: </label>
                                     <div class="input-group">
                                         <span class="input-group-addon tx-size-sm lh-2">৳</span>
-                                        <input type="number" class="form-control" name="location_opening_balance">
+                                        <input type="number" class="form-control" name="location_opening_balance" value="0">
                                         <span class="input-group-addon tx-size-sm lh-2">.00</span>
                                     </div>
                                 </div>
@@ -116,8 +116,8 @@
                             <th class="wd-25p"> Name </th>
                             <th class="wd-20p"> Short Name </th>
                             <th class="wd-35p"> Details </th>
-                            <th class="wd-35p"> Type </th>
                             <th class="wd-35p"> Opening Balance </th>
+                            <th class="wd-35p"> Type </th>
                             <th class="wd-35p"> Status </th>
                             <th class="wd-20p"> Action </th>
                         </tr>

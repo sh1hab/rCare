@@ -43,7 +43,7 @@
                                     <label class="form-control-label"> Opening Balance: </label>
                                     <div class="input-group">
                                         <span class="input-group-addon tx-size-sm lh-2">৳</span>
-                                        <input type="number" class="form-control" name="opening_balance">
+                                        <input type="number" class="form-control" name="opening_balance" value="0">
                                         <span class="input-group-addon tx-size-sm lh-2">.00</span>
                                     </div>
                                 </div>
