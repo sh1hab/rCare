@@ -72,9 +72,17 @@
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="7" class="text-center">
-                                There is no user created
-                            </td>
+                            <td colspan="11" class="text-center"> There is no user created </td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
                         </tr>
                         @endif
 

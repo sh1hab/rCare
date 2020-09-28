@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-4">
 
-            <form class="form-horizontal" action="{{ URL::to('setup/add_supplier') }}" id="" role="form" method="post" data-parsley-validate>
+            <form class="form-horizontal" action="{{ URL::to('setup/add_supplier') }}" role="form" method="post" data-parsley-validate>
                 @csrf
                 <div class="br-section-wrapper">
                     <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> Add Supplier </h6>
@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Opening Amount: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Opening Amount: </label>
                                     <input class="form-control opening_amount" type="number" pattern="/^-?\d+\.?\d*$/" name="opening_amount" placeholder="Enter Opening Amount">
                                 </div>
                             </div>
@@ -128,18 +128,22 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="javascript:void(0);" id="" data-id="{{ $supplier->id }}" data-name="{{ $supplier->supplier_name }}" data-contact="{{ $supplier->supplier_contact }}" data-address="{{ $supplier->supplier_address }}" data-opening="{{ $supplier->opening_amount }}" data-status="{{ $supplier->status }}" class="btn btn-info btn-icon edit_supplier">
+                                <a href="javascript:void(0);" data-id="{{ $supplier->id }}" data-name="{{ $supplier->supplier_name }}" data-contact="{{ $supplier->supplier_contact }}" data-address="{{ $supplier->supplier_address }}" data-opening="{{ $supplier->opening_amount }}" data-status="{{ $supplier->status }}" class="btn btn-info btn-icon edit_supplier">
                                     <div><i class="fa fa-edit" title="Edit"></i></div>
                                 </a>
                             </td>
                         </tr>
                         @endforeach
                         @else
-                        <tr>
-                            <td colspan="7" class="text-center">
-                                There is no supplier created
-                            </td>
-                        </tr>
+                            <tr>
+                                <td colspan="7" class="text-center"> There is no supplier created </td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                            </tr>
                         @endif
 
                     </tbody>

@@ -410,6 +410,9 @@ class SetupController extends Controller
         $data['warranties'] = Warranty::all();
         $data['parts'] = Parts::all();
 
+        
+        $data['supplier'] = Supplier::all();
+
         return view('setup.parts_accessories')->with('data', $data);
     }
 

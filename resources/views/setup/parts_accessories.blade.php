@@ -104,11 +104,20 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        @else
+                        @else                            
                             <tr>
-                                <td colspan="11" class="text-center">
-                                    There is no parts created
-                                </td>
+                                <td colspan="12" class="text-center"> There is no parts created </td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
                             </tr>
                         @endif
                     </tbody>
