@@ -65,7 +65,7 @@
                                     <tr class="rowcount_{{ $serial_no }}">
                                         <td>
                                             <select class="form-control js-example-basic-single parts_id" placeholder="Select Parts"  name="parts_id_1" required="">
-                                                <option value="0">Select Any Parts</option>
+                                                <option value=""> Select Any Parts/Item </option>
                                                 @foreach ($data['parts'] as $part)
                                                 <option data-tokens="{{$part->full_code}}" data-subtext="{{$part->full_code}}" value="{{ $part->id }}"> {{ $part->parts_name }} </option>
                                                 @endforeach
@@ -116,13 +116,18 @@
 
                                 <tbody>
                                     <tr >
-                                        <td></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <textarea rows="3" class="form-control" name="remarks" placeholder="Remarks"></textarea>
+                                            </div>
+                                        </td>
                                         <td></td>
                                         <td>
                                             <input class="form-control discount" type="text" name="discount" placeholder="Discount" value="" required="">
                                         </td>
                                         <td>
-                                            <input class="form-control grandTotal" type="text" name="total" placeholder="Grand Total" required="" value="">
+                                            <input class="total_sum" type="hidden" name="total_sum" value="">
+                                            <input class="form-control grandTotal" type="text" name="grand_total" placeholder="Grand Total" required="" value="">
                                         </td>
                                         <td>
 
@@ -230,9 +235,12 @@
 
             var serial_no = $(this).attr('data-serailNo');
             var deletedTotal = $('.total_'+serial_no).val();
+            var total_sum = $('.total_sum').val();
             var grandTotal = $('.grandTotal').val();
-            var sum = grandTotal - deletedTotal;
-            $('.grandTotal').val(sum);
+            var sum = total_sum - deletedTotal;
+            var sum_1 = grandTotal - deletedTotal;
+            $('.total_sum').val(sum);
+            $('.grandTotal').val(sum_1);
 
             $(this).parent('td').parent('tr').remove();
         }
@@ -303,6 +311,9 @@
             if($(this).val()=='') $(this).val('0');
                 sum += parseInt($(this).val(), 10);
         });
+
+
+        $('.total_sum').val(sum);
 
         var discount = parseFloat($('.discount').val());
 
