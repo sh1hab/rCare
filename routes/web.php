@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// ----------------------- purchase ---------------
 
 	Route::get('/purchase/request', 'PurchaseController@request')->name('create-request');
-	//Route::post('/setup/add_bank', 'SetupController@add_bank');
+	Route::post('/purchase/post_request', 'PurchaseController@post_request');
 
 });
 

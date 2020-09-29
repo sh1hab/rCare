@@ -46,10 +46,15 @@ class PurchaseController extends Controller
 
     public function request()
     {
-        $data['location'] = Location::all();
+        $data['locations'] = Location::all();
         $data['parts'] = Parts::all();
         $data['suppliers'] = Supplier::all();
 
         return view('purchase.request_create')->with('data', $data);
+    }
+
+    public function post_request(Request $request)
+    {
+        dmd($_POST);
     }
 }
