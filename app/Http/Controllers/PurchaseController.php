@@ -128,9 +128,13 @@ class PurchaseController extends Controller
 
         //dmd($data['purchase_details']);
 
-        // $arr = $this->all()->toArray();
-        // var_dump($arr);
-
         return view('purchase.request_list')->with('data', $data);
+    }
+
+    public function request_status($id, $status)
+    {
+        print_r($id);
+        print_r($status);
+        die();
     }
 }
