@@ -52,7 +52,7 @@
                         @endphp
                         <tr>
                             <td> {{ $i++ }} </td>
-                            <td> {{$purchase->parts->parts_name}} </td>
+                            <td> {{$purchase->parts_id}} </td>
                             <td> {{$purchase->purchase->supplier->supplier_name}} </td>
                             <td> {{$purchase->quantity}} </td>
                             <td> {{$purchase->unit_price}} </td>

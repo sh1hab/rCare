@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Route Number: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Route Number: </label>
                                     <input class="form-control" type="text" name="route_number" placeholder="Enter Route Number">
                                 </div>
                             </div><!-- col-4 -->

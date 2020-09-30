@@ -81,7 +81,6 @@ class PurchaseController extends Controller
         $purchase->discount = $request->get('discount');
         $purchase->grand_total = $request->get('grand_total');
         $purchase->remarks = $request->get('remarks');
-        $purchase->status = 1;
         $purchase->request_date = date('Y-m-d');
         $purchase->create_by = Auth::user()->id;
         $purchase->update_by = Auth::user()->id;
