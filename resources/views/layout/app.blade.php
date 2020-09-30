@@ -125,7 +125,7 @@
 
 
         <?php 
-            $purchase = array('purchase', 'purchase/entry', 'purchase/request', 'purchase/challan', 'purchase/confirm');
+            $purchase = array('purchase', 'purchase/entry', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">
@@ -138,7 +138,7 @@
 
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('create-request') }}" class="nav-link {{ Request::path() == 'purchase/request' ? 'active' : '' }}"> Create Request </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Request List </a></li>
+          <li class="nav-item"><a href="{{ route('request-list') }}" class="nav-link {{ Request::path() == 'purchase/request_list' ? 'active' : '' }}"> Request List </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>

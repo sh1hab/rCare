@@ -171,6 +171,8 @@
     });
 
     $(document).on('click', '.add_new_parts', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         $('#edit_parts_modal').modal('show');
     });
 

@@ -20,4 +20,9 @@ class Parts extends Model
     {
         return $this->belongsTo(Warranty::class, 'warranty_id', 'id');
     }
+
+    public function purchase_details()
+    {
+        return $this->belongsTo(PurchaseDetails::class, 'parts_id', 'id');
+    }
 }

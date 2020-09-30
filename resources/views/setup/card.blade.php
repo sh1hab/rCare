@@ -125,6 +125,8 @@
 @section('custom_js')
 <script type="text/javascript"> 
     $(document).on('click', '.edit_card_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var card_id = $(this).attr("data-id");
         var name = $(this).attr("data-name");
         var status = $(this).attr("data-status");

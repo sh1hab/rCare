@@ -185,6 +185,8 @@
     <script type="text/javascript">
 
         $(document).on('click', '.edit_location_modal', function(e){
+            e.preventDefault();
+            jQuery.noConflict();
             var location_id = $(this).attr("data-id");
             var short = $(this).attr("data-short");
             var full = $(this).attr("data-full");

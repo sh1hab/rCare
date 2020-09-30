@@ -155,6 +155,8 @@
     // });
 
     $(document).on('click', '.edit_role_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var role_id = $(this).attr("data-id");
         var role = $(this).attr("data-role");
         var status = $(this).attr("data-status");

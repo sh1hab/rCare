@@ -90,7 +90,7 @@
                                         </td>
                                         <td>                                            
                                             <input type="hidden" class="qty_1" name="qty_1" value="">
-                                            <input type="hidden" class="price_1" name="price_1" value="">
+                                            <input type="hidden" class="prc_1" name="prc_1" value="">
                                             <input type="hidden" class="subtotal total_1" name="total_1" value="">
                                         </td>
 
@@ -187,7 +187,7 @@
         "<td><input type='text' placeholder='Product Note' name='note_"+CurrRowCount+"' class='note form-control'></td>"+
         "<td>"+
         "<input type='hidden' class='qty_"+CurrRowCount+"' name='qty_"+CurrRowCount+"' value=''>"+
-        "<input type='hidden' class='price_"+CurrRowCount+"' name='price_"+CurrRowCount+"' value=''>"+
+        "<input type='hidden' class='prc_"+CurrRowCount+"' name='prc_"+CurrRowCount+"' value=''>"+
         "<input type='hidden' class='subtotal total_"+CurrRowCount+"' name='total_"+CurrRowCount+"' value=''>"+
         "<button type='button' class='btn btn-xs btn-danger deletePurchaseProduct' data-serailNo='"+CurrRowCount+"'>X</button>"+
         "</td>"+

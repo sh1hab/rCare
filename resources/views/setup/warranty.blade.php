@@ -141,6 +141,8 @@
     // });
 
     $(document).on('click', '.edit_warranty_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var warranty_id = $(this).attr("data-id");
         var warranty = $(this).attr("data-warranty");
         var status = $(this).attr("data-status");

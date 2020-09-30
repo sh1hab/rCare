@@ -225,6 +225,8 @@
     });
 
     $(document).on('click', '.edit_category_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var category_id = $(this).attr("data-id");
         var category_name = $(this).attr("data-name");
         var category_code = $(this).attr("data-code");

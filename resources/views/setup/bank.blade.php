@@ -170,6 +170,8 @@
 <script type="text/javascript">
 
     $(document).on('click', '.edit_bank_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var bank_id = $(this).attr("data-id");
         var short = $(this).attr("data-short");
         var full = $(this).attr("data-full");

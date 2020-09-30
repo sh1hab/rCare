@@ -97,5 +97,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/purchase/request', 'PurchaseController@request')->name('create-request');
 	Route::post('/purchase/post_request', 'PurchaseController@post_request');
 
+
+	Route::get('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
+
 });
 

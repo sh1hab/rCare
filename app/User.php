@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
+
+    public function purchase_details()
+    {
+       return $this->hasOne(PurchaseDetails::class);
+    }
 }

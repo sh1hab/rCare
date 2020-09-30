@@ -207,6 +207,8 @@
 <script type="text/javascript">
 
     $(document).on('click', '.edit_bank_ac_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var bank_account_id = $(this).attr("data-id");
         var ac_number = $(this).attr("data-acccount-number");
         var bank_id = $(this).attr("data-bank-id");
@@ -228,6 +230,8 @@
     });
 
     $(document).on('click', '.edit_bank', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         $('#edit_bank_modal').modal('show'); 
     });
 

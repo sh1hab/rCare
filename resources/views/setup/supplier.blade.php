@@ -177,6 +177,8 @@
     });
     
     $(document).on('click', '.edit_supplier', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var supplier_id = $(this).attr("data-id");
         var supplier_name = $(this).attr("data-name");
         var supplier_contact = $(this).attr("data-contact");

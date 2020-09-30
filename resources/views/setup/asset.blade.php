@@ -235,7 +235,9 @@
 @section('custom_js')
 <script type="text/javascript">
 
-    $(document).on('click', '.edit_asset_type', function(e){
+    $(document).on('click', '.edit_asset_type', function(e){        
+        e.preventDefault();
+        jQuery.noConflict();
         var asset_type_id = $(this).attr("data-id");
         var asset_type = $(this).attr("data-name");
         var status = $(this).attr("data-status");
@@ -246,7 +248,9 @@
         $('.status[value='+status+']').prop("checked",true);
     });
 
-    $(document).on('click', '.edit_asset_head', function(e){
+    $(document).on('click', '.edit_asset_head', function(e){        
+        e.preventDefault();
+        jQuery.noConflict();
         var asset_head_id = $(this).attr("data-id");
         var type = $(this).attr("data-type");
         var head = $(this).attr("data-head");

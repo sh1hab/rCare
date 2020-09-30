@@ -234,6 +234,8 @@
     });
 
     $(document).on('click', '.edit_brand_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var brand_id = $(this).attr("data-id");
         var brand_name = $(this).attr("data-name");
         var brand_code = $(this).attr("data-code");

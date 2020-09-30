@@ -10,4 +10,5 @@ class Location extends Model
     {        
         return $this->hasOne(User::class);
     }
+    
 }
