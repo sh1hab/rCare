@@ -12,11 +12,11 @@ class PurchaseDetails extends Model
     }
 
     public function user()
-    {        
+    {
         return $this->belongsTo(User::class, 'create_by', 'id');
     }
 
-    public function parts()
+    public function partsss()
     {
         return $this->belongsTo(Parts::class, 'parts_id', 'id');
     }

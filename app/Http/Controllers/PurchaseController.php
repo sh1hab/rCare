@@ -117,9 +117,19 @@ class PurchaseController extends Controller
         $data['parts'] = Parts::all();
         $data['suppliers'] = Supplier::all();
         $data['purchases'] = Purchase::all();
-        $data['purchase_details'] = PurchaseDetails::all();
 
-        //dmd($data['purchase_details']->purchase());
+        $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
+                            ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
+                            ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
+                            ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
+                            ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                            ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                            ->get();
+
+        //dmd($data['purchase_details']);
+
+        // $arr = $this->all()->toArray();
+        // var_dump($arr);
 
         return view('purchase.request_list')->with('data', $data);
     }

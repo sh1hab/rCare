@@ -99,6 +99,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
+	Route::get('/purchase/request_status/{id}/{status}', 'SetupController@request_status')->name('request-status');
+
 
 });
 

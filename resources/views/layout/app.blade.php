@@ -125,7 +125,7 @@
 
 
         <?php 
-            $purchase = array('purchase', 'purchase/entry', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
+            $purchase = array('purchase', 'purchase/request_create', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">

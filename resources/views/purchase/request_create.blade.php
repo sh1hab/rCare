@@ -32,7 +32,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-offset-1 col-md-4">
+                            <div class=" col-md-4">
                                 <div class="form-group">
                                     <label class="form-control-label"> Location: <span class="tx-danger">*</span></label>
                                     <select class="form-control selectpicker" data-live-search="true" title="Select Location Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">

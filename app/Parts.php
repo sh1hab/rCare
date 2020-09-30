@@ -23,6 +23,7 @@ class Parts extends Model
 
     public function purchase_details()
     {
-        return $this->belongsTo(PurchaseDetails::class, 'parts_id', 'id');
+       
+        return $this->hasOne(PurchaseDetails::class);
     }
 }

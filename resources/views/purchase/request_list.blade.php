@@ -1,4 +1,12 @@
 @extends('layout.app')
+
+@section('custom_css')
+<style type="text/css">
+    .btn, .sp-container button {
+        padding: 5px 8px;
+    }
+</style>
+@endsection
 @section('content')
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -52,27 +60,34 @@
                         @endphp
                         <tr>
                             <td> {{ $i++ }} </td>
-                            <td> {{$purchase->parts_id}} </td>
-                            <td> {{$purchase->purchase->supplier->supplier_name}} </td>
+                            <td> {{$purchase->parts_name}} </td>
+                            <td> {{$purchase->supplier_name}} </td>
                             <td> {{$purchase->quantity}} </td>
                             <td> {{$purchase->unit_price}} </td>
                             <td> {{$purchase->total_price}} </td>
                             <td> {{$purchase->parts_note}} </td>
-                            <td> {{$purchase->create_by}} </td>
-                            <td> {{$purchase->created_at}} </td>
+                            <td> {{$purchase->user->name}} </td>
+                            <td> {{$purchase->location_name}} </td>
                             <td>
-                                @if($purchase->status == 1)
+                                @if($purchase->purchase_status == 1)
                                     Pending
-                                @elseif($purchase->status == 2)
+                                @elseif($purchase->purchase_status == 2)
                                     Approved
                                 @else
-                                    Cancel
+                                    Canceled
                                 @endif
                             </td>
-                            <td>
-                                <a href="" class="btn btn-info btn-icon">
-                                    <div><i class="fa fa-edit" title="Edit"></i></div>
-                                </a>
+                            <td align="center">
+                                <div class="dropdown">
+                                    <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->id.'') }}">Add Note</a>
+                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->id.'/2') }}">Approve</a>
+                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->id.'/3') }}">Cancel</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
