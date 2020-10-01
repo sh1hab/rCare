@@ -95,7 +95,12 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <a href="#" class="br-menu-link">
+
+        <?php 
+            $customer = array('customer/claim', 'customer/claim_list');
+        ?>
+
+        <a href="#" class="br-menu-link {{ in_array(Request::path(), $customer) ? 'sub-show' : '' }}">
           <div class="br-menu-item">
             <i class="menu-item-icon icon icon ion-help-circled tx-24"></i>
             <span class="menu-item-label"> Customer Claim </span>
@@ -103,9 +108,10 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('add-bank') }}" class="nav-link"> New </a></li>
-          <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link"> Claim List </a></li>
+        <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $customer) ? 'display: block' : '' }}">
+          <li class="nav-item"><a href="{{ route('customer-claim') }}" class="nav-link {{ Request::path() == 'customer/claim' ? 'active' : '' }}"> New </a></li>
+          <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'customer/claim_list' ? 'active' : '' }}"> Claim List </a></li>
+          <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'customer/customer_list' ? 'active' : '' }}"> Customer List </a></li>
         </ul>
 
         {{-- <a href="#" class="br-menu-link">
@@ -125,7 +131,7 @@
 
 
         <?php 
-            $purchase = array('purchase', 'purchase/request_create', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
+            $purchase = array('purchase', 'purchase/request', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">
@@ -139,8 +145,7 @@
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('create-request') }}" class="nav-link {{ Request::path() == 'purchase/request' ? 'active' : '' }}"> Create Request </a></li>
           <li class="nav-item"><a href="{{ route('request-list') }}" class="nav-link {{ Request::path() == 'purchase/request_list' ? 'active' : '' }}"> Request List </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
+          <li class="nav-item"><a href="{{ route('draft-challan') }}" class="nav-link {{ Request::path() == 'purchase/challan' ? 'active' : '' }}"> Draft Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>
 

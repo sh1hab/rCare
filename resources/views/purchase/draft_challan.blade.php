@@ -42,7 +42,7 @@
                             <th class="wd-5p"> Note</th>
                             <th class="wd-5p"> Request By </th>
                             <th class="wd-5p"> Location </th>
-                            <th class="wd-5p"> Status </th>
+                            <th class="wd-5p"> Challan </th>
                             <th class="wd-5p"> Action </th>
                         </tr>
                     </thead>
@@ -67,15 +67,11 @@
                             <td> {{$purchase->total_price}} </td>
                             <td> {{$purchase->parts_note}} </td>
                             <td> {{$purchase->user->name}} </td>
-                            <td> {{$purchase->location_name}} </td>
                             <td>
-                                @if($purchase->purchase_status == 1)
-                                    Pending
-                                @elseif($purchase->purchase_status == 2)
-                                    Approved
-                                @else
-                                    Canceled
-                                @endif
+                                <input type="text" name="">
+                            </td>
+                            <td>
+                                <input type="text" name="">
                             </td>
                             <td align="center">
                                 <div class="dropdown">
@@ -86,7 +82,6 @@
                                         <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
                                         <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/2') }}">Approve</a>
                                         <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/3') }}">Cancel</a>
-                                        <a class="dropdown-item product_preview" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id) }}">Details</a>
                                     </div>
                                 </div>
                             </td>
@@ -124,19 +119,14 @@
     </div>
 
 
-    @include('modal.product_preview')
+    @include('modal.edit_role')
+    @include('modal.edit_location')
+    @include('modal.edit_user')
 
     @endsection
 
     @section('custom_js')
     <script type="text/javascript">
-
-         $(document).on('click', '.product_preview', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
-
-            $('#product_preview_modal').modal('show'); 
-        });
 
         $('#sample_1').DataTable({
             "iDisplayLength": 10,

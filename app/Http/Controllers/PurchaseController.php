@@ -113,18 +113,18 @@ class PurchaseController extends Controller
 
     public function request_list()
     {
-        $data['locations'] = Location::all();
-        $data['parts'] = Parts::all();
-        $data['suppliers'] = Supplier::all();
-        $data['purchases'] = Purchase::all();
+        $data['locations']  = Location::all();
+        $data['parts']      = Parts::all();
+        $data['suppliers']  = Supplier::all();
+        $data['purchases']  = Purchase::all();
 
         $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
-                            ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
-                            ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
-                            ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
-                            ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
-                            ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
-                            ->get();
+                                ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
+                                ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
+                                ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
+                                ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                                ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                                ->get();
 
         //dmd($data['purchase_details']);
 
@@ -133,8 +133,28 @@ class PurchaseController extends Controller
 
     public function request_status($id, $status)
     {
-        print_r($id);
-        print_r($status);
-        die();
+        $purchase_details = PurchaseDetails::find($id);
+        $purchase_details->status = $status;
+        if($purchase_details->save()){
+            return redirect()->back()->with('success_message', 'Purchase Request Status Changed');
+        }else{
+            return redirect()->back()->with('error_message', 'Purchase Requestd Status Change Failed');
+        }
+
+    }
+
+    public function challan()
+    {
+        //die('here');
+        $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
+                        ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
+                        ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
+                        ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
+                        ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                        ->where('purchase_details.status', '=', 2)
+                        ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                        ->get();
+
+        return view('purchase.draft_challan')->with('data', $data);
     }
 }

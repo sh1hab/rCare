@@ -26,7 +26,6 @@ Route::get('logout', 'Auth\LoginController@logout');
 Auth::routes();
 
 
-// Setup -----------------------------
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -38,6 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
     //     // Uses Auth Middleware
     // });
 
+    // ----------------------customer claim---------------------
+
+    Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
+
+
+
+	// -----------------------Setup -----------------------------
 
     Route::get('/dashboard', 'SetupController@dashboard')->name('dashboard');
 
@@ -100,6 +106,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
 	Route::get('/purchase/request_status/{id}/{status}', 'PurchaseController@request_status')->name('request-status');
+
+	Route::get('/purchase/challan', 'PurchaseController@challan')->name('draft-challan');
 
 
 });

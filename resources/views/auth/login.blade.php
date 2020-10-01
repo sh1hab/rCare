@@ -11,16 +11,16 @@
             {{-- <div class="tx-center mg-b-60">The Admin Template For Perfectionist</div> --}}
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" placeholder="Enter your username">
-          </div><!-- form-group -->
-          <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Enter your password">
-              <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
-          </div><!-- form-group -->
-          <button type="submit" class="btn btn-info btn-block">Sign In</button>
+                <input type="text" class="form-control" name="username" placeholder="Enter your username">
+            </div><!-- form-group -->
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Enter your password">
+                <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
+            </div><!-- form-group -->
+            <button type="submit" class="btn btn-info btn-block">Sign In</button>
 
-          <div class="mg-t-60 tx-center">Not yet a member? <a href="" class="tx-info">Sign Up</a></div>
-      </div><!-- login-wrapper -->
+            <div class="mg-t-60 tx-center">Not yet a member? <a href="" class="tx-info">Sign Up</a></div>
+        </div><!-- login-wrapper -->
     </div>
 </form>
 

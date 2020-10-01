@@ -692,7 +692,6 @@ class SetupController extends Controller
         $data['users'] = User::all();
         $data['role'] = Role::all();
         $data['location'] = Location::all();
-        $data['users'] = User::all();
 
         return view('setup.user')->with('data', $data);
     }
