@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ----------------------customer claim---------------------
 
     Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
+    Route::post('/customer/add_claim', 'CustomerController@add_claim');
 
 
 

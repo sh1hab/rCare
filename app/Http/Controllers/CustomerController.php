@@ -38,4 +38,9 @@ class CustomerController extends Controller
 
     	return view('customer.claim')->with('data', $data);
     }
+
+    public function add_claim(Request $request)
+    {
+    	dmd($_POST);
+    }
 }

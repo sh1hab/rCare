@@ -6,7 +6,7 @@
 		foreach ($users as $key => $user) {
 			echo "Parameter Number: ".$key;
 		    echo "<pre>";
-		    	print_r($user->toArray());
+		    	print_r($user);
 		    echo "</pre>";
 			echo "<br>";
 		}
