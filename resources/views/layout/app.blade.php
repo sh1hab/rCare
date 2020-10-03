@@ -145,6 +145,7 @@
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $purchase) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('create-request') }}" class="nav-link {{ Request::path() == 'purchase/request' ? 'active' : '' }}"> Create Request </a></li>
           <li class="nav-item"><a href="{{ route('request-list') }}" class="nav-link {{ Request::path() == 'purchase/request_list' ? 'active' : '' }}"> Request List </a></li>
+          <li class="nav-item"><a href="{{ route('approved-list') }}" class="nav-link {{ Request::path() == 'purchase/approved_list' ? 'active' : '' }}"> Approved List </a></li>
           <li class="nav-item"><a href="{{ route('draft-challan') }}" class="nav-link {{ Request::path() == 'purchase/challan' ? 'active' : '' }}"> Draft Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>

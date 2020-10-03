@@ -19,10 +19,10 @@ class CreateCustomerClaimsTable extends Migration
             $table->string('rcv_no_1');
             $table->string('rcv_no_2');
             $table->integer('rcv_location_id');
-            $table->integer('current_location_id');
+            $table->integer('current_location_id')->nullable();
             $table->tinyInteger('rcom')->default('1')->comment('1 = Yes, 0 = No');
-            $table->string('inv_no');
-            $table->dateTime('inv_date');
+            $table->string('invoice_no');
+            $table->dateTime('invoice_date');
             $table->integer('customer_id');
             $table->integer('engineer_id');
             $table->integer('type_id');
@@ -31,6 +31,7 @@ class CreateCustomerClaimsTable extends Migration
             $table->text('product_details')->nullable();
             $table->text('problem_details');
             $table->longText('remarks')->nullable();
+            $table->dateTime('claim_date');
             $table->dateTime('approx_date');
             $table->tinyInteger('status')->default('1')->comment('1 = Pending, 2 = Diagnosing, 3 = Testing, 4 = Ready, 5 = Delivered');
             $table->integer('received_by');

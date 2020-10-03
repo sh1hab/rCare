@@ -38,8 +38,8 @@
                             <th class="wd-5p"> Supplier </th>
                             <th class="wd-5p"> Quantity </th>
                             <th class="wd-5p"> Unit Price </th>
-                            <th class="wd-10p"> Total Price </th>
-                            <th class="wd-5p"> Note</th>
+                            <th class="wd-5p"> Total Price </th>
+                            <th class="wd-10p"> Note</th>
                             <th class="wd-5p"> Request By </th>
                             <th class="wd-5p"> Location </th>
                             <th class="wd-5p"> Status </th>
@@ -65,17 +65,26 @@
                             <td> {{$purchase->quantity}} </td>
                             <td> {{$purchase->unit_price}} </td>
                             <td> {{$purchase->total_price}} </td>
-                            <td> {{$purchase->parts_note}} </td>
+                            <td>
+                                @php
+                                    echo $purchase->parts_note;
+                                    if($purchase->parts_note_1){
+                                        echo "<br>".$purchase->parts_note_1;
+                                    }
+                                @endphp
+                            </td>
                             <td> {{$purchase->user->name}} </td>
                             <td> {{$purchase->location_name}} </td>
                             <td>
                                 @if($purchase->purchase_status == 1)
-                                    Pending
+                                    <a class="btn btn-warning tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Pending</a>
                                 @elseif($purchase->purchase_status == 2)
-                                    Approved
+                                    <a class="btn btn-success tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Approved</a>
                                 @else
-                                    Canceled
+                                    <a class="btn btn-danger tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Canceled</a>
                                 @endif
+                                
+
                             </td>
                             <td align="center">
                                 <div class="dropdown">
@@ -83,8 +92,10 @@
                                         <i class="fa fa-angle-down"></i>
                                     </a>    
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/2') }}">Approve</a>
+                                        <a class="dropdown-item product_note" data-id="{{ $purchase->purchase_id }}" data-note-1="{{ $purchase->parts_note_1 }}" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
+                                        @if($purchase->purchase_status != 2)
+                                            <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/2') }}">Approve</a>
+                                        @endif
                                         <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/3') }}">Cancel</a>
                                         <a class="dropdown-item product_preview" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id) }}">Details</a>
                                     </div>
@@ -94,7 +105,7 @@
                         @endforeach
                         @else
                         <tr>
-                            <td colspan="11" class="text-center"> There is no user created </td>
+                            <td colspan="11" class="text-center"> There is no purchase request </td>
                             <td style="display: none"></td>
                             <td style="display: none"></td>
                             <td style="display: none"></td>
@@ -124,6 +135,7 @@
     </div>
 
 
+    @include('modal.product_note')
     @include('modal.product_preview')
 
     @endsection
@@ -131,7 +143,20 @@
     @section('custom_js')
     <script type="text/javascript">
 
-         $(document).on('click', '.product_preview', function(e){
+        $(document).on('click', '.product_note', function(e){
+            e.preventDefault();
+            jQuery.noConflict();
+
+            var purchase_id = $(this).attr("data-id");
+            var note_1 = $(this).attr("data-note-1");
+
+            $('#product_note_modal').modal('show');
+
+            $('.purchase_id').val(purchase_id);
+            $('.note_1').val(note_1);
+        });
+
+        $(document).on('click', '.product_preview', function(e){
             e.preventDefault();
             jQuery.noConflict();
 
@@ -166,7 +191,7 @@
             var remarks = $(this).attr("data-remarks");
             var status = $(this).attr("data-status");
             
-            $('#edit_bank_modal').modal('show');      
+            $('#edit_bank_modal').modal('show');
             $('.bank_id').val(bank_id);
             $('.short').val(short);
             $('.full').val(full);

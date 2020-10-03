@@ -123,10 +123,11 @@ class PurchaseController extends Controller
                                 ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
                                 ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
                                 ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                                ->where('purchase_details.status', '!=', 2)
                                 ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
                                 ->get();
 
-        //dmd($data['purchase_details']);
+        //dmd($data['purchase_details']->toArray());
 
         return view('purchase.request_list')->with('data', $data);
     }
@@ -141,6 +142,15 @@ class PurchaseController extends Controller
             return redirect()->back()->with('error_message', 'Purchase Requestd Status Change Failed');
         }
 
+    }
+
+    public function add_note(Request $request)
+    {
+        $purchase_note = PurchaseDetails::find($request->get('purchase_id'));
+        $purchase_note->parts_note_1 = $request->get('parts_note_1');
+        $purchase_note->save();
+
+        return redirect()->back()->with('success_message', 'Product Purchase Note Saved');
     }
 
     public function challan()

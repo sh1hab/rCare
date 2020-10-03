@@ -21,6 +21,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->float('unit_price');
             $table->float('total_price');
             $table->text('parts_note')->nullable();
+            $table->text('parts_note_1')->nullable();
             $table->dateTime('request_date');
             $table->tinyInteger('status')->default('1')->comment('1 = Pending, 2 = Approve, 3 = Cancel');
             $table->integer('create_by');

@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
     Route::post('/customer/add_claim', 'CustomerController@add_claim');
+    Route::post('/customer/check_customer', 'CustomerController@check_customer');
 
 
 
@@ -106,9 +107,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::get('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
+	Route::get('/purchase/approved_list', 'PurchaseController@approved_list')->name('approved-list');
 	Route::get('/purchase/request_status/{id}/{status}', 'PurchaseController@request_status')->name('request-status');
 
 	Route::get('/purchase/challan', 'PurchaseController@challan')->name('draft-challan');
+	Route::post('/purchase/add_note', 'PurchaseController@add_note');
 
 
 });

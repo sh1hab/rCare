@@ -1,18 +1,10 @@
 @extends('layout.app')
-
-@section('custom_css')
-<style type="text/css">
-    .btn, .sp-container button {
-        padding: 5px 8px;
-    }
-</style>
-@endsection
 @section('content')
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href=" {{URL::to('/dashboard')}} "> Dashboard </a>
-        <a class="breadcrumb-item" href=""> Purchase </a>
-        <span class="breadcrumb-item active"> Purchase List </span>
+        <a class="breadcrumb-item" href=""> User </a>
+        <span class="breadcrumb-item active"> User List </span>
     </nav>
 </div>
 <div class="br-pagebody">
@@ -22,7 +14,7 @@
             <div class="br-section-wrapper" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Purchase Request List </h6>
+                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All User List </h6>
                     </div>
                     <div class="col-md-6">
                         
@@ -34,62 +26,47 @@
                     <thead>
                         <tr>
                             <th class="wd-5p"> SL </th>
-                            <th class="wd-10p"> Parts </th>
-                            <th class="wd-5p"> Supplier </th>
-                            <th class="wd-5p"> Quantity </th>
-                            <th class="wd-5p"> Unit Price </th>
-                            <th class="wd-10p"> Total Price </th>
-                            <th class="wd-5p"> Note</th>
-                            <th class="wd-5p"> Request By </th>
+                            <th class="wd-10p"> Name </th>
+                            <th class="wd-5p"> Username </th>
+                            <th class="wd-5p"> Email </th>
+                            <th class="wd-5p"> Designation </th>
+                            <th class="wd-10p"> Contact No. </th>
+                            <th class="wd-5p"> RS ID </th>
+                            <th class="wd-5p"> Role </th>
                             <th class="wd-5p"> Location </th>
-                            <th class="wd-5p"> Challan </th>
+                            <th class="wd-5p"> Status </th>
                             <th class="wd-5p"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($data['purchase_details']) > 0)
+                        @if(count($data['users']) > 0)
 
                         @php
                             $i =1;
                         @endphp
 
-                        @foreach($data['purchase_details'] as $purchase)
-
-                        @php
-                            //dmd($purchase->purchase);
-                        @endphp
+                        @foreach($data['users'] as $user)
                         <tr>
                             <td> {{ $i++ }} </td>
-                            <td> {{$purchase->parts_name}} </td>
-                            <td> {{$purchase->supplier_name}} </td>
-                            <td> {{$purchase->quantity}} </td>
-                            <td> {{$purchase->unit_price}} </td>
-                            <td> {{$purchase->total_price}} </td>
+                            <td> {{$user->name}} </td>
+                            <td> {{$user->username}} </td>
+                            <td> {{$user->email}} </td>
+                            <td> {{$user->designation}} </td>
+                            <td> {{$user->contact_no}} </td>
+                            <td> {{$user->rs_id}} </td>
+                            <td> {{$user->role->role_name}} </td>
+                            <td> {{$user->location->location_short_name}} </td>
                             <td>
-                                @php
-                                    echo $purchase->parts_note;
-                                    if($purchase->parts_note_1){
-                                        echo "<br>".$purchase->parts_note_1;
-                                    }
-                                @endphp
-                            </td>
-                            <td> {{$purchase->user->name}} </td>
-                            <td>
-                                <input type="text" name="">
+                                @if($user->status == 1)
+                                    Active
+                                @else
+                                    Inactive
+                                @endif
                             </td>
                             <td>
-                                <input type="text" name="">
-                            </td>
-                            <td align="center">
-                                <div class="dropdown">
-                                    <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-angle-down"></i>
-                                    </a>    
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/3') }}">Cancel</a>
-                                    </div>
-                                </div>
+                                <a href="{{ route('edit-user', ['id'=>$user->id]) }}" class="btn btn-info btn-icon">
+                                    <div><i class="fa fa-edit" title="Edit"></i></div>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -142,19 +119,21 @@
             ]
         });
 
-        $(document).on('click', '.edit_role', function(e){            
+        $(document).on('click', '.edit_role', function(e){
             e.preventDefault();
             jQuery.noConflict();
             $('#edit_role_modal').modal('show'); 
         });
 
-        $(document).on('click', '.edit_location', function(e){            
+        $(document).on('click', '.edit_location', function(e){
             e.preventDefault();
             jQuery.noConflict();
             $('#edit_location_modal').modal('show'); 
         });
 
         $(document).on('click', '.edit_bank_modal', function(e){
+            e.preventDefault();
+            jQuery.noConflict();
             var bank_id = $(this).attr("data-id");
             var short = $(this).attr("data-short");
             var full = $(this).attr("data-full");

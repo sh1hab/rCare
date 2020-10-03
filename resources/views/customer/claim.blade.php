@@ -82,10 +82,10 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Sale Date: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Invoice Date: <span class="tx-danger">*</span></label>
                                     <div class="input-group">
                                           <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
-                                          <input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" name="sale_date">
+                                          <input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" name="invoice_date">
                                         </div>
                                 </div>
                             </div>
@@ -102,8 +102,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label"> Mobile: <span class="tx-danger">*</span></label>
-                                                <input class="form-control" type="text" name="customer_mobile" placeholder="Customer Mobile Number" required="">
+                                                <label class="form-control-label"> Mobile: <span class="tx-danger">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="customer_info tx-danger" hidden></span></label>
+                                                <input class="form-control customer_mobile" type="text" name="customer_mobile" placeholder="Customer Mobile Ex. (017xxxxxxxx) " required="">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -176,7 +176,8 @@
                                     <label class="form-control-label"> Approximate Date: <span class="tx-danger">*</span></label>
                                     <div class="input-group">
                                           <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
-                                          <input type="text" class="form-control fc-datepicker" name="dalivery_date" placeholder="MM/DD/YYYY" required="">
+                                          <input type="text" class="form-control fc-datepicker approx_date" name="approx_date" placeholder="MM/DD/YYYY" required="">
+                                          <span class="input-group-addon tx-size-sm lh-2 calculate_days">0 days</span>
                                         </div>
                                 </div>
                             </div>
@@ -213,14 +214,15 @@
 
 @section('custom_js')
 <script type="text/javascript">
-     $('.fc-datepicker').datepicker({
-          showOtherMonths: true,
-          selectOtherMonths: true,
-          dateFormat: 'dd/mm/yy'
-        });
+
+    $('.fc-datepicker').datepicker({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: 'mm/dd/yy'
+    });
 
 
-     $(document).ready(function() {
+    $(document).ready(function() {
         var date = new Date();
 
         var day = date.getDate();
@@ -230,19 +232,47 @@
         if (month < 10) month = "0" + month;
         if (day < 10) day = "0" + day;
 
-        var today = day+ "/"+month+"/"+year;       
-        $(".claim_date").attr("value", today);
-
-        // date difference ----
-
-
-        // var start = $('#start_date').val();
-        // var end = $('#end_date').val();
-        // var diff = new Date(end - start);
-        // var days = diff/1000/60/60/24;
-
-        // $(".claim_date").val(days);
+        var today = month+ "/"+day+"/"+year;       
+        $(".claim_date").attr("value", today);        
     });
+
+
+    $('.approx_date').change(function(){
+        var start = $('.claim_date').val();
+        var end = $('.approx_date').val();
+
+        var startDay = new Date(start);
+        var endDay = new Date(end);
+        var millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+        var millisBetween = endDay.getTime() - startDay.getTime();
+        var days = millisBetween / millisecondsPerDay;
+
+        $('.calculate_days').text(days+' days');
+    });
+
+    $('.customer_mobile').keyup(function() {
+        var mobile = this.value;
+        if(this.value.length == 11){
+            var url_op = base_url+"/customer/check_customer";
+            $.ajax({
+                type: "POST",
+                url: url_op,
+                dataType: 'json',
+                data: {mobile:mobile, _token:csrf_token},
+                success : function(data){
+                    if(data.status){
+                        $(".customer_info").attr("hidden", false).text(data.msg);
+                    }else{
+                        $(".customer_info").attr("hidden", false).text(data.msg);
+                    }
+                }
+            });
+        }else{
+             $(".customer_info").attr("hidden", true);
+        }
+    });
+
 
 </script>
 @endsection
