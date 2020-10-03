@@ -258,7 +258,6 @@ class SetupController extends Controller
     {
         $input_rules['account_number'] = 'required';
         $input_rules['bank_id'] = 'required';
-        $input_rules['branch_name'] = 'required';
         $input_rules['status'] = 'required';
 
         $validator = Validator::make($request->all(), $input_rules);

@@ -31,7 +31,7 @@ class CustomerController extends Controller
 {
     public function claim()
     {
-        $data['users'] = User::all();
+        $data['users'] = User::where('user_role_id', 3)->get();
         $data['role'] = Role::all();
         $data['location'] = Location::all();
         $data['services'] = Service::all();

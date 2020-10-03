@@ -31,14 +31,17 @@
                                     </select> 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="form-control-label"></label>
                                     <label class="ckbox mg-t-40">
-                                        <input type="checkbox">
+                                        <input type="checkbox" checked="" value="1">
                                         <span>RCOM Product</span>
                                     </label>
                                 </div>
+                            </div>
+                            <div class="col-md-3">
+                                
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -124,8 +127,8 @@
                                 <div class="form-group">
                                     <label class="form-control-label"> Enginner: <span class="tx-danger">*</span></label>
                                     <select class="form-control selectpicker" data-live-search="true" title="Select Enginner" data-placeholder="" tabindex="-1" aria-hidden="true" name="engineer_id" required="">
-                                        @foreach ($data['services'] as $service)
-                                        <option value="{{ $service->id }}"> {{ $service->service_name }} </option>
+                                        @foreach ($data['users'] as $user)
+                                            <option value="{{ $user->id }}"> {{ $user->name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -149,7 +152,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Product Details: <span class="tx-danger">*</span></label>
-                                    <textarea rows="3" class="form-control" name="product_details" placeholder="Write Product Details" required=""></textarea>
+                                    <textarea rows="3" class="form-control" name="product_details" placeholder="Write Product Details"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
