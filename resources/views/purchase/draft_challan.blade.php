@@ -5,6 +5,9 @@
     .btn, .sp-container button {
         padding: 5px 8px;
     }
+    .btn, .sp-container button {
+        padding: 0px 5px;
+    }
 </style>
 @endsection
 @section('content')
@@ -41,7 +44,7 @@
                             <th class="wd-10p"> Total Price </th>
                             <th class="wd-5p"> Note</th>
                             <th class="wd-5p"> Request By </th>
-                            <th class="wd-5p"> Location </th>
+                            <th class="wd-5p"> Serial </th>
                             <th class="wd-5p"> Challan </th>
                             <th class="wd-5p"> Action </th>
                         </tr>
@@ -81,15 +84,7 @@
                                 <input type="text" name="">
                             </td>
                             <td align="center">
-                                <div class="dropdown">
-                                    <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-angle-down"></i>
-                                    </a>    
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
-                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/3') }}">Cancel</a>
-                                    </div>
-                                </div>
+                                <a href="javascript:;" class="btn-sm btn btn-success">Pick</a>
                             </td>
                         </tr>
                         @endforeach

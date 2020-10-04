@@ -5,6 +5,15 @@
     .btn, .sp-container button {
         padding: 5px 8px;
     }
+    .request_search{
+        padding: 10px;
+    }
+    .request_search .form-group{
+        margin-bottom: 10px;
+    }
+    .request_search .btn, .request_search button {
+        padding: 8px 10px;
+    }
 </style>
 @endsection
 @section('content')
@@ -16,7 +25,51 @@
     </nav>
 </div>
 <div class="br-pagebody">
-   
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form class="form-horizontal" action="{{ URL::to('purchase/request_list') }}" id="" role="form" method="post" data-parsley-validate>
+                @csrf
+
+                <div class="br-section-wrapper" style="padding: 10px">
+                    <div class="form-layout form-layout-1 request_search">
+
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="form-group">
+                                    <label class="form-control-label"> Supplier </label>
+                                    <select class="form-control selectpicker" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
+                                        @foreach ($data['suppliers'] as $supplier)
+                                            <option value="{{ $supplier->id }}"> {{ $supplier->supplier_name }} </option>
+                                        @endforeach
+                                    </select> 
+                                </div>
+                            </div><!-- col-4 -->
+                        </div><!-- row -->
+
+                        <div class="row">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="form-group">
+                                    <label class="form-control-label"> Request Date Range </label>
+                                    <input class="form-control date_range" type="text" name="request_dates" placeholder="Date Range">
+                                </div>
+                            </div><!-- col-4 -->
+                        </div><!-- row -->
+
+
+                        <div class="form-layout-footer offset-md-5">
+                            <button type="submit" class="btn btn-info">Search</button>
+                        </div><!-- form-layout-footer -->
+
+                    </div>
+                </div><!-- form-layout -->
+            </form>
+        </div>        
+    </div>
+
+    <br>
+
+
     <div class="row">        
         <div class="col-md-12">
             <div class="br-section-wrapper" style="overflow-x:auto;">
@@ -25,10 +78,10 @@
                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Purchase Request List </h6>
                     </div>
                     <div class="col-md-6">
-                        
+
                     </div>
                 </div>
-                
+
 
                 <table class="table table-striped table-info" id="sample_1"><!-- table2 -->
                     <thead>
@@ -50,7 +103,7 @@
                         @if(count($data['purchase_details']) > 0)
 
                         @php
-                            $i =1;
+                        $i =1;
                         @endphp
 
                         @foreach($data['purchase_details'] as $purchase)
@@ -67,26 +120,26 @@
                             <td> {{$purchase->total_price}} </td>
                             <td>
                                 @php
-                                    echo $purchase->parts_note;
-                                    if($purchase->parts_note_1){
-                                        echo "<br>".$purchase->parts_note_1;
-                                    }
+                                echo $purchase->parts_note;
+                                if($purchase->parts_note_1){
+                                    echo "<br>".$purchase->parts_note_1;
+                                }
                                 @endphp
                             </td>
                             <td> {{$purchase->user->name}} </td>
                             <td> {{$purchase->location_name}} </td>
                             <td>
                                 @if($purchase->purchase_status == 1)
-                                    <a class="btn btn-warning tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Pending</a>
+                                <a class="btn btn-warning tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Pending</a>
                                 @elseif($purchase->purchase_status == 2)
-                                    <a class="btn btn-success tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Approved</a>
+                                <a class="btn btn-success tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Approved</a>
                                 @else
-                                    <a class="btn btn-danger tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Canceled</a>
+                                <a class="btn btn-danger tx-8 btn btn-warning tx-uppercase" style="cursor: default;" href="">Canceled</a>
                                 @endif
-                                
+
 
                             </td>
-                            <td align="center">
+                            <td>
                                 <div class="dropdown">
                                     <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-angle-down"></i>
@@ -94,7 +147,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item product_note" data-id="{{ $purchase->purchase_id }}" data-note-1="{{ $purchase->parts_note_1 }}" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'') }}">Add Note</a>
                                         @if($purchase->purchase_status != 2)
-                                            <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/2') }}">Approve</a>
+                                        <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/2') }}">Approve</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id.'/3') }}">Cancel</a>
                                         <a class="dropdown-item product_preview" href="{{ URL::to('purchase/request_status/'.$purchase->purchase_id) }}">Details</a>
@@ -126,79 +179,96 @@
         </div>
     </div>
 
-        <br>
+    <br>
 
-        <div class="row">
+    <div class="row">
 
-        </div><!-- br-section-wrapper -->
+    </div><!-- br-section-wrapper -->
 
-    </div>
+</div>
 
 
-    @include('modal.product_note')
-    @include('modal.product_preview')
+@include('modal.product_note')
+@include('modal.product_preview')
 
-    @endsection
+@endsection
 
-    @section('custom_js')
-    <script type="text/javascript">
+@section('custom_js')
+<script type="text/javascript">
 
-        $(document).on('click', '.product_note', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
+    //$('.date_range').daterangepicker();
 
-            var purchase_id = $(this).attr("data-id");
-            var note_1 = $(this).attr("data-note-1");
-
-            $('#product_note_modal').modal('show');
-
-            $('.purchase_id').val(purchase_id);
-            $('.note_1').val(note_1);
+    $( document ).ready(function() {        
+        $('.date_range').daterangepicker({
+            autoUpdateInput: false
         });
 
-        $(document).on('click', '.product_preview', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
-
-            $('#product_preview_modal').modal('show'); 
+        $('.date_range').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
         });
 
-        $('#sample_1').DataTable({
-            "iDisplayLength": 10,
-            "aLengthMenu": [
-            [10, 25, 50, -1],
-            [10, 25, 50, "all"]
-            ]
+        $('.date_range').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
         });
+    });
 
-        $(document).on('click', '.edit_role', function(e){            
-            e.preventDefault();
-            jQuery.noConflict();
-            $('#edit_role_modal').modal('show'); 
-        });
 
-        $(document).on('click', '.edit_location', function(e){            
-            e.preventDefault();
-            jQuery.noConflict();
-            $('#edit_location_modal').modal('show'); 
-        });
+    $(document).on('click', '.product_note', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
 
-        $(document).on('click', '.edit_bank_modal', function(e){
-            var bank_id = $(this).attr("data-id");
-            var short = $(this).attr("data-short");
-            var full = $(this).attr("data-full");
-            var opening = $(this).attr("data-opening");
-            var remarks = $(this).attr("data-remarks");
-            var status = $(this).attr("data-status");
-            
-            $('#edit_bank_modal').modal('show');
-            $('.bank_id').val(bank_id);
-            $('.short').val(short);
-            $('.full').val(full);
-            $('.opening').val(opening);
-            $('.remarks').val(remarks);
-            $('.status[value='+status+']').prop("checked",true);
-        });
+        var purchase_id = $(this).attr("data-id");
+        var note_1 = $(this).attr("data-note-1");
 
-    </script>
-    @endsection
+        $('#product_note_modal').modal('show');
+
+        $('.purchase_id').val(purchase_id);
+        $('.note_1').val(note_1);
+    });
+
+    $(document).on('click', '.product_preview', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
+
+        $('#product_preview_modal').modal('show'); 
+    });
+
+    $('#sample_1').DataTable({
+        "iDisplayLength": 10,
+        "aLengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "all"]
+        ]
+    });
+
+    $(document).on('click', '.edit_role', function(e){            
+        e.preventDefault();
+        jQuery.noConflict();
+        $('#edit_role_modal').modal('show'); 
+    });
+
+    $(document).on('click', '.edit_location', function(e){            
+        e.preventDefault();
+        jQuery.noConflict();
+        $('#edit_location_modal').modal('show'); 
+    });
+
+    $(document).on('click', '.edit_bank_modal', function(e){
+        var bank_id = $(this).attr("data-id");
+        var short = $(this).attr("data-short");
+        var full = $(this).attr("data-full");
+        var opening = $(this).attr("data-opening");
+        var remarks = $(this).attr("data-remarks");
+        var status = $(this).attr("data-status");
+
+        $('#edit_bank_modal').modal('show');
+        $('.bank_id').val(bank_id);
+        $('.short').val(short);
+        $('.full').val(full);
+        $('.opening').val(opening);
+        $('.remarks').val(remarks);
+        $('.status[value='+status+']').prop("checked",true);
+    });
+
+</script>
+@endsection

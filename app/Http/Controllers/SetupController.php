@@ -537,28 +537,6 @@ class SetupController extends Controller
 
     public function employee_role(Request $request)
     {
-        // if ($request->ajax()) {
-        //     $data = Role::all();
-        //     return Datatables::of($data)
-        //             ->addIndexColumn()
-        //             ->editColumn('Status', function ($data) {
-        //                 if($data->status == 1){
-        //                     $output = 'Active';
-        //                 }else{
-        //                     $output = 'Inactive';
-        //                 }
-        //                 return $output;
-        //             })
-        //             ->addColumn('action', function($row){
-
-        //                     $output = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';     
-        //                     return $output;
-        //             })
-
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-
         $data['role'] = Role::all();
         return view('setup.employee_role')->with('data', $data);
     }

@@ -66,20 +66,7 @@
 
           <div class="col-md-7">
             <div class="br-section-wrapper">          
-              <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Employee Role List </h6>
-
-             {{--  <table class="table table-bordered data-table">
-                  <thead>
-                      <tr>
-                          <th>No</th>
-                          <th>Role</th>
-                          <th width="100px">Action</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-              </table>
- --}}
+              <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Employee Role List </h6>           
 
               <table class="table table-bordered table-colored table-info data-table">
                 <thead>
@@ -137,22 +124,7 @@
 @endsection
 
 @section('custom_js')
-  <script type="text/javascript">
-    // $(function () {
-    
-    //   var table = $('.data-table').DataTable({
-    //       processing: true,
-    //       serverSide: true,
-    //       ajax: "{{ route('add-employee-role') }}",
-    //       columns: [
-    //          // {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: true, searchable: true},
-    //           {data: 'role_name', name: 'Role Name', orderable: true, searchable: true},
-    //           {data: 'Status', name: 'Status', orderable: true, searchable: true },
-    //           {data: 'action', name: 'action', orderable: true, searchable: true},
-    //       ]
-    //   });
-      
-    // });
+  <script type="text/javascript">    
 
     $(document).on('click', '.edit_role_modal', function(e){
         e.preventDefault();

@@ -111,25 +111,101 @@ class PurchaseController extends Controller
 
     }
 
-    public function request_list()
+    public function request_list(Request $request)
     {
         $data['locations']  = Location::all();
         $data['parts']      = Parts::all();
         $data['suppliers']  = Supplier::all();
         $data['purchases']  = Purchase::all();
 
-        $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
+        $query = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
                                 ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
                                 ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
                                 ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
                                 ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
-                                ->where('purchase_details.status', '!=', 2)
-                                ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
-                                ->get();
+                                ->where('purchase_details.status', '!=', 2);
+                                
 
-        //dmd($data['purchase_details']->toArray());
+        if(isset($_POST['supplier_id']) && $_POST['supplier_id']){
+            $query->where('purchases.supplier_id', $_POST['supplier_id']);
+        }
+
+        if(isset($_POST['request_dates']) && $_POST['request_dates']){
+            $string = explode(' - ', $_POST['request_dates']);
+            $date1 = explode('/',$string[0]);
+            $date2 = explode('/',$string[1]);
+            $sDate = $date1[2].'-'.$date1[0].'-'.$date1[1];
+            $eDate = $date2[2].'-'.$date2[0].'-'.$date2[1];
+
+            $query->where('purchase_details.request_date' , '>=', $sDate)->where('purchase_details.request_date', '<=', $eDate);
+        }
+
+        $data['purchase_details'] = $query->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                                            ->get();
 
         return view('purchase.request_list')->with('data', $data);
+    }
+
+    public function approved_list(DataTables $dataTable)
+    {
+        //return $dataTable->render('purchase.approved_list');
+
+        return view('purchase.approved_list');
+    }
+
+    public function employee_role(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
+                        ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
+                        ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
+                        ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
+                        ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                        ->where('purchase_details.status', '=', 2)
+                        ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                        ->get();
+
+            //dmd($data->toArray());
+
+
+            return Datatables::of($data)
+                    ->editColumn('no', function ($result){
+                        return '';
+                    })
+                    ->addColumn('Parts', function($data){
+                        return $data->parts_name;
+                    })
+                    ->addColumn('Supplier', function($data){
+                        return $data->supplier_name;
+                    })
+                    ->addColumn('Quantity', function($data){
+                        return $data->quantity;
+                    })
+                    ->addColumn('Unit Price', function($data){
+                        return $data->unit_price;
+                    })
+                    ->addColumn('Total Price', function($data){
+                        return $data->total_price;
+                    })
+                    ->addColumn('Note', function ($data) {
+                        $note = $data->parts_note;
+                        $note .= '<br>'.$data->parts_note_1;
+
+                        return $note;
+                    })
+                    // ->addColumn('action', function($row){
+
+                    //         $output = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';     
+                    //         return $output;
+                    // })
+
+                    ->rawColumns(['no', 'Note', 'Unit Price', 'Quantity', 'Total Price', 'Supplier', 'Parts'])
+                    ->make(true);
+        }
+
+
+        //return Datatables::of(PurchaseDetails::all())->make(true);
     }
 
     public function request_status($id, $status)

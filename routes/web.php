@@ -82,6 +82,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/setup/add_role', 'SetupController@add_role');
 	Route::post('/setup/edit_role', 'SetupController@edit_role');
 
+
+	Route::get('/purchase/employee_role', 'PurchaseController@employee_role')->name('employee-role');
+
 	Route::get('/setup/supplier', 'SetupController@supplier')->name('add-supplier');
 	Route::post('/setup/add_supplier', 'SetupController@add_supplier');
 
@@ -106,13 +109,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/purchase/post_request', 'PurchaseController@post_request');
 
 
-	Route::get('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
+	Route::any('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
 	Route::get('/purchase/approved_list', 'PurchaseController@approved_list')->name('approved-list');
 	Route::get('/purchase/request_status/{id}/{status}', 'PurchaseController@request_status')->name('request-status');
 
 	Route::get('/purchase/challan', 'PurchaseController@challan')->name('draft-challan');
 	Route::post('/purchase/add_note', 'PurchaseController@add_note');
 
+	Route::get('datatables.data', 'PurchaseController@anyData')->name('datatables.data');
 
 });
 

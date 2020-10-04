@@ -48,6 +48,10 @@
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
     
 
     <!-- Bracket CSS -->
@@ -131,7 +135,7 @@
 
 
         <?php 
-            $purchase = array('purchase', 'purchase/request', 'purchase/request_list', 'purchase/challan', 'purchase/confirm');
+            $purchase = array('purchase', 'purchase/request', 'purchase/request_list', 'purchase/challan', 'purchase/confirm', 'purchase/approved_list');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">
@@ -406,7 +410,7 @@
 
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name hidden-md-down"> {{ Auth::user()->username }} </span>
-              <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt="">
+              {{-- <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt=""> --}}
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
@@ -872,10 +876,10 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {{-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> --}}
     {{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> --}}
 
@@ -883,6 +887,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    {{-- <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script> --}}
     <script src="{{asset('admin/lib/popper.js/popper.js')}}"></script>
     
     <script src="{{asset('admin/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
@@ -920,6 +926,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src="{{asset('js/custom.js')}}"></script>
 
