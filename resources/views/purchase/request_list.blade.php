@@ -51,7 +51,7 @@
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-group">
                                     <label class="form-control-label"> Request Date Range </label>
-                                    <input class="form-control date_range" type="text" name="request_dates" placeholder="Date Range">
+                                    <input class="form-control date_range" type="text" name="request_dates" placeholder="Date Range" autocomplete="off">
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->

@@ -101,7 +101,7 @@
 
 
         <?php 
-            $customer = array('customer/claim', 'customer/claim_list');
+            $customer = array('customer/claim', 'customer/claim_list', 'customer/customer_list');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $customer) ? 'sub-show' : '' }}">
@@ -115,7 +115,7 @@
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $customer) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('customer-claim') }}" class="nav-link {{ Request::path() == 'customer/claim' ? 'active' : '' }}"> New </a></li>
           <li class="nav-item"><a href="{{ route('claim-list') }}" class="nav-link {{ Request::path() == 'customer/claim_list' ? 'active' : '' }}"> Claim List </a></li>
-          <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'customer/customer_list' ? 'active' : '' }}"> Customer List </a></li>
+          <li class="nav-item"><a href="{{ route('customer-list') }}" class="nav-link {{ Request::path() == 'customer/customer_list' ? 'active' : '' }}"> Customer List </a></li>
         </ul>
 
         {{-- <a href="#" class="br-menu-link">
@@ -410,7 +410,7 @@
 
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name hidden-md-down"> {{ Auth::user()->username }} </span>
-              {{-- <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt=""> --}}
+              <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt="">
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">

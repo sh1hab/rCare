@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
     Route::get('/customer/claim_list', 'CustomerController@claim_list')->name('claim-list');
+    Route::get('/customer/customer_list', 'CustomerController@customer_list')->name('customer-list');
     Route::get('/customer/claim_data', 'CustomerController@claim_data')->name('claim-data');
 
     Route::post('/customer/add_claim', 'CustomerController@add_claim');

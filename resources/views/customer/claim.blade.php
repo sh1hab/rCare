@@ -1,4 +1,12 @@
 @extends('layout.app')
+@section('custom_css')
+
+<style type="text/css">
+    
+
+</style>
+
+@endsection
 @section('content')
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -215,10 +223,12 @@
 @section('custom_js')
 <script type="text/javascript">
 
+    var highlight_dates = ['1-1-2018','11-1-2018','18-1-2018','28-1-2018'];
+
     $('.fc-datepicker').datepicker({
         showOtherMonths: true,
         selectOtherMonths: true,
-        dateFormat: 'mm/dd/yy'
+        dateFormat: 'mm/dd/yy',
     });
 
 

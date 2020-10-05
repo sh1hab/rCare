@@ -8,6 +8,9 @@
     div.dt-buttons {
         margin-left: 20px;
     }
+    .btn, .sp-container button {
+        padding: 5px 8px;
+    }
 </style>
 
 @endsection
@@ -57,6 +60,7 @@
                                     <th> Remarks</th>
                                     <th> Receive Note </th>
                                     <th> Problem </th> 
+                                    <th> Action </th> 
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,6 +107,7 @@
                 {data: 'claim_remarks', name: 'Remarks'},
                 {data: 'product_details', name: 'Receive Note'},
                 {data: 'problem_details', name: 'Problem'},
+                {data: 'action', name: 'Action'},
                 ]
 
                 });

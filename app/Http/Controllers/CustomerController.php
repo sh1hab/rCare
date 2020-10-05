@@ -220,14 +220,31 @@ class CustomerController extends Controller
 
                     //     return $note;
                     // })
-                    // ->addColumn('action', function($row){
+                    ->addColumn('action', function($row){
 
-                    //         $output = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';     
-                    //         return $output;
-                    // })
+                        $action = '<div class="dropdown">
+                                    <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>    
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="">Add Text</a>
+                                        <a class="dropdown-item" href="">Add Text</a>
+                                        <a class="dropdown-item" href="">Add Text</a>
+                                        <a class="dropdown-item" href="">Add Text</a>
+                                    </div>
+                                </div>';
+  
+                        return $action;
+                    })
 
-                    ->rawColumns(['no', 'approx_date', 'claim_date', 'rcv_no', 'claim_remarks'])
+                    ->rawColumns(['no', 'approx_date', 'claim_date', 'rcv_no', 'claim_remarks', 'action'])
                     ->make(true);
         }
+    }
+
+    public function customer_list()
+    {
+        $data['customers'] = Customer::all();
+        return view('customer.customer_list')->with('data', $data);
     }
 }
