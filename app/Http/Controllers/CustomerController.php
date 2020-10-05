@@ -43,9 +43,7 @@ class CustomerController extends Controller
 
     public function add_claim(Request $request)
     {
-
     	//dmd($_POST);
-
     	$input_rules['location_id'] = 'required';
     	$input_rules['service_type_id'] = 'required';
         $input_rules['invoice_no'] = 'required';
@@ -78,13 +76,15 @@ class CustomerController extends Controller
 	        $customer->customer_address = $request->get('customer_address');
 	        $customer->create_by = Auth::user()->id;
 	        $customer->save();
-        }
+        }        
+
+        $invoice_no = $this->create_invoice($request->get('location_id'));
 
         $claim = new CustomerClaim();
 
-        $claim->rcv_no = 'RCL'; //$request->get('rcv_no');
-        $claim->rcv_no_1 = 'RCV'; //$request->get('rcv_no_1');
-        $claim->rcv_no_2 = 'RCV'; //$request->get('rcv_no_2');
+        $claim->rcv_no = 'CPR-'.$invoice_no['rcv_1'].''.$invoice_no['rcv_3'];
+        $claim->rcv_no_1 = $invoice_no['rcv_1'];
+        $claim->rcv_no_2 = $invoice_no['rcv_3'];
         $claim->rcv_location_id = $request->get('location_id');
         //$claim->current_location_id = $request->get('current_location_id');
         //$claim->rcom = $request->get('rcom');
@@ -122,5 +122,112 @@ class CustomerController extends Controller
             return response()->json(['status' => true, 'msg' => 'Old/Valuable Customer of RCL']);
         }
         return response()->json(['status' => false, 'msg' => 'New Customer']);
+    }
+
+    public function create_invoice($location_id)
+    {
+        $no_1 = $no_2 = '';
+        $inv_info = CustomerClaim::where('rcv_location_id', $location_id)
+                                    ->where('rcv_no_1', '!=', '')
+                                    ->orderBy('id', 'desc')
+                                    ->first();      
+
+        if($inv_info){
+            $no_1 = $inv_info->rcv_no_1;
+            $no_2 = $inv_info->rcv_no_2;
+        }
+        
+        if($no_2 == '')
+        {
+            $rcv_1 = 'AA';
+            $rcv_2 = 0;
+        }
+        else if($no_2 == 9999)
+        {
+            $rcv_1 = ++$no_1;
+            $rcv_2 = 0;
+        }
+        else
+        {
+            $rcv_1 = $no_1;
+            $rcv_2 = $no_2 + 1;
+        }
+
+
+        if($rcv_2 < 10)
+        {
+            $rcv_3 = '000'.$rcv_2;
+        }
+        else if($rcv_2 < 100)
+        {
+            $rcv_3 = '00'.$rcv_2;
+        }
+        else if($rcv_2 < 1000)
+        {
+            $rcv_3 = '0'.$rcv_2;
+        }
+        else
+        {
+            $rcv_3 = $rcv_2;
+        }
+
+        return $invoice = array('rcv_1' => $rcv_1, 'rcv_3' => $rcv_3);
+
+    }
+
+    public function claim_list()
+    {
+        return view('customer.claim_list');
+    }
+
+    public function claim_data(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = CustomerClaim::LeftJoin('locations', 'locations.id', '=', 'customer_claims.rcv_location_id')
+                        ->LeftJoin('customers', 'customers.id', '=', 'customer_claims.customer_id')
+                        ->LeftJoin('users as engineer', 'engineer.id', '=', 'customer_claims.engineer_id')
+                        ->LeftJoin('services', 'services.id', '=', 'customer_claims.type_id')
+                        ->LeftJoin('users as user', 'user.id', '=', 'customer_claims.received_by')
+                        ->select('*', 'customer_claims.id as claim_id', 'customer_claims.status as claim_status', 'engineer.name as engineer_name', 'customer_claims.remarks as claim_remarks')
+                        ->get();
+
+            return Datatables::of($data)
+                    ->editColumn('no', function ($data){
+                        return '';
+                    })
+                    ->addColumn('rcv_no', function ($data){
+                        return $data->rcv_no;
+                    })
+                    ->addColumn('claim_date', function ($data){
+                        return date('d-m-Y', strtotime($data->claim_date));
+                    }) 
+                    ->addColumn('approx_date', function ($data){
+                        return date('d-m-Y', strtotime($data->approx_date));
+                    }) 
+                    ->addColumn('claim_remarks', function($data){
+                        return $data->claim_remarks;
+                    })
+                    // ->addColumn('Unit Price', function($data){
+                    //     return $data->unit_price;
+                    // })
+                    // ->addColumn('Total Price', function($data){
+                    //     return $data->total_price;
+                    // })
+                    // ->addColumn('Note', function ($data) {
+                    //     $note = $data->parts_note;
+                    //     $note .= '<br>'.$data->parts_note_1;
+
+                    //     return $note;
+                    // })
+                    // ->addColumn('action', function($row){
+
+                    //         $output = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>';     
+                    //         return $output;
+                    // })
+
+                    ->rawColumns(['no', 'approx_date', 'claim_date', 'rcv_no', 'claim_remarks'])
+                    ->make(true);
+        }
     }
 }

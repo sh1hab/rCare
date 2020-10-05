@@ -114,7 +114,7 @@
 
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $customer) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('customer-claim') }}" class="nav-link {{ Request::path() == 'customer/claim' ? 'active' : '' }}"> New </a></li>
-          <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'customer/claim_list' ? 'active' : '' }}"> Claim List </a></li>
+          <li class="nav-item"><a href="{{ route('claim-list') }}" class="nav-link {{ Request::path() == 'customer/claim_list' ? 'active' : '' }}"> Claim List </a></li>
           <li class="nav-item"><a href="{{ route('add-permission') }}" class="nav-link {{ Request::path() == 'customer/customer_list' ? 'active' : '' }}"> Customer List </a></li>
         </ul>
 

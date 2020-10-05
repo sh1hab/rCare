@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     // ----------------------customer claim---------------------
 
     Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
+    Route::get('/customer/claim_list', 'CustomerController@claim_list')->name('claim-list');
+    Route::get('/customer/claim_data', 'CustomerController@claim_data')->name('claim-data');
+
     Route::post('/customer/add_claim', 'CustomerController@add_claim');
     Route::post('/customer/check_customer', 'CustomerController@check_customer');
 
@@ -83,7 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/setup/edit_role', 'SetupController@edit_role');
 
 
-	Route::get('/purchase/employee_role', 'PurchaseController@employee_role')->name('employee-role');
+	Route::get('/purchase/approve_data', 'PurchaseController@approve_data')->name('approve-data');
 
 	Route::get('/setup/supplier', 'SetupController@supplier')->name('add-supplier');
 	Route::post('/setup/add_supplier', 'SetupController@add_supplier');

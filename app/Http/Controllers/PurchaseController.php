@@ -148,12 +148,10 @@ class PurchaseController extends Controller
 
     public function approved_list(DataTables $dataTable)
     {
-        //return $dataTable->render('purchase.approved_list');
-
         return view('purchase.approved_list');
     }
 
-    public function employee_role(Request $request)
+    public function approve_data(Request $request)
     {
         if ($request->ajax()) {
 
@@ -167,10 +165,8 @@ class PurchaseController extends Controller
                         ->get();
 
             //dmd($data->toArray());
-
-
             return Datatables::of($data)
-                    ->editColumn('no', function ($result){
+                    ->addColumn('no', function ($result){
                         return '';
                     })
                     ->addColumn('Parts', function($data){
@@ -191,7 +187,6 @@ class PurchaseController extends Controller
                     ->addColumn('Note', function ($data) {
                         $note = $data->parts_note;
                         $note .= '<br>'.$data->parts_note_1;
-
                         return $note;
                     })
                     // ->addColumn('action', function($row){
@@ -203,9 +198,6 @@ class PurchaseController extends Controller
                     ->rawColumns(['no', 'Note', 'Unit Price', 'Quantity', 'Total Price', 'Supplier', 'Parts'])
                     ->make(true);
         }
-
-
-        //return Datatables::of(PurchaseDetails::all())->make(true);
     }
 
     public function request_status($id, $status)

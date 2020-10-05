@@ -16,8 +16,8 @@
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href=" {{URL::to('/dashboard')}} "> Dashboard </a>
-        <a class="breadcrumb-item" href=""> Purchase </a>
-        <span class="breadcrumb-item active"> Approved List </span>
+        <a class="breadcrumb-item" href=""> Customer </a>
+        <span class="breadcrumb-item active"> Claim List </span>
     </nav>
 </div>
 <div class="br-pagebody">
@@ -26,7 +26,7 @@
             <div class="br-section-wrapper" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Approved </h6>
+                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Claimed </h6>
                     </div>
                     <div class="col-md-6">
 
@@ -48,14 +48,15 @@
                             <thead>
                                 <tr>
                                     <th> SL </th>
-                                    <th> Parts </th>
-                                    <th> Supplier </th>
-                                    <th> Quantity </th>
-                                    <th> Unit Price </th>
-                                    <th> Total Price </th>
-                                    <th> Note</th>
-                                    <th> Request By </th>
-                                    {{-- <th> Action </th>  --}}
+                                    <th> RCV No </th>
+                                    <th> Claim Date </th>
+                                    <th> Customer </th>
+                                    <th> Approx Days </th>
+                                    <th> Engineer </th>
+                                    <th> Received By </th>
+                                    <th> Remarks</th>
+                                    <th> Receive Note </th>
+                                    <th> Problem </th> 
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,17 +91,18 @@
             search: {
                 caseInsensitive: false,
               },
-            ajax: "{{ route('approve-data') }}",
+            ajax: "{{ route('claim-data') }}",
             columns: [
-                {data: 'no', name: 'SL'},
-                {data: 'parts_name', name: 'Parts', bSortable:false},
-                {data: 'supplier_name', name: 'Supplier', bSearchable:true, bSortable:true},
-                {data: 'quantity', name: 'Quantity'},
-                {data: 'unit_price', name: 'Unit Price'},
-                {data: 'total_price', name: 'Total Price'},
-                {data: 'Note', name: 'Note'},
-                {data: 'username', name: 'Request By', bSearchable:false, bSortable:false},
-                //{data: 'action', name: 'action', bSearchable:false, bSortable:false},
+                {data: 'no', name: 'SL', bSortable:false},
+                {data: 'rcv_no', name: 'RCV No',  bSearchable:true, bSortable:true},
+                {data: 'claim_date', name: 'Claim Date'},
+                {data: 'customer_name', name: 'Customer',bSearchable:true, bSortable:false},
+                {data: 'approx_date', name: 'Approx Days',bSearchable:true, bSortable:true},
+                {data: 'engineer_name', name: 'Engineer', bSearchable:true,},
+                {data: 'username', name: 'Received By'},
+                {data: 'claim_remarks', name: 'Remarks'},
+                {data: 'product_details', name: 'Receive Note'},
+                {data: 'problem_details', name: 'Problem'},
                 ]
 
                 });

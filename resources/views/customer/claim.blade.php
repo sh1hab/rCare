@@ -85,7 +85,7 @@
                                     <label class="form-control-label"> Invoice Date: <span class="tx-danger">*</span></label>
                                     <div class="input-group">
                                           <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
-                                          <input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" name="invoice_date">
+                                          <input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" name="invoice_date" autocomplete="off">
                                         </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-control-label"> Mobile: <span class="tx-danger">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="customer_info tx-danger" hidden></span></label>
-                                                <input class="form-control customer_mobile" type="text" name="customer_mobile" placeholder="Customer Mobile Ex. (017xxxxxxxx) " required="">
+                                                <input class="form-control customer_mobile" type="text" name="customer_mobile" pattern="[0][0-9]{10}" onKeyPress="if(this.value.length == 11) return false;" placeholder="Customer Mobile Ex. (017xxxxxxxx) " required="">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -176,7 +176,7 @@
                                     <label class="form-control-label"> Approximate Date: <span class="tx-danger">*</span></label>
                                     <div class="input-group">
                                           <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
-                                          <input type="text" class="form-control fc-datepicker approx_date" name="approx_date" placeholder="MM/DD/YYYY" required="">
+                                          <input type="text" class="form-control fc-datepicker approx_date" name="approx_date" placeholder="MM/DD/YYYY" required="" autocomplete="off">
                                           <span class="input-group-addon tx-size-sm lh-2 calculate_days">0 days</span>
                                         </div>
                                 </div>
