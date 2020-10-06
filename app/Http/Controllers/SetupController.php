@@ -14,6 +14,7 @@ use App\Brand;
 use App\AssetType;
 use App\AssetHead;
 use App\Warranty;
+use App\Item;
 use App\Parts;
 use App\Supplier;
 use App\User;
@@ -489,12 +490,6 @@ class SetupController extends Controller
         return view('setup.warranty')->with('data', $data);
     }
 
-    public function permission()
-    {
-        $data['permission'] = '';
-        return view('setup.permission')->with('data', $data);
-    }
-
     public function add_warranty(Request $request)
     {
         $input_rules['warranty_period'] = 'required'; 
@@ -522,6 +517,49 @@ class SetupController extends Controller
             return redirect()->back()->with('error_message', 'Failed to Save Warranty Period');
         }
 
+    }
+
+
+    public function item()
+    {
+        $data['items'] = Item::all();
+        return view('setup.item')->with('data', $data);
+    }
+
+    public function add_item(Request $request)
+    {
+        $input_rules['item_name'] = 'required'; 
+
+        $validator = Validator::make($request->all(), $input_rules);
+
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+
+        if(isset($_POST['item_id']) && $_POST['item_id'])
+            $item = Item::find($request->get('item_id'));
+        else
+            $item = new Item();
+
+        $item->warranty_period = $request->get('item_name'); 
+        $item->status = $request->get('status');  
+
+        if($item->save()){
+            return redirect()->back()->with('success_message', 'Item Successfully Saved');
+        }else{
+            return redirect()->back()->with('error_message', 'Failed to Save Item');
+        }
+
+    }
+
+
+    public function permission()
+    {
+        $data['permission'] = '';
+        return view('setup.permission')->with('data', $data);
     }
 
     public function check_parts_name(Request $request)

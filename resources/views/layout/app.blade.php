@@ -217,7 +217,7 @@
           <li class="nav-item"><a href="{{ route('add-card') }}" class="nav-link {{ Request::path() == 'setup/card' ? 'active' : '' }}"> Card </a></li>
           <li class="nav-item"><a href="{{ route('add-asset') }}" class="nav-link {{ Request::path() == 'setup/asset' ? 'active' : '' }}"> Asset </a></li>
           <li class="nav-item"><a href="{{ route('add-warranty') }}" class="nav-link {{ Request::path() == 'setup/warranty' ? 'active' : '' }}"> Warranty </a></li>
-          <li class="nav-item"><a href="" class="nav-link {{ Request::path() == 'setup/item' ? 'active' : '' }}"> Item Type </a></li>
+          <li class="nav-item"><a href="{{ route('add-item') }}" class="nav-link {{ Request::path() == 'setup/item' ? 'active' : '' }}"> Item Type </a></li>
           <li class="nav-item"><a href="{{ route('add-parts-accessories') }}" class="nav-link {{ Request::path() == 'setup/parts_accessories' ? 'active' : '' }}"> Parts/Accessories </a></li>
           <li class="nav-item"><a href="{{ route('add-employee-role') }}" class="nav-link {{ Request::path() == 'setup/employee_role' ? 'active' : '' }}"> Employee Role </a></li>
           <li class="nav-item"><a href="{{ route('add-supplier') }}" class="nav-link {{ Request::path() == 'setup/supplier' ? 'active' : '' }}"> Supplier </a></li>

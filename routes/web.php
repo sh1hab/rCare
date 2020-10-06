@@ -79,6 +79,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/setup/add_warranty', 'SetupController@add_warranty');
 
 
+	Route::get('/setup/item', 'SetupController@item')->name('add-item');
+	Route::post('/setup/add_item', 'SetupController@add_item');
+
+
 	Route::get('/setup/parts_accessories', 'SetupController@parts_accessories')->name('add-parts-accessories');
 	Route::post('/setup/add_parts_accessoris', 'SetupController@add_parts_accessoris');
 

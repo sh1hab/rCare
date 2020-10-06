@@ -116,13 +116,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label"> Email: <span class="tx-danger">*</span></label>
+                                                <label class="form-control-label"> Email: </label>
                                                 <input class="form-control" type="email" name="customer_email" placeholder="Customer Email Address">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="form-control-label"> Address: <span class="tx-danger">*</span></label>
+                                                <label class="form-control-label"> Address: </label>
                                                 <textarea rows="3" class="form-control" name="customer_address" placeholder="Customer Full Address"></textarea>
                                             </div>
                                         </div>
