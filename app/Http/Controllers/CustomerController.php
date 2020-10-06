@@ -13,6 +13,7 @@ use App\Brand;
 use App\AssetType;
 use App\AssetHead;
 use App\Warranty;
+use App\Item;
 use App\Parts;
 use App\Supplier;
 use App\User;
@@ -37,6 +38,7 @@ class CustomerController extends Controller
         $data['role'] = Role::all();
         $data['location'] = Location::all();
         $data['services'] = Service::all();
+        $data['items'] = Item::all();
 
     	return view('customer.claim')->with('data', $data);
     }
@@ -51,6 +53,7 @@ class CustomerController extends Controller
         $input_rules['customer_name'] = 'required';
         $input_rules['customer_mobile'] = 'required';
         $input_rules['engineer_id'] = 'required';
+        $input_rules['item_type_id'] = 'required';
         $input_rules['product_old'] = 'required';
         $input_rules['serial_old'] = 'required';
         $input_rules['problem_details'] = 'required';
@@ -92,6 +95,7 @@ class CustomerController extends Controller
         $claim->invoice_date = date('Y-m-d H:i:s', strtotime($request->get('invoice_date')));
         $claim->customer_id = $customer->id;
         $claim->engineer_id = $request->get('engineer_id');
+        $claim->item_type_id = $request->get('item_type_id');
         $claim->type_id = $request->get('service_type_id');
         $claim->product_old = $request->get('product_old');
         $claim->serial_old = $request->get('serial_old');
@@ -188,6 +192,7 @@ class CustomerController extends Controller
                         ->LeftJoin('customers', 'customers.id', '=', 'customer_claims.customer_id')
                         ->LeftJoin('users as engineer', 'engineer.id', '=', 'customer_claims.engineer_id')
                         ->LeftJoin('services', 'services.id', '=', 'customer_claims.type_id')
+                        ->LeftJoin('items', 'items.id', '=', 'customer_claims.item_type_id')
                         ->LeftJoin('users as user', 'user.id', '=', 'customer_claims.received_by')
                         ->select('*', 'customer_claims.id as claim_id', 'customer_claims.status as claim_status', 'engineer.name as engineer_name', 'customer_claims.remarks as claim_remarks')
                         ->get();

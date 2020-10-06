@@ -528,6 +528,8 @@ class SetupController extends Controller
 
     public function add_item(Request $request)
     {
+        //dmd($_POST);
+
         $input_rules['item_name'] = 'required'; 
 
         $validator = Validator::make($request->all(), $input_rules);
@@ -544,8 +546,11 @@ class SetupController extends Controller
         else
             $item = new Item();
 
-        $item->warranty_period = $request->get('item_name'); 
-        $item->status = $request->get('status');  
+        $item->item_name = $request->get('item_name');
+        $item->item_description = $request->get('item_description');
+        $item->status = $request->get('status');        
+        $item->create_by = Auth::user()->id;
+        $item->update_by = Auth::user()->id;
 
         if($item->save()){
             return redirect()->back()->with('success_message', 'Item Successfully Saved');

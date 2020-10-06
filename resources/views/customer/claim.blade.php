@@ -147,6 +147,20 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label class="form-control-label"> Item Type: <span class="tx-danger">*</span></label>
+                                    <select class="form-control selectpicker" data-live-search="true" data-size="10" title="Select Item" data-placeholder="" tabindex="-1" aria-hidden="true" name="item_type_id" required="">
+                                        @foreach ($data['items'] as $item)
+                                            <option data-tokens="" value="{{ $item->id }}"> {{ $item->item_name }} </option>
+                                        @endforeach
+                                    </select> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label class="form-control-label"> Product (Old): <span class="tx-danger">*</span></label>
                                     <input class="form-control" type="text" name="product_old" placeholder="Product Old Name" required="">
                                 </div>

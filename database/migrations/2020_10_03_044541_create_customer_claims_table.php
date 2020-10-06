@@ -25,6 +25,7 @@ class CreateCustomerClaimsTable extends Migration
             $table->dateTime('invoice_date');
             $table->integer('customer_id');
             $table->integer('engineer_id');
+            $table->integer('item_type_id');
             $table->integer('type_id');
             $table->string('product_old');
             $table->string('serial_old');

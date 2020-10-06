@@ -56,6 +56,7 @@
                                     <th> Customer </th>
                                     <th> Approx Days </th>
                                     <th> Engineer </th>
+                                    <th> Item </th>
                                     <th> Received By </th>
                                     <th> Remarks</th>
                                     <th> Receive Note </th>
@@ -83,26 +84,27 @@
     $(function () {
 
         var table = $('.data-table').DataTable({
-              buttons: [
+            buttons: [
                 'csv', 'excel', 'pdf', 'print'
               ],
-            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+          "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             dom: 'lBfrtip',
             processing: true,
-            serverSide: true,
+            //serverSide: true,
             //"scrollY": "200px",
-            "paging": true,
-            search: {
-                caseInsensitive: false,
-              },
+            // "paging": true,
+            // search: {
+            //     caseInsensitive: false,
+            //   },
             ajax: "{{ route('claim-data') }}",
             columns: [
-                {data: 'no', name: 'SL', bSortable:false},
+                {data: 'no', name: 'SL', bSortable:false, bSearchable:false},
                 {data: 'rcv_no', name: 'RCV No',  bSearchable:true, bSortable:true},
                 {data: 'claim_date', name: 'Claim Date'},
                 {data: 'customer_name', name: 'Customer',bSearchable:true, bSortable:false},
                 {data: 'approx_date', name: 'Approx Days',bSearchable:true, bSortable:true},
-                {data: 'engineer_name', name: 'Engineer', bSearchable:true,},
+                {data: 'engineer_name', name: 'Engineer', bSearchable:true},
+                {data: 'item_name', name: 'Item', bSearchable:true},
                 {data: 'username', name: 'Received By'},
                 {data: 'claim_remarks', name: 'Remarks'},
                 {data: 'product_details', name: 'Receive Note'},

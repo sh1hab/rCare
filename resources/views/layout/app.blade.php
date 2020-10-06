@@ -408,9 +408,16 @@
           </div><!-- dropdown -->
           <div class="dropdown">
 
+            @php
+              if(Auth::user()->image)
+                $image = Auth::user()->image;
+              else
+                $image = 'default.jpg';
+            @endphp
+
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name hidden-md-down"> {{ Auth::user()->username }} </span>
-              <img src="{{ asset('uploads/user_image/'.Auth::user()->image) }}" class="wd-32 rounded-circle" alt="">
+              <img src="{{ asset('uploads/user_image/'.$image )}}" class="wd-32 rounded-circle" alt="">
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
