@@ -78,10 +78,10 @@
 
 
 
-                        <div class="form-layout-footer">
-                            <button class="btn btn-info edit_brand_submit">Submit</button>
-                            <button class="btn btn-secondary">Cancel</button>
-                        </div><!-- form-layout-footer -->
+                        <div class="modal-footer  text-center">
+                            <button type="submit" class="btn btn-info tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium"> Submit </button>
+                            <button type="button" class="btn btn-secondary tx-11 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium" data-dismiss="modal">Close</button>
+                        </div>
 
                     </div>
                 </div><!-- form-layout -->

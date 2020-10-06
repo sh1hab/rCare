@@ -57,9 +57,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> User Role: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="-------- Select |Role ---------" tabindex="-1" aria-hidden="true" name="role_id" required="">
+                                    <select class="form-control js-example-basic-single" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="role_id" required="">
                                         @foreach ($data['role'] as $role)
-                                            <option value="{{ $role->id }}"> {{ $role->role_name }} </option>
+                                            <option value="{{ $role->id }}" {{ ($role->id == $data['user']->user_role_id)?'class="selected"':'' }}> {{ $role->role_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -76,9 +76,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label"> User Location: <span class="tx-danger">*</span></label>
-                                        <select class="form-control selectpicker" data-live-search="true" title="Select Location Name" data-placeholder="-------- Select Location ---------" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                        <select class="form-control js-example-basic-single" data-live-search="true" title="Select Location Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
                                             @foreach ($data['location'] as $location)
-                                                <option data-subtext="{{$location->location_short_name}}" value="{{ $location->id }}"> {{ $location->location_name }} </option>
+                                                <option data-subtext="{{$location->location_short_name}}" value="{{ $location->id }}" {{ ($location->id == $data['user']->location_id)?'class="selected"':'' }}> {{ $location->location_name }} </option>
                                             @endforeach
                                         </select> 
                                     </div>
@@ -148,14 +148,28 @@
             </div>
         </div>
 
-        <br>
-
+        @include('modal.edit_role')
+        @include('modal.edit_location')
 
         @endsection
 
         @section('custom_js')
         <script type="text/javascript">
 
+            $(document).on('click', '.edit_role', function(e){
+                e.preventDefault();
+                jQuery.noConflict();
+                $('#edit_role_modal').modal('show'); 
+            });
 
+            $(document).on('click', '.edit_location', function(e){
+                e.preventDefault();
+                jQuery.noConflict();
+                $('#edit_location_modal').modal('show'); 
+            });
+
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
         </script>
         @endsection

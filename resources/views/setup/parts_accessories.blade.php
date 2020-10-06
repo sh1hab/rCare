@@ -178,6 +178,8 @@
 
 
     $(document).on('click', '.edit_parts_modal', function(e){
+        e.preventDefault();
+        jQuery.noConflict();
         var parts_id = $(this).attr("data-id");
         var category_id = $(this).attr("data-category");
         var brand_id = $(this).attr("data-brand");

@@ -197,7 +197,7 @@
         </ul>
 
         <?php 
-            $setup = array('setup', 'setup/bank', 'setup/location', 'setup/category', 'setup/brand', 'setup/card', 'setup/bank', 'setup/bank', 'setup/employee_role', 'setup/supplier', 'setup/bank_account', 'setup/service', 'setup/asset', 'setup/parts_accessories', 'setup/warranty', 'setup/permission', 'setup/service');
+            $setup = array('setup', 'setup/bank', 'setup/location', 'setup/category', 'setup/brand', 'setup/card', 'setup/bank', 'setup/bank', 'setup/employee_role', 'setup/supplier', 'setup/bank_account', 'setup/service', 'setup/asset', 'setup/parts_accessories', 'setup/warranty', 'setup/permission', 'setup/service', 'setup/item');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $setup) ? 'sub-show' : '' }}">
@@ -269,12 +269,12 @@
       <div class="br-header-left">
         <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
         <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-        <div class="input-group hidden-xs-down wd-170 transition">
+        {{-- <div class="input-group hidden-xs-down wd-170 transition">
           <input id="searchbox" type="text" class="form-control" placeholder="Search">
           <span class="input-group-btn">
             <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
           </span>
-        </div><!-- input-group -->
+        </div> --}}<!-- input-group -->
       </div><!-- br-header-left -->
       <div class="br-header-right">
         <nav class="nav">
@@ -847,19 +847,39 @@
     <div class="br-mainpanel">
 
       @if (Session::has('timeout_message'))
-        <div class="alert alert-bordered alert-info timeout_message">{{ Session::get('timeout_message') }}</div>
+        <div class="alert alert-bordered alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button> {{ Session::get('timeout_message') }}
+        </div>
       @endif
       @if (Session::has('message'))
-        <div class="alert alert-bordered alert-info">{{ Session::get('message') }}</div>
+        <div class="alert alert-bordered alert-info" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button> {{ Session::get('message') }}
+        </div>
       @endif
       @if (Session::has('error_message'))
-        <div class="alert alert-bordered alert-danger"><?php echo html_entity_decode(Session::get('error_message')); ?></div>
+        <div class="alert alert-bordered alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button> {{ Session::get('error_message') }}
+        </div>
       @endif
       @if (Session::has('warning_message'))
-        <div class="alert alert-bordered alert-warning">{{ Session::get('warning_message') }}</div>
+        <div class="alert alert-bordered alert-warning" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button> {{ Session::get('warning_message') }}
+        </div>
       @endif
       @if (Session::has('success_message'))
-        <div class="alert alert-bordered alert-success">{{ Session::get('success_message') }}</div>
+        <div class="alert alert-bordered alert-success" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button> {{ Session::get('success_message') }}
+        </div>
       @endif
 
       @yield('content')

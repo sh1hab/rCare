@@ -102,15 +102,11 @@
     </div>
 
 
-    @include('modal.edit_role')
-    @include('modal.edit_location')
-    @include('modal.edit_user')
 
     @endsection
 
     @section('custom_js')
     <script type="text/javascript">
-
         $('#sample_1').DataTable({
             "iDisplayLength": 10,
             "aLengthMenu": [
@@ -118,37 +114,5 @@
             [10, 25, 50, "all"]
             ]
         });
-
-        $(document).on('click', '.edit_role', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
-            $('#edit_role_modal').modal('show'); 
-        });
-
-        $(document).on('click', '.edit_location', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
-            $('#edit_location_modal').modal('show'); 
-        });
-
-        $(document).on('click', '.edit_bank_modal', function(e){
-            e.preventDefault();
-            jQuery.noConflict();
-            var bank_id = $(this).attr("data-id");
-            var short = $(this).attr("data-short");
-            var full = $(this).attr("data-full");
-            var opening = $(this).attr("data-opening");
-            var remarks = $(this).attr("data-remarks");
-            var status = $(this).attr("data-status");
-            
-            $('#edit_bank_modal').modal('show');      
-            $('.bank_id').val(bank_id);
-            $('.short').val(short);
-            $('.full').val(full);
-            $('.opening').val(opening);
-            $('.remarks').val(remarks);
-            $('.status[value='+status+']').prop("checked",true);
-        });
-
     </script>
     @endsection

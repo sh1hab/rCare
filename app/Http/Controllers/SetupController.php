@@ -781,6 +781,8 @@ class SetupController extends Controller
         $data['role'] = Role::all();
         $data['location'] = Location::all();
 
+        //dmd($data['user']->toArray());
+
         return view('setup.edit_user')->with('data', $data);
     }
 
