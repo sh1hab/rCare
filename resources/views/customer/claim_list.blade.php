@@ -108,7 +108,12 @@
 @section('custom_js')
 <script type="text/javascript">
 
-    $(function () {
+    
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+
+    $(function () {        
 
         var table = $('.data-table').DataTable({
             buttons: [
@@ -123,6 +128,37 @@
             // search: {
             //     caseInsensitive: false,
             //   },
+            "aoColumnDefs": [
+              { 'bSortable': false, 'aTargets': [ 5, 11 ] }
+            ],
+            initComplete: function () {
+                this.api().columns([5, 11]).every( function () {
+                    var column = this;
+                    var select = $('<select class="js-example-basic-single filter_select"><option value="">Show all</option></select>')
+                        .appendTo( $(column.header()) )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+     
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+     
+                    column.data().unique().sort().each( function ( d, j ) {
+
+                        // if($(d).attr("value") == null){
+                        //     var d = d;
+                        // }
+                        // else{
+                        //     var d = $(d).attr("value");
+                        // }
+
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
             ajax: "{{ route('claim-data') }}",
             columns: [
                 {data: 'no', name: 'SL', bSortable:false, bSearchable:false},
@@ -141,6 +177,7 @@
                 ]
 
                 });
+
 
 
             table.on('order.dt search.dt', function () {

@@ -45,7 +45,7 @@
                         <tr>
                             <th class="wd-5p"> SL </th>
                             <th class="wd-10p"> Parts </th>
-                            <th class="wd-10p"> Supplier </th>
+                            <th class="wd-10p text-center"> Supplier </th>
                             <th class="wd-5p"> Quantity </th>
                             <th class="wd-5p"> Unit Price </th>
                             <th class="wd-10p"> Total Price </th>
@@ -145,6 +145,9 @@
             "aLengthMenu": [
             [10, 25, 50, -1],
             [10, 25, 50, "all"]
+            ],
+            "aoColumnDefs": [
+              { 'bSortable': false, 'aTargets': [ 2, 7 ] }
             ],
             initComplete: function () {
                 this.api().columns([2, 7]).every( function () {

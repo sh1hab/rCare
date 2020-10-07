@@ -219,18 +219,18 @@ class CustomerController extends Controller
                     // ->addColumn('Total Price', function($data){
                     //     return $data->total_price;
                     // })
-                    ->editColumn('status', function ($data) {
+                    ->addColumn('status', function ($data) {
                        if($data->claim_status == 1){
-                            return '<a class="btn btn-danger status_btn" href=""> Pending </a>'; 
+                            return 'Pending'; 
                         }
                         else if($data->claim_status == 2){
-                            return '<a class="btn btn-primary status_btn" href=""> Diagnosis </a>'; 
+                            return 'Diagnosis'; 
                         }
                         else if($data->claim_status == 3){
-                            return '<a class="btn btn-warning status_btn" href=""> Testing </a>'; 
+                            return 'Testing'; 
                         }
                         else if($data->claim_status == 4){
-                            return '<a class="btn btn-success status_btn" href=""> Ready </a>'; 
+                            return 'Ready'; 
                         }
                     })
                     ->addColumn('action', function($row){
