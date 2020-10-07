@@ -219,12 +219,20 @@ class CustomerController extends Controller
                     // ->addColumn('Total Price', function($data){
                     //     return $data->total_price;
                     // })
-                    // ->addColumn('Note', function ($data) {
-                    //     $note = $data->parts_note;
-                    //     $note .= '<br>'.$data->parts_note_1;
-
-                    //     return $note;
-                    // })
+                    ->editColumn('status', function ($data) {
+                       if($data->claim_status == 1){
+                            return '<a class="btn btn-danger status_btn" href=""> Pending </a>'; 
+                        }
+                        else if($data->claim_status == 2){
+                            return '<a class="btn btn-primary status_btn" href=""> Diagnosis </a>'; 
+                        }
+                        else if($data->claim_status == 3){
+                            return '<a class="btn btn-warning status_btn" href=""> Testing </a>'; 
+                        }
+                        else if($data->claim_status == 4){
+                            return '<a class="btn btn-success status_btn" href=""> Ready </a>'; 
+                        }
+                    })
                     ->addColumn('action', function($row){
 
                         $action = '<div class="dropdown">
@@ -242,7 +250,7 @@ class CustomerController extends Controller
                         return $action;
                     })
 
-                    ->rawColumns(['no', 'approx_date', 'claim_date', 'rcv_no', 'claim_remarks', 'action'])
+                    ->rawColumns(['no', 'approx_date', 'claim_date', 'rcv_no', 'claim_remarks', 'action', 'status'])
                     ->make(true);
         }
     }

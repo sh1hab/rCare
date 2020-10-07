@@ -11,6 +11,10 @@
     .btn, .sp-container button {
         padding: 5px 8px;
     }
+    .status_btn{
+        padding: 1px 2px;
+        font-size: 12px;
+    }
 </style>
 
 @endsection
@@ -29,24 +33,46 @@
             <div class="br-section-wrapper" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Claimed </h6>
+
+                        {{-- <div class="form-group">
+                            <label class="form-control-label"> Location: <span class="tx-danger">*</span></label>
+                            <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                            </select> 
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"> Location: <span class="tx-danger">*</span></label>
+                            <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                            </select> 
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"> Location: <span class="tx-danger">*</span></label>
+                            <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                                <option value=""> test </option>
+                            </select> 
+                        </div> --}}
+
                     </div>
                     <div class="col-md-6">
-
+                        
                     </div>
                 </div>
                 <div class="row">
-                    {{-- <div class="col-md-12">
-                        <label>Column Filter:</label>
-                        <select id="myCol">
-                          <option value="0">All</option>
-                          <option value="1">Diff1</option>
-                          <option value="2">Diff2</option>
-                          <option value="3">Diff3</option>
-                        </select> 
-                    </div> --}}
-                    <div class="col-md-12">                       
 
+                    <div class="col-md-12">                       
+                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Claimed </h6>
                         <table class="table table-striped table-info no-footer data-table">
                             <thead>
                                 <tr>
@@ -60,7 +86,8 @@
                                     <th> Received By </th>
                                     <th> Remarks</th>
                                     <th> Receive Note </th>
-                                    <th> Problem </th> 
+                                    <th> Problem </th>
+                                    <th> Status </th>
                                     <th> Action </th> 
                                 </tr>
                             </thead>
@@ -109,6 +136,7 @@
                 {data: 'claim_remarks', name: 'Remarks'},
                 {data: 'product_details', name: 'Receive Note'},
                 {data: 'problem_details', name: 'Problem'},
+                {data: 'status', name: 'Status'},
                 {data: 'action', name: 'Action'},
                 ]
 
