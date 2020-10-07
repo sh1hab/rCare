@@ -87,8 +87,8 @@
 
     <!-- ########## START: LEFT PANEL ########## -->
     <div class="br-logo">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><span>[</span>RyansCare<span>]</span></a>
-      {{-- <a href=""><img src="https://www.ryanscomputers.com/assets/website/img/ryans-computers.svg" alt="Ryans Computers Logo"></a> --}}
+      {{-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><span>[</span>RyansCare<span>]</span></a> --}}
+      <a href="" style="margin: 0px auto;"><img style="height: 35px" src="{{asset('admin/img/ryanscare.png')}}" alt="Ryans Computers Logo"></a>
     </div>
     <div class="br-sideleft overflow-y-auto">
       <div class="br-sideleft-menu">
