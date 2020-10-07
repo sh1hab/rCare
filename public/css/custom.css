@@ -13,3 +13,15 @@
     width: 600px;
   }
 }
+
+table thead .sorting:before,
+table thead .sorting_asc:before,
+table thead .sorting_desc:before{
+    display: none !important;
+}
+
+table thead .sorting:after,
+table thead .sorting_asc:after,
+table thead .sorting_desc:after{
+    display: none !important;
+}

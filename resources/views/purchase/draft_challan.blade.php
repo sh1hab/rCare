@@ -8,6 +8,9 @@
     .btn, .sp-container button {
         padding: 0px 5px;
     }
+    .select2-container {
+        width: 100% !important;
+    }
 </style>
 @endsection
 @section('content')
@@ -27,18 +30,22 @@
                     <div class="col-md-6">
                         <h6 class="tx-inverse tx-uppercase tx-bold tx-14 mg-b-10"> All Purchase Request List </h6>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="table_filtering">
                         
                     </div>
                 </div>
                 
 
                 <table class="table table-striped table-info" id="sample_1"><!-- table2 -->
+                    {{-- <tfoot>
+                        <tr>                           
+                        </tr>
+                    </tfoot> --}}
                     <thead>
                         <tr>
                             <th class="wd-5p"> SL </th>
                             <th class="wd-10p"> Parts </th>
-                            <th class="wd-5p"> Supplier </th>
+                            <th class="wd-10p"> Supplier </th>
                             <th class="wd-5p"> Quantity </th>
                             <th class="wd-5p"> Unit Price </th>
                             <th class="wd-10p"> Total Price </th>
@@ -104,7 +111,7 @@
                         </tr>
                         @endif
 
-                    </tbody>
+                    </tbody>                    
                 </table>
 
             </div>
@@ -129,12 +136,38 @@
     @section('custom_js')
     <script type="text/javascript">
 
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+
         $('#sample_1').DataTable({
             "iDisplayLength": 10,
             "aLengthMenu": [
             [10, 25, 50, -1],
             [10, 25, 50, "all"]
-            ]
+            ],
+            initComplete: function () {
+                this.api().columns([2, 7]).every( function () {
+                    var column = this;
+                    var select = $('<select class="js-example-basic-single filter_select"><option value="">Show all</option></select>')
+                        // .appendTo( $(column.header()).empty() )
+                        .appendTo( $(column.header()) )
+                        // .appendTo( '#table_filtering' )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+     
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+     
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            }
         });
 
         $(document).on('click', '.edit_role', function(e){            
@@ -165,6 +198,12 @@
             $('.remarks').val(remarks);
             $('.status[value='+status+']').prop("checked",true);
         });
+
+        // $(document).ready(function() {
+        //     $('#sample_1').DataTable( {
+                
+        //     } );
+        // } );
 
     </script>
     @endsection

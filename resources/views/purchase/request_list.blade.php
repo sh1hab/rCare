@@ -38,9 +38,18 @@
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-group">
                                     <label class="form-control-label"> Supplier </label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
+                                    <select class="form-control js-example-basic-single" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
+                                        {{-- @php
+                                            if(isset($_POST['supplier_id']) && $_POST['supplier_id'])
+                                                $supplier_id = $_POST['supplier_id'];
+                                            else
+                                                $supplier_id = 0;
+
+                                            {{ ($supplier_id == $supplier->id)? 'class="selected active"':'' }}
+                                        @endphp --}}
+                                        <option value="0"> ALL Supplier </option>
                                         @foreach ($data['suppliers'] as $supplier)
-                                            <option value="{{ $supplier->id }}"> {{ $supplier->supplier_name }} </option>
+                                            <option value="{{ $supplier->id }}" > {{ $supplier->supplier_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -57,8 +66,9 @@
                         </div><!-- row -->
 
 
-                        <div class="form-layout-footer offset-md-5">
+                        <div class="form-layout-footer offset-md-4">
                             <button type="submit" class="btn btn-info">Search</button>
+                            <button type="submit" class="btn btn-primary">Show All</button>
                         </div><!-- form-layout-footer -->
 
                     </div>
@@ -196,7 +206,9 @@
 @section('custom_js')
 <script type="text/javascript">
 
-    //$('.date_range').daterangepicker();
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
 
     $( document ).ready(function() {        
         $('.date_range').daterangepicker({
