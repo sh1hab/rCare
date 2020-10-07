@@ -43,6 +43,7 @@ class CreateUsersTable extends Migration
                     'email' => 'admin@test.com',
                     'password' => '$2y$10$46Y2SPvnA.GIejLuevj5Q.x/oHV8.nAcv/pMNC6wWZ3Cjjq3iw9A2',
                     'user_role_id' => '1',
+                    'image' => 'default.jpg',
                     'rs_id' => 'rs968',
                     'location_id' => '1',
                     'status' => '1',
