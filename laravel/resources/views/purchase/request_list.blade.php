@@ -28,7 +28,7 @@
 
     <div class="row">
         <div class="col-md-4 offset-md-4">
-            <form class="form-horizontal" action="{{ URL::to('purchase/request_list') }}" id="" role="form" method="post" data-parsley-validate>
+            <form class="form-horizontal" action="{{ URL::to('purchase/request_list') }}" id="" role="form" method="post">
                 @csrf
 
                 <div class="br-section-wrapper" style="padding: 10px">
@@ -38,7 +38,7 @@
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-group">
                                     <label class="form-control-label"> Supplier </label>
-                                    <select class="form-control js-example-basic-single" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
+                                    <select class="form-control js-example-basic-single" style="width: 100%" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
                                         {{-- @php
                                             if(isset($_POST['supplier_id']) && $_POST['supplier_id'])
                                                 $supplier_id = $_POST['supplier_id'];

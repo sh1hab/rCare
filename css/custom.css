@@ -25,3 +25,11 @@ table thead .sorting_asc:after,
 table thead .sorting_desc:after{
     display: none !important;
 }
+
+.select2-container{
+  width: 100%;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border: none !important;
+}

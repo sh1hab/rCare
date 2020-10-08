@@ -19,6 +19,7 @@ use App\Supplier;
 use App\User;
 use App\Purchase;
 use App\PurchaseDetails;
+use App\PurchaseReceive;
 
 use Session;
 use Hash;
@@ -57,7 +58,6 @@ class PurchaseController extends Controller
 
     public function post_request(Request $request)
     {
-        //dmd($_POST);
 
         $input_rules['supplier_id'] = 'required';
         $input_rules['location_id'] = 'required';
@@ -128,6 +128,8 @@ class PurchaseController extends Controller
 
         if(isset($_POST['supplier_id']) && $_POST['supplier_id']){
             $query->where('purchases.supplier_id', $_POST['supplier_id']);
+        }else{
+             $_POST['supplier_id'] = '';
         }
 
         if(isset($_POST['request_dates']) && $_POST['request_dates']){
@@ -138,12 +140,16 @@ class PurchaseController extends Controller
             $eDate = $date2[2].'-'.$date2[0].'-'.$date2[1];
 
             $query->where('purchase_details.request_date' , '>=', $sDate)->where('purchase_details.request_date', '<=', $eDate);
+        }else{
+            $_POST['request_dates'] = '';
         }
 
         $data['purchase_details'] = $query->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
                                             ->get();
 
         return view('purchase.request_list')->with('data', $data);
+
+        //return redirect('purchase/request_list')->with('data', $data);
     }
 
     public function approved_list(DataTables $dataTable)
@@ -223,7 +229,6 @@ class PurchaseController extends Controller
 
     public function challan()
     {
-        //die('here');
         $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
                         ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
                         ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
@@ -232,7 +237,74 @@ class PurchaseController extends Controller
                         ->where('purchase_details.status', '=', 2)
                         ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
                         ->get();
+        //dmd($data['purchase_details']->toArray());
 
         return view('purchase.draft_challan')->with('data', $data);
+    }
+
+    public function challan_entry($request_id)
+    {
+        
+        $data['locations']  = Location::all();
+        $data['purchase_details'] = PurchaseDetails::LeftJoin('purchases', 'purchases.id', '=', 'purchase_details.purchase_id')
+                        ->LeftJoin('suppliers', 'suppliers.id', '=', 'purchases.supplier_id')
+                        ->LeftJoin('locations', 'locations.id', '=', 'purchases.location_id')
+                        ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
+                        ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
+                        ->where('purchase_details.id', '=', $request_id)
+                        ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                        ->first();
+
+        //dmd($data['purchase_details']->toArray(), $request_id);
+
+        return view('purchase.challan_entry')->with('data', $data);
+    }
+
+    public function add_challan_entry(Request $request)
+    {
+
+        $purchase = PurchaseDetails::find($request->get('purchase_details_id'));
+        $purchase->status = 3;
+        $purchase->save();
+
+        dmd($purchase->toArray(), $_POST);
+
+
+        $purchase_rcv = new PurchaseReceive();
+
+        $purchase_rcv->purchase_id = $request->get('purchase_id');
+        $purchase_rcv->purchase_details_id = $request->get('purchase_details_id');
+        $purchase_rcv->parts_id = $request->get('parts_id');
+        $purchase_rcv->rcv_quantity = $request->get('rcv_quantity');
+        $purchase_rcv->rcv_location_id = $request->get('rcv_location_id');
+        $purchase_rcv->receive_note = $request->get('receive_note');
+        $purchase_rcv->supplier_challan_no = $request->get('supplier_challan_no');
+        $purchase_rcv->serial_ids = $request->get('serial_ids');
+        $purchase_rcv->receive_date = date('Y-m-d');
+        $purchase_rcv->receive_by = Auth::user()->id;
+
+        if($purchase->save()){
+            for ($i = 1; $i <= $request->get('productsrowcount'); $i++) { 
+               
+                $purchase_details = new PurchaseDetails();
+ 
+                $purchase_details->purchase_id = $purchase->id; 
+                $purchase_details->parts_id = $request->get('parts_id_'.$i);  
+                $purchase_details->quantity = $request->get('quantity_'.$i);
+                $purchase_details->unit_price = $request->get('price_'.$i);
+                $purchase_details->total_price = $request->get('total_'.$i);
+                $purchase_details->parts_note = $request->get('note_'.$i);
+                $purchase_details->request_date = date('Y-m-d');
+                $purchase_details->status = 1;
+                $purchase_details->create_by = Auth::user()->id;
+                $purchase_details->update_by = Auth::user()->id;
+                $purchase_details->save();                
+            }
+
+            return redirect()->back()->with('success_message', 'Purchase Requestd Successfully');
+            
+        }else{
+            return redirect()->back()->with('error_message', 'Failed to Save Location');
+        }
     }
 }

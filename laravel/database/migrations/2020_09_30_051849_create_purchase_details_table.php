@@ -23,8 +23,9 @@ class CreatePurchaseDetailsTable extends Migration
             $table->text('parts_note')->nullable();
             $table->text('parts_note_1')->nullable();
             $table->dateTime('request_date');
-            $table->tinyInteger('status')->default('1')->comment('1 = Pending, 2 = Approve, 3 = Cancel');
+            $table->tinyInteger('status')->default('1')->comment('1 = Pending, 2 = Approve, 3 = Received, 4 = Cancel');
             $table->integer('create_by');
+            $table->integer('received_by');
             $table->integer('update_by')->nullable();
             $table->timestamps();
         });

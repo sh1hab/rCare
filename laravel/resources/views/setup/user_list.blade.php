@@ -1,4 +1,9 @@
 @extends('layout.app')
+@section('custom_css')
+    <style type="text/css">
+        
+    </style>
+@endsection
 @section('content')
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -108,6 +113,7 @@
     @section('custom_js')
     <script type="text/javascript">
         $('#sample_1').DataTable({
+            "scrollX": true,
             "iDisplayLength": 10,
             "aLengthMenu": [
             [10, 25, 50, -1],

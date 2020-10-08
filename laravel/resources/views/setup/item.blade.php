@@ -142,6 +142,7 @@
 <script type="text/javascript">
 
     $('#sample_1').DataTable({
+        "scrollX": true,
         "iDisplayLength": 10,
         "aLengthMenu": [
         [10, 25, 50, -1],

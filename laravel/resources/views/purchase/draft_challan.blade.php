@@ -51,64 +51,54 @@
                             <th class="wd-10p"> Total Price </th>
                             <th class="wd-5p"> Note</th>
                             <th class="wd-5p"> Request By </th>
-                            <th class="wd-5p"> Serial </th>
-                            <th class="wd-5p"> Challan </th>
                             <th class="wd-5p"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($data['purchase_details']) > 0)
+                            @php
+                                $i =1;
+                            @endphp
+                            @foreach($data['purchase_details'] as $purchase)                        
+                                <tr class="row_{{$purchase->purchase_id}}" >
+                                    <td> {{ $i++ }} </td>
+                                    <td> {{$purchase->parts_name}} </td>
+                                    <td> {{$purchase->supplier_name}} </td>
+                                    <td> {{$purchase->quantity}} </td>
+                                    <td> {{$purchase->unit_price}} </td>
+                                    <td> {{$purchase->total_price}} </td>
+                                    <td>
+                                        @php
+                                            echo $purchase->parts_note;
+                                            if($purchase->parts_note_1){
+                                                echo "<br>".$purchase->parts_note_1;
+                                            }
+                                        @endphp
+                                    </td>
+                                    <td> {{$purchase->user->name}} </td>
+                                    <td align="center">
+                                        <a href="{{ URL::to('purchase/challan_entry/'.$purchase->purchase_id) }}" target="_blank" class="btn-sm btn btn-success pick_button">Pick</a>
+                                    </td>
+                                </tr>
 
-                        @php
-                            $i =1;
-                        @endphp
-
-                        @foreach($data['purchase_details'] as $purchase)
-
-                        @php
-                            //dmd($purchase->purchase);
-                        @endphp
-                        <tr>
-                            <td> {{ $i++ }} </td>
-                            <td> {{$purchase->parts_name}} </td>
-                            <td> {{$purchase->supplier_name}} </td>
-                            <td> {{$purchase->quantity}} </td>
-                            <td> {{$purchase->unit_price}} </td>
-                            <td> {{$purchase->total_price}} </td>
-                            <td>
-                                @php
-                                    echo $purchase->parts_note;
-                                    if($purchase->parts_note_1){
-                                        echo "<br>".$purchase->parts_note_1;
-                                    }
-                                @endphp
-                            </td>
-                            <td> {{$purchase->user->name}} </td>
-                            <td>
-                                <input type="text" name="">
-                            </td>
-                            <td>
-                                <input type="text" name="">
-                            </td>
-                            <td align="center">
-                                <a href="javascript:;" class="btn-sm btn btn-success">Pick</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                                {{-- <tr>
+                                    <td colspan="11" class="hide" hidden=""></td>
+                                </tr> --}}
+                            @endforeach
                         @else
-                        <tr>
-                            <td colspan="11" class="text-center"> There is no user created </td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                            <td style="display: none"></td>
-                        </tr>
+                            <tr>
+                                <td colspan="11" class="text-center"> There is no user created </td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                                <td style="display: none"></td>
+                            </tr>
                         @endif
 
                     </tbody>                    
@@ -138,6 +128,10 @@
 
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+        });
+
+        $(document).on('click', '.pick_button', function(e){            
+            $(this).parent('td').parent('tr').attr('hidden', true);
         });
 
         $('#sample_1').DataTable({

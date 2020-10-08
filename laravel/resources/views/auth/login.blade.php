@@ -13,20 +13,16 @@
             {{-- <div class="tx-center mg-b-60">The Admin Template For Perfectionist</div> --}}
 
             <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Enter your username" required="">
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <input type="text" class="form-control" name="username" placeholder="Enter your username" required="" value="{{old('username')}}" autocomplete="off">                
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
+                
+                @foreach ($errors->all() as $message)
+                    <span class="invalid-feedback" role="alert" <?php echo ($message)?'style="display: block"':'' ?> >
                         <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    </span>                       
+                @endforeach
                 <a href="" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
             </div>
             <button type="submit" class="btn btn-info btn-block">Sign In</button>

@@ -119,7 +119,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::any('/purchase/request_list', 'PurchaseController@request_list')->name('request-list');
 	Route::get('/purchase/approved_list', 'PurchaseController@approved_list')->name('approved-list');
+	Route::get('/purchase/challan_entry/{id}', 'PurchaseController@challan_entry');
 	Route::get('/purchase/request_status/{id}/{status}', 'PurchaseController@request_status')->name('request-status');
+
+	Route::post('/purchase/add_challan_entry', 'PurchaseController@add_challan_entry');
 
 	Route::get('/purchase/challan', 'PurchaseController@challan')->name('draft-challan');
 	Route::post('/purchase/add_note', 'PurchaseController@add_note');
