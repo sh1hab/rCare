@@ -283,7 +283,7 @@ class PurchaseController extends Controller
         $purchase_rcv->receive_date = date('Y-m-d');
         $purchase_rcv->receive_by = Auth::user()->id;
 
-        if($purchase->save()){
+        if($purchase_rcv->save()){
             for ($i = 1; $i <= $request->get('productsrowcount'); $i++) { 
                
                 $purchase_details = new PurchaseDetails();

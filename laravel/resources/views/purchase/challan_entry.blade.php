@@ -103,7 +103,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Return Quantity: </label>                                   
-                                    <input class="form-control" type="text" name="return_quantity" placeholder="Enter Return Quantity" required="" value="">
+                                    <input class="form-control" type="text" name="return_quantity" placeholder="Enter Return Quantity" value="">
                                 </div>
                             </div>
 
