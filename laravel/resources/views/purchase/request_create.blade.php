@@ -64,7 +64,7 @@
                                     <?php $existsData = 1; ?>
                                     <tr class="rowcount_{{ $serial_no }}">
                                         <td>
-                                            <select class="form-control js-example-basic-single parts_id" placeholder="Select Parts"  name="parts_id_1" required="">
+                                            <select class="form-control selectpicker parts_id" data-live-search="true" placeholder="Select Parts"  name="parts_id_1" required="">
                                                 <option value=""> Select Any Parts/Item </option>
                                                 @foreach ($data['parts'] as $part)
                                                 <option data-tokens="{{$part->full_code}}" data-subtext="{{$part->full_code}}" value="{{ $part->id }}"> {{ $part->parts_name }} </option>
@@ -199,6 +199,7 @@
     });
 
     function getParts(count){
+        
         var salesdropdownhtml = '<select name="parts_id_'+count+'" class="form-control js-example-basic-single" required>'
         +'<option value=""> ---- Select --- </option>';
         <?php 

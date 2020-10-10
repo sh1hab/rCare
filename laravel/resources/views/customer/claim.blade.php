@@ -40,13 +40,13 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label class="form-control-label"></label>
                                     <label class="ckbox mg-t-40">
                                         <input type="checkbox" checked="" value="1">
                                         <span>RCOM Product</span>
                                     </label>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-3">
                                 
@@ -94,7 +94,7 @@
                                     <div class="input-group">
                                           <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
                                           <input type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY" name="invoice_date" autocomplete="off">
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -131,7 +131,7 @@
                             </div>
 
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Enginner: <span class="tx-danger">*</span></label>
                                     <select class="form-control selectpicker" data-live-search="true" title="Select Enginner" data-placeholder="" tabindex="-1" aria-hidden="true" name="engineer_id" required="">
@@ -144,7 +144,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Item Type: <span class="tx-danger">*</span></label>
@@ -157,17 +157,19 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Product (Old): <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Product Model: <span class="tx-danger">*</span></label>
                                     <input class="form-control" type="text" name="product_old" placeholder="Product Old Name" required="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Serial (Old): <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Product Model: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="text" name="product_old" placeholder="Product Old Name" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label"> Product Serial: <span class="tx-danger">*</span></label>
                                     <input class="form-control" type="text" name="serial_old" placeholder="Enter Old Serial Number" required="">
                                 </div>
                             </div>

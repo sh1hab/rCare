@@ -20,6 +20,8 @@ use App\User;
 use App\Purchase;
 use App\PurchaseDetails;
 use App\PurchaseReceive;
+use App\Serial;
+use App\PartsStock;
 
 use Session;
 use Hash;
@@ -252,7 +254,7 @@ class PurchaseController extends Controller
                         ->LeftJoin('parts', 'parts.id', '=', 'purchase_details.parts_id')
                         ->LeftJoin('users', 'users.id', '=', 'purchases.create_by')
                         ->where('purchase_details.id', '=', $request_id)
-                        ->select('*', 'purchase_details.id as purchase_id', 'purchase_details.status as purchase_status')
+                        ->select('*', 'purchase_details.id as purchase_detail_id', 'purchases.id as purchase_id', 'purchase_details.status as purchase_status')
                         ->first();
 
         //dmd($data['purchase_details']->toArray(), $request_id);
@@ -261,14 +263,26 @@ class PurchaseController extends Controller
     }
 
     public function add_challan_entry(Request $request)
-    {
+    {      
 
-        $purchase = PurchaseDetails::find($request->get('purchase_details_id'));
-        $purchase->status = 3;
-        $purchase->save();
+        $serial_ids = array();
 
-        dmd($purchase->toArray(), $_POST);
+        if(isset($_POST['serial']) && $_POST['serial'])
+        {
+            foreach ($_POST['serial'] as $key => $serial_no) {
+                $serial = new Serial();
+                $serial->parts_id = $request->get('parts_id');
+                $serial->purchase_details_id = $request->get('purchase_details_id');
+                $serial->supplier_id = $request->get('supplier_id');
+                $serial->location_id = $request->get('rcv_location_id');
+                $serial->serial_no = $serial_no;
+                $serial->affect_date = date('Y-m-d H:i:s', strtotime($request->get('affect_date')));
+                $serial->entry_by = $request->get('entry_by');
+                $serial->save();
 
+                $serial_ids[] = $serial->id;
+            }
+        }
 
         $purchase_rcv = new PurchaseReceive();
 
@@ -279,32 +293,56 @@ class PurchaseController extends Controller
         $purchase_rcv->rcv_location_id = $request->get('rcv_location_id');
         $purchase_rcv->receive_note = $request->get('receive_note');
         $purchase_rcv->supplier_challan_no = $request->get('supplier_challan_no');
-        $purchase_rcv->serial_ids = $request->get('serial_ids');
-        $purchase_rcv->receive_date = date('Y-m-d');
-        $purchase_rcv->receive_by = Auth::user()->id;
+        $purchase_rcv->serial_ids = json_encode($serial_ids);
+        $purchase_rcv->receive_date = date('Y-m-d H:i:s', strtotime($request->get('affect_date')));
+        $purchase_rcv->received_by = $request->get('entry_by');
 
         if($purchase_rcv->save()){
-            for ($i = 1; $i <= $request->get('productsrowcount'); $i++) { 
-               
-                $purchase_details = new PurchaseDetails();
- 
-                $purchase_details->purchase_id = $purchase->id; 
-                $purchase_details->parts_id = $request->get('parts_id_'.$i);  
-                $purchase_details->quantity = $request->get('quantity_'.$i);
-                $purchase_details->unit_price = $request->get('price_'.$i);
-                $purchase_details->total_price = $request->get('total_'.$i);
-                $purchase_details->parts_note = $request->get('note_'.$i);
-                $purchase_details->request_date = date('Y-m-d');
-                $purchase_details->status = 1;
-                $purchase_details->create_by = Auth::user()->id;
-                $purchase_details->update_by = Auth::user()->id;
-                $purchase_details->save();                
-            }
+           
+            $purchase = PurchaseDetails::find($request->get('purchase_details_id'));
+            $purchase->status = 3;
+            $purchase->save();
 
-            return redirect()->back()->with('success_message', 'Purchase Requestd Successfully');
+
+            $stock = new PartsStock();
+
+            $stock->parts_id = $request->get('parts_id');
+            $stock->type = 1;
+            $stock->quantity = $request->get('rcv_quantity');
+            $stock->location_id = $request->get('rcv_location_id');
+            $stock->purchase_id = $request->get('purchase_id');
+            $stock->purchase_details_id = $request->get('purchase_details_id');
+            $stock->purchase_rcv_id = $purchase_rcv->id;
+            $stock->entry_date = date('Y-m-d H:i:s');
+            $stock->affect_date = date('Y-m-d H:i:s', strtotime($request->get('affect_date')));
+            $stock->entry_by = $request->get('entry_by');
+            $stock->save();
+
+
+            return redirect('purchase/challan')->with('success_message', 'Purchase Parts Entered Successfully');
             
         }else{
-            return redirect()->back()->with('error_message', 'Failed to Save Location');
+            return redirect()->back()->with('error_message', 'Failed to Save Parts Entry');
+        }
+
+        
+    }
+
+    public function parts()
+    {
+        if($request->ajax()){
+            $parts_list = Parts::all();
+
+            $options = "<option value=''> Parts/Accessories </option>";
+            if($parts_list){
+                foreach($parts_list as $parts){
+                    $options .= "<option value = '$parts->id'>".$parts->parts_name."</option>";
+                }
+            }
+
+            return response()->json(['status' => true, 'result' => $options]);
+        }else{
+            return redirect('cheque')->with('success_message', 'Cheque Addedd Successfully.');
         }
     }
 }

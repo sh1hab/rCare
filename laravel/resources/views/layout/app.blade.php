@@ -163,6 +163,7 @@
         </a><!-- br-menu-link -->
 
         <ul class="br-menu-sub nav flex-column">
+          <li class="nav-item"><a href="" class="nav-link">Stock Report</a></li>
           <li class="nav-item"><a href="" class="nav-link">Challan Report</a></li>
           <li class="nav-item"><a href="" class="nav-link">Credit Memo Report</a></li>
           <li class="nav-item"><a href="" class="nav-link">Interchange Report</a></li>
