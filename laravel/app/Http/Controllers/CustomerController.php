@@ -84,6 +84,11 @@ class CustomerController extends Controller
 
         $invoice_no = $this->create_invoice($request->get('location_id'));
 
+        // if(isset($_POST['item_password']) && $_POST['item_password'])
+        //     $item_password = $_POST['item_password'];
+        // else
+        //     $item_password = NULL;
+
         $claim = new CustomerClaim();
 
         $claim->rcv_no = 'CPR-'.$invoice_no['rcv_1'].''.$invoice_no['rcv_3'];
@@ -98,6 +103,7 @@ class CustomerController extends Controller
         $claim->engineer_id = $request->get('engineer_id');
         $claim->item_type_id = $request->get('item_type_id');
         $claim->type_id = $request->get('service_type_id');
+        $claim->item_password = $request->get('item_password');
         $claim->product_old = $request->get('product_old');
         $claim->serial_old = $request->get('serial_old');
         $claim->product_details = $request->get('product_details');

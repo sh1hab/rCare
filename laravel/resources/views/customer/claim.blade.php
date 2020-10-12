@@ -34,9 +34,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Location: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                    <select class="form-control js-example-basic-single" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
+                                        <option>Select Location</option>
                                         @foreach ($data['location'] as $location)
-                                        <option value="{{ $location->id }}"> {{ $location->location_name }} </option>
+                                            <option value="{{ $location->id }}"> {{ $location->location_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -56,9 +57,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Service Type: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" title="Select Service Type" data-placeholder="" tabindex="-1" aria-hidden="true" name="service_type_id" required="">
+                                    <select class="form-control js-example-basic-single" data-live-search="true" id="service_type" title="Select Service Type" data-placeholder="" tabindex="-1" aria-hidden="true" name="service_type_id" required="">
+                                        <option>Select Service Type</option>
                                         @foreach ($data['services'] as $service)
-                                        <option value="{{ $service->id }}"> {{ $service->service_name }} </option>
+                                            <option value="{{ $service->id }}"> {{ $service->service_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -161,7 +163,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Item Type: <span class="tx-danger">*</span></label>
-                                    <select class="form-control selectpicker" data-live-search="true" data-size="10" title="Select Item" data-placeholder="" tabindex="-1" aria-hidden="true" name="item_type_id" required="">
+                                    <select class="form-control js-example-basic-single service_type" data-live-search="true" data-size="10" title="Select Item" data-placeholder="" tabindex="-1" aria-hidden="true" name="item_type_id" required="">
+                                        <option>Select Item Type</option>
                                         @foreach ($data['items'] as $item)
                                             <option data-tokens="" value="{{ $item->id }}"> {{ $item->item_name }} </option>
                                         @endforeach
@@ -169,9 +172,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-control-label"> Product Model: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="product_old" placeholder="Product Old Name" required="">
+                                <div class="form-group notebook_password" hidden>
+                                    <label class="form-control-label"> Notebook Password: </label>
+                                    <input class="form-control" type="text" name="item_password" placeholder="Enter Customer's Notebook Password">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -258,6 +261,22 @@
         showOtherMonths: true,
         selectOtherMonths: true,
         dateFormat: 'mm/dd/yy',
+    });
+
+    $(document).ready(function() {
+        $('.service_type').on('change', function() {
+
+            console.log($.trim($(".service_type option[value='"+this.value+"']").text()))
+
+            if($.trim($(".service_type option[value='"+this.value+"']").text()) == 'Notebook'){
+                console.log('if');
+                $('.notebook_password').removeAttr('hidden');
+            }
+            else{
+                console.log('else');
+                $('.notebook_password').attr('hidden', true);
+            }
+        });
     });
 
 

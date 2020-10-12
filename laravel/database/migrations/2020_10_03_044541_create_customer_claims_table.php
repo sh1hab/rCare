@@ -27,6 +27,7 @@ class CreateCustomerClaimsTable extends Migration
             $table->integer('engineer_id');
             $table->integer('item_type_id');
             $table->integer('type_id');
+            $table->integer('item_password')->nullable();
             $table->string('product_old');
             $table->string('serial_old');
             $table->text('product_details')->nullable();
