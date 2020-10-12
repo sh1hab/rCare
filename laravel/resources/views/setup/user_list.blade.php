@@ -35,7 +35,8 @@
                             <th class="wd-5p"> Username </th>
                             <th class="wd-5p"> Email </th>
                             <th class="wd-5p"> Designation </th>
-                            <th class="wd-10p"> Contact No. </th>
+                            <th class="wd-10p"> Contact No. 1 </th>
+                            <th class="wd-10p"> Contact No. 2 </th>
                             <th class="wd-5p"> RS ID </th>
                             <th class="wd-5p"> Role </th>
                             <th class="wd-5p"> Location </th>
@@ -58,6 +59,7 @@
                             <td> {{$user->email}} </td>
                             <td> {{$user->designation}} </td>
                             <td> {{$user->contact_no}} </td>
+                            <td> {{$user->contact_no_1}} </td>
                             <td> {{$user->rs_id}} </td>
                             <td> {{$user->role->role_name}} </td>
                             <td> {{$user->location->location_short_name}} </td>

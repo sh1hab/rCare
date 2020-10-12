@@ -38,34 +38,91 @@
                             <th class="wd-5p"> Sales Price </th>
                             <th class="wd-5p"> Warranty </th>
                             <th class="wd-5p"> Stock Level </th>
+                            <th class="wd-5p"> Stock Value </th>
+                            <th class="wd-5p"> Quantity </th>
+                            @php
+                            $locs = '';
+                            $qtys_inner = array();
+
+                            for($i=0; $i<$data['location_count']; $i++){
+                                if($locs!='') $locs .= ',';
+                                //$locs .= $qtys_inner[$i];
+                            @endphp
+                               
+                                {{-- <td style="cursor: pointer;" onclick=""></td> --}}
+                                @php
+                            }
+                                
+                            @endphp
+
                         </tr>
                     </thead>
                     <tbody>
                         @if(count($data['stock_list']) > 0)
                             @php
-                            $i =1;
+                                $i =1;
+                                $parts_row_total = 0;
+                                $total_qty = $total_stock_value = 0;
+                                $parts_ids = array();
                             @endphp
 
                             @foreach($data['stock_list'] as $stock)
+
+                                @php
+                                    // $loc = $stock['location_id'];
+                                    // $key = array_search($loc, $data['location_ids']);
+                                    // if($key || $key===0) {
+                                    //     $qtys_inner[$key] =  $stock->quantity;
+                                    // }
+                                    
+                                    //$total_qty +=  $stock->quantity;
+
+                                    echo "<pre>";
+                                    print_r($parts_row_total.' -- '.$stock->parts_id);
+
+                                    if(in_array($stock->parts_id, $parts_ids))
+                                        $parts_row_total += $stock->quantity;
+                                    else
+                                        $parts_row_total = 0;
+
+                                    
+                                @endphp
+
+                                @if(in_array($stock->parts_id, $parts_ids) == false)                               
+                                    
                                 <tr>
-                                    {{-- <td> {{ $i++ }} </td> --}}
                                     <td> {{$stock->category_name}} </td>
                                     <td> {{$stock->brand_name}} </td>
                                     <td> {{$stock->full_code}} </td>
-                                    <td> {{$stock->parts_name}} </td>
+                                    <td> {{$stock->parts_name}} --- {{$stock->parts_id}}</td>
                                     <td> {{$stock->sales_price}} </td>
                                     <td> {{$stock->warranty_period}} </td>
                                     <td> {{$stock->stock_level}} </td>
+                                    <td> {{$stock->stock_level}} </td>
+                                    <td> {{$parts_row_total}} </td>
                                 </tr>
-                            @endforeach
+
+                                @php
+                                   //$parts_row_total = 0;
+                                @endphp
+
+                                    
+                                    
+                                @endif
+
+                                @php
+                                    // if(in_array($stock->parts_id, $parts_ids))
+                                    //     $parts_row_total += $stock->quantity;
+                                    // else
+                                    //      $parts_row_total = 0;
+
+                                    $parts_ids[] = $stock->parts_id; 
+                                @endphp
+
+                            @endforeach                            
                         @else
                             <tr>
-                                <td colspan="11" class="text-center"> There is no user created </td>
-                                <td style="display: none"></td>
-                                <td style="display: none"></td>
-                                <td style="display: none"></td>
-                                <td style="display: none"></td>
-                                <td style="display: none"></td>
+                                <td colspan="1" class="text-center"> There is no user created </td>
                             </tr>
                         @endif
 

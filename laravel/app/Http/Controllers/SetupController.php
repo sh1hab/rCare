@@ -18,6 +18,7 @@ use App\Item;
 use App\Parts;
 use App\Supplier;
 use App\User;
+use App\PartsStockView;
 
 use Session;
 use Hash;
@@ -480,9 +481,30 @@ class SetupController extends Controller
         $parts->update_by = Auth::user()->id;
 
         if($parts->save()){
+
+            self::insert_parts_stock_view($parts->id);
+
             return redirect()->back()->with('success_message', 'Parts/Accessories Successfully Saved');
         }else{
             return redirect()->back()->with('error_message', 'Failed to Save Parts/Accessories');
+        }
+    }
+
+    static function insert_parts_stock_view($parts_id)
+    {
+        $locations = Location::where('status', 1)->get();
+
+        foreach ($locations as $key => $location) {
+            $parts = PartsStockView::where('parts_id', $parts_id)
+                                    ->where('location_id', $location->id)
+                                    ->first();
+            if(!$parts){
+                $parts_stock_view = new PartsStockView();
+                $parts_stock_view->parts_id = $parts_id;
+                $parts_stock_view->location_id = $location->id;
+                $parts_stock_view->quantity = 0;
+                $parts_stock_view->save();
+            }
         }
     }
 
@@ -759,6 +781,7 @@ class SetupController extends Controller
         $user->name = $request->get('user_name');
         $user->designation = $request->get('designation');
         $user->contact_no = $request->get('contact_no');
+        $user->contact_no_1 = $request->get('contact_no_1');
         $user->rs_id = $request->get('rs_id');
         $user->user_role_id = $request->get('role_id');
         $user->location_id = $request->get('location_id');
@@ -824,6 +847,7 @@ class SetupController extends Controller
         $user->name = $request->get('user_name');
         $user->designation = $request->get('designation');
         $user->contact_no = $request->get('contact_no');
+        $user->contact_no_1 = $request->get('contact_no_1');
         $user->rs_id = $request->get('rs_id');
         $user->user_role_id = $request->get('role_id');
         $user->location_id = $request->get('location_id');

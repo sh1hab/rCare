@@ -75,6 +75,7 @@ class CustomerController extends Controller
         	$customer = new Customer();
 	        $customer->customer_name = $request->get('customer_name');
 	        $customer->customer_mobile = $request->get('customer_mobile');
+            $customer->customer_mobile_1 = $request->get('customer_mobile_1');
 	        $customer->customer_email = $request->get('customer_email');
 	        $customer->customer_address = $request->get('customer_address');
 	        $customer->create_by = Auth::user()->id;

@@ -19,9 +19,9 @@ class CreatePartsStocksTable extends Migration
             $table->tinyInteger('type')->comment('1 = Purchase, 2 = Sales, 3 = Interchange, 4 = purchase return');
             $table->integer('quantity');
             $table->integer('location_id');
-            $table->integer('purchase_id')->nullable()
-            $table->integer('purchase_details_id')->nullable()
-            $table->integer('purchase_rcv_id')->nullable()
+            $table->integer('purchase_id')->nullable();
+            $table->integer('purchase_details_id')->nullable();
+            $table->integer('purchase_rcv_id')->nullable();
             $table->integer('sales_id')->nullable();
             $table->integer('sales_details_id')->nullable();
             $table->integer('interchange_id')->nullable();

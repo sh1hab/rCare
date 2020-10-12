@@ -35,8 +35,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Contact Number: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label"> Contact Number 1: <span class="tx-danger">*</span></label>
                                     <input class="form-control" type="text" name="contact_no" placeholder="Enter Contact Number" required="" value="{{ $data['user']->contact_no }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label"> Contact Number 2: </label>
+                                    <input class="form-control" type="text" name="contact_no_1" placeholder="Enter Contact Number" required="" value="{{ $data['user']->contact_no_1 }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -52,8 +58,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                            </div>
+                            {{-- <div class="col-md-6">
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> User Role: <span class="tx-danger">*</span></label>

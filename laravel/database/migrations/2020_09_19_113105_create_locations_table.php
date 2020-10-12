@@ -20,7 +20,7 @@ class CreateLocationsTable extends Migration
             $table->longText('location_details')->nullable();
             $table->tinyInteger('location_type');
             $table->double('location_opening_balance')->nullable();
-            $table->tinyInteger('location_status');
+            $table->tinyInteger('status');
             $table->integer('create_by');
             $table->integer('update_by')->nullable();
             $table->timestamps();

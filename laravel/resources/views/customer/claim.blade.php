@@ -2,7 +2,9 @@
 @section('custom_css')
 
 <style type="text/css">
-    
+    .mobile .form-group{
+        margin-bottom: 0px;
+    }    
 
 </style>
 
@@ -109,10 +111,21 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label"> Mobile: <span class="tx-danger">*</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="customer_info tx-danger" hidden></span></label>
-                                                <input class="form-control customer_mobile" type="text" name="customer_mobile" pattern="[0][0-9]{10}" onKeyPress="if(this.value.length == 11) return false;" placeholder="Customer Mobile Ex. (017xxxxxxxx) " required="">
-                                            </div>
+                                            <div class="row mobile">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label"> Mobile 1: <span class="tx-danger">*</span></label>
+                                                        <input class="form-control customer_mobile" type="text" name="customer_mobile" pattern="[0][0-9]{10}" onKeyPress="if(this.value.length == 11) return false;" placeholder="Ex. (017xxxxxxxx)" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label"> Mobile 2: </label>
+                                                        <input class="form-control customer_mobile" type="text" name="customer_mobile" pattern="[0][0-9]{10}" onKeyPress="if(this.value.length == 11) return false;" placeholder="Ex. (017xxxxxxxx)">
+                                                    </div>
+                                                </div>
+                                                <span class="customer_info tx-danger" hidden style="margin: 0 auto;"></span>
+                                            </div>                                            
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">

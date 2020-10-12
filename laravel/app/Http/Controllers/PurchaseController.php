@@ -22,6 +22,7 @@ use App\PurchaseDetails;
 use App\PurchaseReceive;
 use App\Serial;
 use App\PartsStock;
+use App\PartsStockView;
 
 use Session;
 use Hash;
@@ -320,6 +321,15 @@ class PurchaseController extends Controller
             $stock->entry_by = $request->get('entry_by');
             $stock->save();
 
+            $parts_stock_view = PartsStockView::where('parts_id', $request->get('parts_id'))
+                                        ->where('location_id', $request->get('rcv_location_id'))
+                                        ->first();
+            $quantity = $parts_stock_view->quantity;
+            $quantity += $request->get('rcv_quantity');
+
+            $parts_stock_view = PartsStockView::find($parts_stock_view->id);
+            $parts_stock_view->quantity = $quantity;
+            $parts_stock_view->save();
 
             return redirect('purchase/challan')->with('success_message', 'Purchase Parts Entered Successfully');
             

@@ -27,7 +27,8 @@
                         <tr>
                             <th class="wd-5p"> SL </th>
                             <th class="wd-5p"> Name </th>
-                            <th class="wd-5p"> Mobile </th>
+                            <th class="wd-5p"> Mobile 1 </th>
+                            <th class="wd-5p"> Mobile 2 </th>
                             <th class="wd-5p"> Email </th>
                             <th class="wd-10p"> Address </th>
                         </tr>
@@ -44,6 +45,7 @@
                             <td> {{ $i++ }} </td>
                             <td> {{$customer->customer_name}} </td>
                             <td> {{$customer->customer_mobile}} </td>
+                            <td> {{$customer->customer_mobile_1}} </td>
                             <td> {{$customer->customer_email}} </td>
                             <td> {{$customer->customer_address}} </td>
                         </tr>
