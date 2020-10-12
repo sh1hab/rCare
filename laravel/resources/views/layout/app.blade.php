@@ -88,7 +88,7 @@
     <!-- ########## START: LEFT PANEL ########## -->
     <div class="br-logo">
       {{-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><span>[</span>RyansCare<span>]</span></a> --}}
-      <a href="" style="margin: 0px auto;"><img style="height: 35px" src="{{asset('admin/img/ryanscare.png')}}" alt="Ryans Computers Logo"></a>
+      <a href="{{ route('dashboard') }}" style="margin: 0px auto;"><img style="height: 35px" src="{{asset('admin/img/ryanscare.png')}}" alt="Ryans Computers Logo"></a>
     </div>
     <div class="br-sideleft overflow-y-auto">
       <div class="br-sideleft-menu">
@@ -154,7 +154,11 @@
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>
 
-        <a href="#" class="br-menu-link">
+        <?php 
+            $report = array('stock-report');
+        ?>
+
+        <a href="#" class="br-menu-link  {{ in_array(Request::path(), $purchase) ? 'sub-show' : '' }}">
           <div class="br-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
             <span class="menu-item-label">Reports</span>
@@ -162,8 +166,8 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link">Stock Report</a></li>
+        <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $report) ? 'display: block' : '' }}">
+          <li class="nav-item"><a href="{{ route('stock-report') }}" class="nav-link {{ Request::path() == 'stock-report' ? 'active' : '' }}"> Stock Report </a></li>
           <li class="nav-item"><a href="" class="nav-link">Challan Report</a></li>
           <li class="nav-item"><a href="" class="nav-link">Credit Memo Report</a></li>
           <li class="nav-item"><a href="" class="nav-link">Interchange Report</a></li>

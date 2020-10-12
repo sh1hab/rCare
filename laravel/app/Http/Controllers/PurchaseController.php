@@ -129,12 +129,14 @@ class PurchaseController extends Controller
                                 
 
         if(isset($_POST['supplier_id']) && $_POST['supplier_id']){
+        //if($request->has('supplier_id')){
             $query->where('purchases.supplier_id', $_POST['supplier_id']);
         }else{
              $_POST['supplier_id'] = '';
         }
 
-        if(isset($_POST['request_dates']) && $_POST['request_dates']){
+        if(isset($_POST['request_dates']) && $_POST['request_dates']){            
+        //if($request->has('request_dates')){
             $string = explode(' - ', $_POST['request_dates']);
             $date1 = explode('/',$string[0]);
             $date2 = explode('/',$string[1]);

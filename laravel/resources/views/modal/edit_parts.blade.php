@@ -53,7 +53,7 @@
             <div class="row"> --}}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-control-label"> Average Price: <span class="tx-danger">*</span></label>
+                        <label class="form-control-label"> Purchase Price: <span class="tx-danger">*</span></label>
                         <input class="form-control avg_price" type="text" name="avg_price" placeholder="Enter Parts/Accessories Avg. Price" required="">
                     </div>
                 </div>
@@ -94,13 +94,20 @@
             <div class="row"> --}}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-control-label"> Details: </label>
-                        <textarea rows="3" class="form-control details" name="details" placeholder="Details of Product"></textarea>
+                        <label class="form-control-label"> Stock Level: <span class="tx-danger">*</span></label>
+                        <input class="form-control stock_level" type="text" name="stock_level" placeholder="Enter Parts/Accessories Stock Level" required="">
                     </div>
                 </div>
             {{-- </div>
 
             <div class="row"> --}}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label"> Details: </label>
+                        <textarea rows="3" class="form-control details" name="details" placeholder="Details of Product"></textarea>
+                    </div>
+                </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="form-control-label"> Status: <span class="tx-danger">*</span></label>

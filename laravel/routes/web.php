@@ -129,5 +129,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('datatables.data', 'PurchaseController@anyData')->name('datatables.data');
 
+
+	// --------------------  report ----------------------
+
+	Route::get('stock-report', 'ReportsController@stock_list')->name('stock-report');
+
 });
 

@@ -16,7 +16,7 @@ class CreatePartsStocksTable extends Migration
         Schema::create('parts_stocks', function (Blueprint $table) {
             $table->id();
             $table->integer('parts_id');
-            $table->tinyInteger('type')->comment('1 = Purchase, 2 = Sales, 3 = Interchange');
+            $table->tinyInteger('type')->comment('1 = Purchase, 2 = Sales, 3 = Interchange, 4 = purchase return');
             $table->integer('quantity');
             $table->integer('location_id');
             $table->integer('purchase_id')->nullable()

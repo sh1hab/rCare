@@ -26,6 +26,7 @@ class CreatePartsTable extends Migration
             $table->double('margin');
             $table->double('sales_price');
             $table->integer('warranty_id');
+            $table->integer('stock_level');
             $table->tinyInteger('status');
             $table->integer('create_by');
             $table->integer('update_by')->nullable();

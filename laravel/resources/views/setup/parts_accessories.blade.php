@@ -1,29 +1,28 @@
 @extends('layout.app')
 @section('custom_css')
 
-<style type="text/css">
-    
+<style type="text/css">    
     .br-pagebody{
         margin-top: 0px;
-      }
-      .br-section-wrapper {
+    }
+    .br-section-wrapper {
         padding: 30px;
-      }
-      .DataTables_sort_icon { display:none;}
+    }
+    .DataTables_sort_icon { display:none;}
 
-      .dataTable > thead > tr > th[class*=sort]:after{
-          display:none;
-      }
+    .dataTable > thead > tr > th[class*=sort]:after{
+        display:none;
+    }
 
-      .sorting, .sorting_asc, .sorting_desc {
-          background : none;
-      }
+    .sorting, .sorting_asc, .sorting_desc {
+        background : none;
+    }
 
-        table.dataTable thead .sorting:after
-        {
-            display: none;
-        }
-
+    table.dataTable thead .sorting:after
+    {
+        display: none;
+    }
+    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child,table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child{position:relative;padding-left:30px;cursor:pointer}table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before{top:8px;right:4px;height:16px;width:16px;display:block;position:absolute;color:white;border:2px solid white;border-radius:1px;text-align:center;line-height:14px;box-shadow:0 0 3px #444;box-sizing:content-box;content:'+';background-color:#31b131}table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child.dataTables_empty:before,table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child.dataTables_empty:before{display:none}table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before{content:'-';background-color:#d33333}table.dataTable.dtr-inline.collapsed>tbody>tr.child td:before{display:none}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child{padding-left:27px}table.dataTable.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before,table.dataTable.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before{top:5px;right:4px;height:14px;width:14px;border-radius:1px;line-height:12px}table.dataTable.dtr-column>tbody>tr>td.control,table.dataTable.dtr-column>tbody>tr>th.control{position:relative;cursor:pointer}table.dataTable.dtr-column>tbody>tr>td.control:before,table.dataTable.dtr-column>tbody>tr>th.control:before{top:50%;left:50%;height:16px;width:16px;margin-top:-10px;margin-left:-10px;display:block;position:absolute;color:white;border:2px solid white;border-radius:1px;text-align:center;line-height:14px;box-shadow:0 0 3px #444;box-sizing:content-box;content:'+';background-color:#31b131}table.dataTable.dtr-column>tbody>tr.parent td.control:before,table.dataTable.dtr-column>tbody>tr.parent th.control:before{content:'-';background-color:#d33333}table.dataTable>tbody>tr.child{padding:0.5em 1em}table.dataTable>tbody>tr.child:hover{background:transparent !important}table.dataTable>tbody>tr.child ul{display:inline-block;list-style-type:none;margin:0;padding:0}table.dataTable>tbody>tr.child ul li{border-bottom:1px solid #efefef;padding:0.5em 0}table.dataTable>tbody>tr.child ul li:first-child{padding-top:0}table.dataTable>tbody>tr.child ul li:last-child{border-bottom:none}table.dataTable>tbody>tr.child span.dtr-title{display:inline-block;min-width:75px;font-weight:bold}
 
 </style>
 @endsection
@@ -54,7 +53,7 @@
                     </div>
                 </div>                
 
-                <table class="table table-striped table-info" id="sample_1"><!-- table2 -->
+                <table class="table table-striped table-info display responsive nowrap" id="sample_1" width="100%" cellspacing="0"><!-- table2 -->
                     <thead>
                         <tr>
                             <th class="wd-3p"> No </th>
@@ -64,7 +63,7 @@
                             <th class="wd-20p"> Parts </th>                        
                             <th class="wd-20p"> Warranty </th>                        
                             <th class="wd-15p"> Details </th>
-                            <th class="wd-10p"> Avg. Price </th>
+                            <th class="wd-10p"> Purchase Price </th>
                             <th class="wd-10p"> Margin </th>
                             <th class="wd-10p"> Sale Price </th>
                             <th class="wd-5p"> Status </th>
@@ -98,7 +97,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="javascript:void(0);" id="" data-id="{{ $part->id }}" data-category="{{ $part->category_id }}" data-brand="{{ $part->compatible_brand_id }}" data-name="{{ $part->parts_name }}" data-avg-price="{{ $part->avg_price }}" data-margin="{{ $part->margin }}" data-margin="{{ $part->margin }}" data-sale-price="{{ $part->sales_price }}" data-warranty="{{ $part->warranty_id }}" data-details="{{ $part->details }}" data-status="{{ $part->status }}" class="btn btn-info btn-icon edit_parts_modal">
+                                        <a href="javascript:void(0);" id="" data-id="{{ $part->id }}" data-category="{{ $part->category_id }}" data-brand="{{ $part->compatible_brand_id }}" data-name="{{ $part->parts_name }}" data-avg-price="{{ $part->avg_price }}" data-margin="{{ $part->margin }}" data-margin="{{ $part->margin }}" data-sale-price="{{ $part->sales_price }}" data-stock-level="{{ $part->stock_level }}" data-warranty="{{ $part->warranty_id }}" data-details="{{ $part->details }}" data-status="{{ $part->status }}" class="btn btn-info btn-icon edit_parts_modal">
                                             <div><i class="fa fa-edit" title="Edit"></i></div>
                                         </a>
                                     </td>
@@ -187,6 +186,7 @@
         var avg_price = $(this).attr("data-avg-price");
         var margin = $(this).attr("data-margin");
         var sales_price = $(this).attr("data-sale-price");
+        var stock_level = $(this).attr("data-stock-level");
         var warranty_id = $(this).attr("data-warranty");
         var details = $(this).attr("data-details");
         var status = $(this).attr("data-status");
@@ -197,6 +197,7 @@
         $('.avg_price').val(avg_price);
         $('.margin').val(margin);
         $('.sales_price').val(sales_price);
+        $('.stock_level').val(stock_level);
         $('.details').val(details);
         $('.status[value='+status+']').prop("checked",true);
 

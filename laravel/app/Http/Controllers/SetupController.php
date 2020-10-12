@@ -53,7 +53,7 @@ class SetupController extends Controller
 
     public function bank()
     {
-        $data['bank'] = Bank::all();
+        $data['bank'] = Bank::where('status', 1)->get();
         return view('setup.bank')->with('data', $data);
     }
 
@@ -96,7 +96,7 @@ class SetupController extends Controller
 
     public function location()
     {
-        $data['location'] = Location::all();
+        $data['location'] = Location::where('status', 1)->get();
         return view('setup.location')->with('data', $data);
     }
 
@@ -141,7 +141,7 @@ class SetupController extends Controller
 
     public function category()
     {
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('status', 1)->get();
         return view('setup.category')->with('data', $data);
     }
 
@@ -193,9 +193,9 @@ class SetupController extends Controller
 
     public function brand()
     {
-        $data['brand'] = Brand::all();
+        $data['brand'] = Brand::where('status', 1)->get();
         //dmd($data['brand']);
-        $data['categories'] = Category::all();
+        $data['categories'] = Category::where('status', 1)->get();
 
         return view('setup.brand')->with('data', $data);
     }
@@ -249,8 +249,8 @@ class SetupController extends Controller
 
     public function bank_account()
     {
-        $data['bank_account'] = BankAccount::all();
-        $data['bank'] = Bank::all();
+        $data['bank_account'] = BankAccount::where('status', 1)->get();
+        $data['bank'] = Bank::where('status', 1)->get();
         return view('setup.bank_account')->with('data', $data);
     }
 
@@ -294,7 +294,7 @@ class SetupController extends Controller
 
     public function card()
     {
-        $data['card'] = Card::all();
+        $data['card'] = Card::where('status', 1)->get();
         return view('setup.card')->with('data', $data);
     }
 
@@ -333,8 +333,8 @@ class SetupController extends Controller
 
     public function asset()
     {
-        $data['asset_type'] = AssetType::all();
-        $data['asset_head'] = AssetHead::all();
+        $data['asset_type'] = AssetType::where('status', 1)->get();
+        $data['asset_head'] = AssetHead::where('status', 1)->get();
 
         return view('setup.asset')->with('data', $data);
     }
@@ -404,13 +404,13 @@ class SetupController extends Controller
 
     public function parts_accessories()
     {
-        $data['category'] = Category::all();
-        $data['brand'] = Brand::all();
-        $data['warranties'] = Warranty::all();
-        $data['parts'] = Parts::all();
+        $data['category'] = Category::where('status', 1)->get();
+        $data['brand'] = Brand::where('status', 1)->get();
+        $data['warranties'] = Warranty::where('status', 1)->get();
+        $data['parts'] = Parts::where('status', 1)->get();
 
 
-        $data['supplier'] = Supplier::all();
+        $data['supplier'] = Supplier::where('status', 1)->get();
 
         return view('setup.parts_accessories')->with('data', $data);
     }
@@ -426,6 +426,7 @@ class SetupController extends Controller
         $input_rules['avg_price'] = 'required';
         $input_rules['margin'] = 'required';
         $input_rules['sales_price'] = 'required';
+        $input_rules['stock_level'] = 'required';
         $input_rules['warranty_id'] = 'required';
 
         $validator = Validator::make($request->all(), $input_rules);
@@ -472,6 +473,7 @@ class SetupController extends Controller
         $parts->avg_price = $request->get('avg_price');
         $parts->margin = $request->get('margin');
         $parts->sales_price = $request->get('sales_price');
+        $parts->stock_level = $request->get('stock_level');
         $parts->warranty_id = $request->get('warranty_id');
         $parts->status = $request->get('status');
         $parts->create_by = Auth::user()->id;
@@ -486,7 +488,7 @@ class SetupController extends Controller
 
     public function warranty()
     {
-        $data['warranties'] = Warranty::all();
+        $data['warranties'] = Warranty::where('status', 1)->get();
         return view('setup.warranty')->with('data', $data);
     }
 
@@ -522,7 +524,7 @@ class SetupController extends Controller
 
     public function item()
     {
-        $data['items'] = Item::all();
+        $data['items'] = Item::where('status', 1)->get();
         return view('setup.item')->with('data', $data);
     }
 
@@ -580,7 +582,7 @@ class SetupController extends Controller
 
     public function employee_role(Request $request)
     {
-        $data['role'] = Role::all();
+        $data['role'] = Role::where('status', 1)->get();
         return view('setup.employee_role')->with('data', $data);
     }
 
@@ -615,7 +617,7 @@ class SetupController extends Controller
 
     public function supplier()
     {
-        $data['supplier'] = Supplier::all();
+        $data['supplier'] = Supplier::where('status', 1)->get();
         return view('setup.supplier')->with('data', $data);
     }
 
@@ -658,7 +660,7 @@ class SetupController extends Controller
 
     public function service()
     {
-        $data['service'] = Service::all();
+        $data['service'] = Service::where('status', 1)->get();
         return view('setup.service')->with('data', $data);
     }
 
@@ -699,19 +701,19 @@ class SetupController extends Controller
 
     public function users()
     {
-        $data['users'] = User::all();
-        $data['role'] = Role::all();
-        $data['location'] = Location::all();
-        $data['users'] = User::all();
+        $data['users'] = User::where('status', 1)->get();
+        $data['role'] = Role::where('status', 1)->get();
+        $data['location'] = Location::where('status', 1)->get();
+        $data['users'] = User::where('status', 1)->get();
 
         return view('setup.user_list')->with('data', $data);
     }
 
     public function add_user()
     {
-        $data['users'] = User::all();
-        $data['role'] = Role::all();
-        $data['location'] = Location::all();
+        $data['users'] = User::where('status', 1)->get();
+        $data['role'] = Role::where('status', 1)->get();
+        $data['location'] = Location::where('status', 1)->get();
 
         return view('setup.user')->with('data', $data);
     }
@@ -778,8 +780,8 @@ class SetupController extends Controller
     public function edit_user($user_id)
     {
         $data['user'] = User::find($user_id);
-        $data['role'] = Role::all();
-        $data['location'] = Location::all();
+        $data['role'] = Role::where('status', 1)->get();
+        $data['location'] = Location::where('status', 1)->get();
 
         //dmd($data['user']->toArray());
 

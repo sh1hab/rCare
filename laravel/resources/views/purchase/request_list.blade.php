@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-group">
-                                    <label class="form-control-label"> Supplier </label>
+                                    <label class="form-control-label"> {{ old('supplier_id') }} Supplier </label>
                                     <select class="form-control js-example-basic-single" style="width: 100%" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
                                         {{-- @php
                                             if(isset($_POST['supplier_id']) && $_POST['supplier_id'])
@@ -49,7 +49,7 @@
                                         @endphp --}}
                                         <option value="0"> ALL Supplier </option>
                                         @foreach ($data['suppliers'] as $supplier)
-                                            <option value="{{ $supplier->id }}" > {{ $supplier->supplier_name }} </option>
+                                            <option value="{{ $supplier->id }}" <?php if($supplier->id == old('supplier_id')) { echo "selected"; } ?>> {{ $supplier->supplier_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>

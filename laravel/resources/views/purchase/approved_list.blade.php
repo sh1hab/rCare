@@ -8,6 +8,13 @@
     div.dt-buttons {
         margin-left: 20px;
     }
+    td.details-control {
+        background: url('../resources/details_open.png') no-repeat center center;
+        cursor: pointer;
+    }
+    tr.shown td.details-control {
+        background: url('../resources/details_close.png') no-repeat center center;
+    }
 </style>
 
 @endsection
@@ -47,6 +54,7 @@
                         <table class="table table-striped table-info no-footer data-table">
                             <thead>
                                 <tr>
+                                    {{-- <th>  </th> --}}
                                     <th> SL </th>
                                     <th> Parts </th>
                                     <th> Supplier </th>
@@ -89,9 +97,15 @@
             "paging": true,
             search: {
                 caseInsensitive: false,
-              },
+              },             
             ajax: "{{ route('approve-data') }}",
             columns: [
+                //  {
+                //     "className": 'details-control',
+                //     "orderable": false,
+                //     "data":      null,
+                //     "defaultContent": ''
+                // },
                 {data: 'no', name: 'SL'},
                 {data: 'parts_name', name: 'Parts', bSortable:false},
                 {data: 'supplier_name', name: 'Supplier', bSearchable:true, bSortable:true},
@@ -118,6 +132,73 @@
                     cell.innerHTML = i + 1 + PageInfo.start;
                 } );
             });
+
+
+
+
+
+
+
+            /* Formatting function for row details - modify as you need */
+            // function format ( d ) {
+            //     // `d` is the original data object for the row
+            //     return '<table cellpadding="10" cellspacing="0" border="0" style="">'+
+            //         '<tr>'+
+            //             '<td>Full name:</td>'+
+            //             '<td>'+d.name+'</td>'+
+            //         '</tr>'+
+            //         '<tr>'+
+            //             '<td>Extension number:</td>'+
+            //             '<td>'+d.extn+'</td>'+
+            //         '</tr>'+
+            //         '<tr>'+
+            //             '<td>Extra info:</td>'+
+            //             '<td>And any further details here (images etc)...</td>'+
+            //         '</tr>'+
+            //     '</table>';
+            // }
+             
+            // $(document).ready(function() {
+                // var table = $('#example').DataTable( {
+                //     "ajax": "../ajax/data/objects.txt",
+                //     "columns": [
+                //         {
+                //             "className":      'details-control',
+                //             "orderable":      false,
+                //             "data":           null,
+                //             "defaultContent": ''
+                //         },
+                //         { "data": "name" },
+                //         { "data": "position" },
+                //         { "data": "office" },
+                //         { "data": "salary" }
+                //     ],
+                //     "order": [[1, 'asc']]
+                // } );
+                 
+                // Add event listener for opening and closing details
+                // $('.data-table tbody').on('click', 'td.details-control', function () {
+                //     var tr = $(this).closest('tr');
+                //     var row = table.row( tr );
+             
+                //     if ( row.child.isShown() ) {
+                //         // This row is already open - close it
+                //         row.child.hide();
+                //         tr.removeClass('shown');
+                //     }
+                //     else {
+                //         // Open this row
+                //         row.child( format(row.data()) ).show();
+                //         tr.addClass('shown');
+                //     }
+                // } );
+            // } );
+
+
+
+
+
+
 
 
             // $(document).on("change","#myCol",function(event){

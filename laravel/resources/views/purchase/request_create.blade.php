@@ -26,7 +26,7 @@
                                     <label class="form-control-label"> Supplier: <span class="tx-danger">*</span></label>
                                     <select class="form-control selectpicker" data-live-search="true" title="Select Supplier Name" data-placeholder="-------- Select Bank ---------" tabindex="-1" aria-hidden="true" name="supplier_id" required="">
                                         @foreach ($data['suppliers'] as $supplier)
-                                            <option value="{{ $supplier->id }}"> {{ $supplier->supplier_name }} </option>
+                                            <option value="{{ $supplier->id }}" > {{ $supplier->supplier_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
