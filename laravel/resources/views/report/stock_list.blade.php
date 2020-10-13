@@ -77,8 +77,8 @@
                                     
                                     //$total_qty +=  $stock->quantity;
 
-                                    echo "<pre>";
-                                    print_r($parts_row_total.' -- '.$stock->parts_id);
+                                    // echo "<pre>";
+                                    // print_r($parts_row_total.' -- '.$stock->parts_id);
 
                                     if(in_array($stock->parts_id, $parts_ids))
                                         $parts_row_total += $stock->quantity;

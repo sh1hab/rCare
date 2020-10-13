@@ -67,7 +67,7 @@
                                             <select class="form-control selectpicker parts_id" data-live-search="true" placeholder="Select Parts"  name="parts_id_1" required="">
                                                 <option value=""> Select Any Parts/Item </option>
                                                 @foreach ($data['parts'] as $part)
-                                                <option data-tokens="{{$part->full_code}}" data-subtext="{{$part->full_code}}" value="{{ $part->id }}"> {{ $part->parts_name }} </option>
+                                                <option data-tokens="" data-subtext="" value="{{ $part->id }}"> {{ $part->full_code }} -- {{ $part->parts_name }} </option>
                                                 @endforeach
                                             </select> 
                                         </td>
@@ -143,7 +143,7 @@
                             <div class="col-md-6">
                                 <div class="form-layout-footer">
                                     <button type="submit" class="btn btn-info">Submit</button>
-                                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    <button type="reset" class="btn btn-secondary" onClick="window.location.reload();">Cancel</button>
                                 </div>
                             </div>
                             <div class="col-md-6 text-right">
@@ -182,9 +182,9 @@
         var anotherRow = "<tr class='rowcount_"+CurrRowCount+"'>"+
         "<td>"+getParts(CurrRowCount)+"</td>"+
         // "<td>"+getSupplier(CurrRowCount)+"</td>"+
-        "<td><input type='text' placeholder='Product Quantity' name='quantity_"+CurrRowCount+"' class='quantity form-control'></td>"+
-        "<td><input type='text' placeholder='Product Price' name='price_"+CurrRowCount+"' class='price form-control'></td>"+
-        "<td><input type='text' placeholder='Product Note' name='note_"+CurrRowCount+"' class='note form-control'></td>"+
+        "<td><input type='text' placeholder='Product Quantity' name='quantity_"+CurrRowCount+"' class='quantity form-control' required></td>"+
+        "<td><input type='text' placeholder='Product Price' name='price_"+CurrRowCount+"' class='price form-control' required></td>"+
+        "<td><input type='text' placeholder='Product Note' name='note_"+CurrRowCount+"' class='note form-control' required></td>"+
         "<td>"+
         "<input type='hidden' class='qty_"+CurrRowCount+"' name='qty_"+CurrRowCount+"' value=''>"+
         "<input type='hidden' class='prc_"+CurrRowCount+"' name='prc_"+CurrRowCount+"' value=''>"+
@@ -195,16 +195,17 @@
 
         $('#purchaseProduct tbody').append(anotherRow);
         $('#productsrowcount').val(CurrRowCount);
+        selectRefresh();
 
     });
 
     function getParts(count){
         
-        var salesdropdownhtml = '<select name="parts_id_'+count+'" class="form-control js-example-basic-single" required>'
-        +'<option value=""> ---- Select --- </option>';
+        var salesdropdownhtml = '<select name="parts_id_'+count+'" class="form-control select select2 js-example-basic-single" data-plugin="select2" data-live-search="true" required>'
+        +'<option value=""> Select Any Parts/Item </option>';
         <?php 
         foreach ($data['parts'] as $part) {
-            echo 'salesdropdownhtml += \'<option value="'.$part->id.'">'.$part->parts_name.'</option>\'; ';
+            echo 'salesdropdownhtml += \'<option value="'.$part->id.'" data-subtext="'.$part->full_code.'" >'.$part->full_code.' -- '.$part->parts_name.'</option>\'; ';
         }
         ?>
 
@@ -212,19 +213,28 @@
         return salesdropdownhtml;
     }
 
-    function getSupplier(count){
-        var PurchaseProducthtml = '<select name="supplier_id_'+count+'" class="form-control select select2 js-example-basic-single" required>'
-        +'<option value=""> ---- Select --- </option>';
-
-        <?php 
-        foreach ($data['suppliers'] as $supplier) {
-            echo 'PurchaseProducthtml += \'<option value="'.$supplier->id.'">'.$supplier->supplier_name.'</option>\'; ';
-        }
-        ?>
-
-        PurchaseProducthtml += '</select>';
-        return PurchaseProducthtml;
+    function selectRefresh() {
+      $('.select2').select2({
+        //tags: true,
+        placeholder: "Select Any Parts/Item",
+        //allowClear: true,
+        width: '100%',
+        });
     }
+
+    // function getSupplier(count){
+    //     var PurchaseProducthtml = '<select name="supplier_id_'+count+'" class="form-control select select2 js-example-basic-single" required>'
+    //     +'<option value=""> ---- Select --- </option>';
+
+    //     <?php 
+    //     foreach ($data['suppliers'] as $supplier) {
+    //         echo 'PurchaseProducthtml += \'<option value="'.$supplier->id.'">'.$supplier->supplier_name.'</option>\'; ';
+    //     }
+    //     ?>
+
+    //     PurchaseProducthtml += '</select>';
+    //     return PurchaseProducthtml;
+    // }
 
 
     $('#purchaseProduct tbody').on("click", '.deletePurchaseProduct', function(){

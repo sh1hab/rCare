@@ -44,9 +44,13 @@ class ReportsController extends Controller
                                             // ->orderBy('parts.category_id')
                                             // ->orderBy('parts.compatible_brand_id')
                                             // ->orderBy('parts_stock_views.parts_id')
-                                            ->select('*')
-                                            ->get();
-        //dmd($data['stock_list']->toArray());
+                                            //->groupBy('parts_id')
+                                            //->select('*', DB::raw('SUM(`quantity`) as total_qty', 'parts_name as name'))
+                                            ->get()
+                                            ->toArray();
+
+
+        dmd($data['stock_list']);
 
 		$location_ids = array();
 		$location_short_names = array();
@@ -60,45 +64,50 @@ class ReportsController extends Controller
 		    $qtys[] = 0;
     	}
 
-		$data['location_count'] = count($location_ids);
+		$data['location_count'] = $location_count = count($location_ids);
         $data['location_ids'] = $location_ids;
 
         $stock_data = array();
         $parts_id = array();
+
+
         
-        // foreach ($data['stock_list']->toArray() as $key => $stock) {
+        foreach ($data['stock_list']->toArray() as $key => $stock) {
 
-        //         $stock_data[$key]['category'] = $stock['category_name'];
-        //         $stock_data[$key]['brand'] = $stock['brand_name'];
-        //         $stock_data[$key]['full_code'] = $stock['full_code'];
-        //         $stock_data[$key]['parts_name'] = $stock['parts_name'];
-        //         $stock_data[$key]['sales_price'] = $stock['sales_price'];
-        //         $stock_data[$key]['warranty_period'] = $stock['warranty_period'];
-        //         $stock_data[$key]['location_id'] = $stock['location_id'];
-        //         $stock_data[$key]['quantity'] = $stock['quantity'];
-        //         $stock_data[$key]['ave_purchase'] = $stock['avg_price'];
-        //         $stock_data[$key]['stock_level'] = $stock['stock_level'];
+                $stock_data[$key]['category'] = $stock['category_name'];
+                $stock_data[$key]['brand'] = $stock['brand_name'];
+                $stock_data[$key]['full_code'] = $stock['full_code'];
+                $stock_data[$key]['parts_name'] = $stock['parts_name'];
+                $stock_data[$key]['sales_price'] = $stock['sales_price'];
+                $stock_data[$key]['warranty_period'] = $stock['warranty_period'];
+                $stock_data[$key]['location_id'] = $stock['location_id'];
+                $stock_data[$key]['quantity'] = $stock['quantity'];
+                $stock_data[$key]['ave_purchase'] = $stock['avg_price'];
+                $stock_data[$key]['stock_level'] = $stock['stock_level'];
 
-                // $locs = '';
-                // for($i=0; $i<$location_count; $i++){
-                //     if($locs!='') $locs .= ',';
-                //     $locs .= $qtys_inner[$i];
-                //<?php echo $qtys_inner[$i];                
-                // }
+                $locs = '';
+                for($i = 0; $i < $location_count; $i++){
+                    if($locs!='') $locs .= ',';
+                    $locs .= $qtys_inner[$i];
+                    $qtys_inner[$i];                
+                }
 
-                // $loc = $location_id;
-                // $key = array_search($loc, $location_ids);
-                // if($key || $key===0) {
-                //     $qtys_inner[$key] = $quantity;
-                // }
+                $loc = $location_id;
+                $key = array_search($loc, $location_ids);
+                if($key || $key===0) {
+                    $qtys_inner[$key] = $quantity;
+                }
 
-                // $parts_row_total += $quantity;
-                // $total_qty += $quantity;
+                $parts_row_total += $quantity;
+                $total_qty += $quantity;
 
-                // $pre_parts_id = $parts_id;
+                $pre_parts_id = $parts_id;
 
 
-        // }
+        }
+
+
+        dmd($data['stock_list']->toArray(), $location_count, $location_ids);
 
     	$data['users'] = User::all();
     	return view('report.stock_list')->with('data', $data);

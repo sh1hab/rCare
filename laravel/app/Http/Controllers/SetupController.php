@@ -814,6 +814,8 @@ class SetupController extends Controller
     public function post_edit_user(Request $request)
     {
 
+        //dmd($_POST);
+
         $input_rules['user_name'] = 'required';
         $input_rules['designation'] = 'required';
         $input_rules['contact_no'] = 'required';

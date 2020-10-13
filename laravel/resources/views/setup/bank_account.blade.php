@@ -227,6 +227,9 @@
         $('.opening').val(opening);
         $('.remarks').val(remarks);
         $('.status[value='+status+']').prop("checked",true);
+
+        
+        $('.bank_id').selectpicker('val', bank_id);
     });
 
     $(document).on('click', '.edit_bank', function(e){

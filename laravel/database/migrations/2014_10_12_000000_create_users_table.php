@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('designation')->nullable();
             $table->string('contact_no');
-            $table->string('contact_no_1'))->nullable();
+            $table->string('contact_no_1')->nullable();
             $table->string('rs_id');
             $table->integer('user_role_id');
             $table->integer('location_id');

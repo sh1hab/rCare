@@ -230,7 +230,11 @@
           <li class="nav-item"><a href="{{ route('add-service') }}" class="nav-link {{ Request::path() == 'setup/service' ? 'active' : '' }}"> Service Type </a></li>
         </ul>
 
-        <a href="#" class="br-menu-link">
+        <?php 
+            $interchange = array('interchange-request');
+        ?>
+
+        <a href="#" class="br-menu-link {{ in_array(Request::path(), $interchange) ? 'sub-show' : '' }}">
           <div class="br-menu-item">
             <i class="menu-item-icon icon fa fa-exchange tx-20"></i>
             <span class="menu-item-label">Interchange</span>
@@ -238,8 +242,8 @@
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
 
-        <ul class="br-menu-sub nav flex-column">
-          <li class="nav-item"><a href="" class="nav-link"> Request </a></li>
+        <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $interchange) ? 'display: block' : '' }}">
+          <li class="nav-item"><a href="{{ route('interchange-request') }}" class="nav-link {{ Request::path() == 'interchange-request' ? 'active' : '' }}"> Request </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>

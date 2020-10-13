@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/setup/add_user', 'SetupController@add_user')->name('add-user');
 	Route::post('/setup/post_add_user', 'SetupController@post_add_user');
 	Route::get('/setup/edit_user/{id}', 'SetupController@edit_user')->name('edit-user');
+	Route::post('/setup/post_edit_user', 'SetupController@post_edit_user');
 
 
 	// ----------------------- purchase ---------------
@@ -128,6 +129,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/purchase/add_note', 'PurchaseController@add_note');
 
 	Route::get('datatables.data', 'PurchaseController@anyData')->name('datatables.data');
+
+
+	// ---------------------  interchange --------------------
+
+	Route::get('interchange-request', 'InterchangeController@request')->name('interchange-request');
+	Route::post('post-interchange', 'InterchangeController@request_create')->name('interchange-create');
 
 
 	// --------------------  report ----------------------

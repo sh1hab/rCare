@@ -20,6 +20,8 @@
                     <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10"> Edit User </h6>
                     <div class="form-layout form-layout-1">
 
+                        <input type="hidden" name="user_id" value="{{$data['user']->id}}">
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -42,7 +44,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-control-label"> Contact Number 2: </label>
-                                    <input class="form-control" type="text" name="contact_no_1" placeholder="Enter Contact Number" required="" value="{{ $data['user']->contact_no_1 }}">
+                                    <input class="form-control" type="text" name="contact_no_1" placeholder="Enter Contact Number" value="{{ $data['user']->contact_no_1 }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -65,7 +67,7 @@
                                     <label class="form-control-label"> User Role: <span class="tx-danger">*</span></label>
                                     <select class="form-control js-example-basic-single" data-live-search="true" title="Select Role" data-placeholder="" tabindex="-1" aria-hidden="true" name="role_id" required="">
                                         @foreach ($data['role'] as $role)
-                                            <option value="{{ $role->id }}" {{ ($role->id == $data['user']->user_role_id)?'class="selected"':'' }}> {{ $role->role_name }} </option>
+                                            <option value="{{ $role->id }}" {{ ($role->id == $data['user']->user_role_id)?'selected="selected""':'' }}> {{ $role->role_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -84,7 +86,7 @@
                                         <label class="form-control-label"> User Location: <span class="tx-danger">*</span></label>
                                         <select class="form-control js-example-basic-single" data-live-search="true" title="Select Location Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="location_id" required="">
                                             @foreach ($data['location'] as $location)
-                                                <option data-subtext="{{$location->location_short_name}}" value="{{ $location->id }}" {{ ($location->id == $data['user']->location_id)?'class="selected"':'' }}> {{ $location->location_name }} </option>
+                                                <option data-subtext="{{$location->location_short_name}}" value="{{ $location->id }}" {{ ($location->id == $data['user']->location_id)?'selected="selected"':'' }}> {{ $location->location_name }} </option>
                                             @endforeach
                                         </select> 
                                     </div>
@@ -173,9 +175,6 @@
                 jQuery.noConflict();
                 $('#edit_location_modal').modal('show'); 
             });
-
-            $(document).ready(function() {
-                $('.js-example-basic-single').select2();
-            });
+            
         </script>
         @endsection

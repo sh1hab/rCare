@@ -30,9 +30,9 @@
                 <div class="col-md-10">
                     <div class="form-group">
                         <label class="form-control-label"> Bank: <span class="tx-danger">*</span></label>
-                        <select class="form-control selectpicker" data-live-search="true" title="Select Bank Name"  tabindex="-1" aria-hidden="true" name="bank_id" required="">
+                        <select class="form-control selectpicker bank_id" data-live-search="true" title="Select Bank Name"  tabindex="-1" aria-hidden="true" name="bank_id" required="">
                             @foreach ($data['bank'] as $bank)
-                            <option value="{{ $bank->id }}"> {{ $bank->full_name }} </option>
+                                <option value="{{ $bank->id }}"> {{ $bank->full_name }} </option>
                             @endforeach
                         </select>
                     </div>
