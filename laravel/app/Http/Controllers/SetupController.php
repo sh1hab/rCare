@@ -107,7 +107,7 @@ class SetupController extends Controller
         $input_rules['location_name'] = 'required';
         $input_rules['location_short_name'] = 'required';
         $input_rules['location_type'] = 'required';
-        $input_rules['location_status'] = 'required';
+        $input_rules['status'] = 'required';
 
         $validator = Validator::make($request->all(), $input_rules);
 
@@ -128,7 +128,7 @@ class SetupController extends Controller
         $location->location_details = $request->get('location_details');  
         $location->location_type = $request->get('location_type');
         $location->location_opening_balance = $request->get('location_opening_balance');
-        $location->location_status = $request->get('location_status');
+        $location->status = $request->get('status');
         $location->create_by = Auth::user()->id;
         $location->update_by = Auth::user()->id;
 

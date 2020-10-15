@@ -1,5 +1,17 @@
 @extends('layout.app')
 @section('content')
+@section('custom_css')
+
+<style type="text/css">
+    .bigdrop {
+        width: 500px !important;
+    }
+    .table th, .table td {
+        padding: 5px;
+    }
+</style>
+
+@endsection
 <div class="br-pageheader pd-y-15 pd-l-20">
     <nav class="breadcrumb pd-0 mg-0 tx-12">
         <a class="breadcrumb-item" href=" {{URL::to('/dashboard')}} "> Dashboard </a>
@@ -55,7 +67,7 @@
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
-                                <table class="table mg-b-0" id="interchangeParts">
+                                <table class="table responsive table mg-b-0" id="interchangeParts">
                                     <thead>
                                         <tr>
                                             <th class="wd-40p"> Parts </th>
@@ -84,14 +96,12 @@
                                             </td>
                                             <td>
                                                 <label class="mg-t-10">
-                                                    <input type="checkbox" value="1">
+                                                    <input type="checkbox" name="instant_1" value="1">
                                                     <span>&nbsp;Instant</span>
                                                 </label>
                                             </td>
                                             <td>                                            
-                                                <input type="hidden" class="qty_1" name="qty_1" value="">
-                                                <input type="hidden" class="prc_1" name="prc_1" value="">
-                                                <input type="hidden" class="subtotal total_1" name="total_1" value="">
+                                                
                                             </td>
                                             <?php $j++; $serial_no++; ?>
                                         </tr>
@@ -154,7 +164,7 @@
 
     function getParts(count){
         
-        var salesdropdownhtml = '<select name="parts_id_'+count+'" class="form-control select select2 js-example-basic-single" data-plugin="select2" data-live-search="true" required>'
+        var salesdropdownhtml = '<select name="parts_id_'+count+'" class="form-control select select2 js-example-basic-single" data-live-search="true" required>'
         +'<option value=""> Select Any Parts/Item </option>';
         <?php 
         foreach ($data['parts'] as $part) {
@@ -189,7 +199,8 @@
         //tags: true,
         placeholder: "Select Any Parts/Item",
         //allowClear: true,
-        width: '100%',
+        //width: '100%',
+        dropdownCssClass : 'bigdrop'
         });
     }
 

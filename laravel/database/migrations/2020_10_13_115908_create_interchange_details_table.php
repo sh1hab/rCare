@@ -28,7 +28,7 @@ class CreateInterchangeDetailsTable extends Migration
             $table->dateTime('void_date')->nullable();
             $table->integer('void_by')->nullable();
             $table->tinyInteger('status')->default('1')->comment('1 = Request, 2 = Accept, 3 = Confirm, 4 = Void');
-            $table->tinyInteger('instant');
+            $table->tinyInteger('instant')->default('0')->comment('0 = No, 1 = Yes');
             $table->timestamps();
         });
     }

@@ -135,6 +135,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('interchange-request', 'InterchangeController@request')->name('interchange-request');
 	Route::post('post-interchange', 'InterchangeController@request_create')->name('interchange-create');
+	Route::get('request-to-others', 'InterchangeController@request_to_others')->name('request-to-others');
+	Route::get('request-to-me', 'InterchangeController@request_to_me')->name('request-to-me');
 
 
 	// --------------------  report ----------------------

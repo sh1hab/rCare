@@ -77,13 +77,13 @@
                                     <div class="row mg-t-10">
                                         <div class="col-lg-4">
                                             <label class="rdiobox">
-                                                <input name="location_status" value="1" type="radio" checked="">
+                                                <input name="status" value="1" type="radio" checked="">
                                                 <span> Active </span>
                                             </label>
                                         </div><!-- col-3 -->
                                         <div class="col-lg-4">
                                             <label class="rdiobox">
-                                                <input name="location_status" value="0" type="radio">
+                                                <input name="status" value="0" type="radio">
                                                 <span> Inactive </span>
                                             </label>
                                         </div><!-- col-3 -->
@@ -142,14 +142,14 @@
                                 @endif
                             </td>
                             <td>
-                                @if($location->location_status == 1)
+                                @if($location->status == 1)
                                     Active
                                 @else
                                     Inactive
                                 @endif
                             </td>
                             <td>
-                                <a href="javascript:void(0);" id="" data-id="{{ $location->id }}" data-full="{{ $location->location_name }}" data-short="{{ $location->location_short_name }}" data-details="{{ $location->location_details }}" data-opening="{{ $location->Location_opening_balance }}" data-status="{{ $location->location_status }}" data-type="{{ $location->location_type }}" class="btn btn-info btn-icon edit_location_modal">
+                                <a href="javascript:void(0);" id="" data-id="{{ $location->id }}" data-full="{{ $location->location_name }}" data-short="{{ $location->location_short_name }}" data-details="{{ $location->location_details }}" data-opening="{{ $location->Location_opening_balance }}" data-status="{{ $location->status }}" data-type="{{ $location->location_type }}" class="btn btn-info btn-icon edit_location_modal">
                                     <div><i class="fa fa-edit" title="Edit"></i></div>
                                 </a>
                             </td>

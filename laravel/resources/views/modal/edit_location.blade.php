@@ -73,13 +73,13 @@
                         <div class="row mg-t-10">
                             <div class="col-lg-4">
                                 <label class="rdiobox">
-                                    <input class="status" name="location_status" value="1" type="radio" checked="">
+                                    <input class="status" name="status" value="1" type="radio" checked="">
                                     <span> Active </span>
                                 </label>
                             </div><!-- col-3 -->
                             <div class="col-lg-4">
                                 <label class="rdiobox">
-                                    <input class="status" name="location_status" value="0" type="radio">
+                                    <input class="status" name="status" value="0" type="radio">
                                     <span> Inactive </span>
                                 </label>
                             </div><!-- col-3 -->

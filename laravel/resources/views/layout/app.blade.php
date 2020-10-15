@@ -231,7 +231,7 @@
         </ul>
 
         <?php 
-            $interchange = array('interchange-request');
+            $interchange = array('interchange-request', 'request-to-others', 'request-to-me');
         ?>
 
         <a href="#" class="br-menu-link {{ in_array(Request::path(), $interchange) ? 'sub-show' : '' }}">
@@ -244,7 +244,8 @@
 
         <ul class="br-menu-sub nav flex-column" style="{{ in_array(Request::path(), $interchange) ? 'display: block' : '' }}">
           <li class="nav-item"><a href="{{ route('interchange-request') }}" class="nav-link {{ Request::path() == 'interchange-request' ? 'active' : '' }}"> Request </a></li>
-          <li class="nav-item"><a href="" class="nav-link"> Accept </a></li>
+          <li class="nav-item"><a href="{{ route('request-to-others') }}" class="nav-link {{ Request::path() == 'request-to-others' ? 'active' : '' }}"> Req. To Others </a></li>
+          <li class="nav-item"><a href="{{ route('request-to-me') }}" class="nav-link {{ Request::path() == 'request-to-me' ? 'active' : '' }}"> Req. To Me </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Challan </a></li>
           <li class="nav-item"><a href="" class="nav-link"> Confirm </a></li>
         </ul>

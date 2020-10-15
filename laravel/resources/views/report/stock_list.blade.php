@@ -34,90 +34,92 @@
                             <th class="wd-5p"> Category </th>
                             <th class="wd-5p"> Brand </th>
                             <th class="wd-5p"> Code </th>
-                            <th class="wd-5p"> Parts </th>
+                            <th class="wd-10p"> Parts </th>
                             <th class="wd-5p"> Sales Price </th>
                             <th class="wd-5p"> Warranty </th>
                             <th class="wd-5p"> Stock Level </th>
                             <th class="wd-5p"> Stock Value </th>
                             <th class="wd-5p"> Quantity </th>
                             @php
-                            $locs = '';
-                            $qtys_inner = array();
-
-                            for($i=0; $i<$data['location_count']; $i++){
-                                if($locs!='') $locs .= ',';
-                                //$locs .= $qtys_inner[$i];
+                                $location_ids = array();
                             @endphp
-                               
-                                {{-- <td style="cursor: pointer;" onclick=""></td> --}}
-                                @php
-                            }
-                                
-                            @endphp
-
+                            @foreach ($data['locations'] as $location)
+                               <th class="wd-5p"> {{ $location->location_short_name }} </th>
+                               @php
+                                   $location_ids[] = $location->id;
+                               @endphp
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($data['stock_list']) > 0)
+                        @if(count($data['location_data']) > 0)
                             @php
-                                $i =1;
-                                $parts_row_total = 0;
-                                $total_qty = $total_stock_value = 0;
-                                $parts_ids = array();
+                                // $i =1;
+                                // $parts_row_total = 0;
+                                // $total_qty = $total_stock_value = 0;
+                                // $parts_ids = array();
                             @endphp
 
-                            @foreach($data['stock_list'] as $stock)
+                            @foreach($data['location_data'] as $stock)
 
                                 @php
+
                                     // $loc = $stock['location_id'];
                                     // $key = array_search($loc, $data['location_ids']);
                                     // if($key || $key===0) {
-                                    //     $qtys_inner[$key] =  $stock->quantity;
+                                    //     $qtys_inner[$key] =  $stock['quantity'];
                                     // }
-                                    
-                                    //$total_qty +=  $stock->quantity;
 
                                     // echo "<pre>";
-                                    // print_r($parts_row_total.' -- '.$stock->parts_id);
+                                    // print_r($qtys_inner);
+                                    
+                                    // $total_qty +=  $stock['quantity'];
 
-                                    if(in_array($stock->parts_id, $parts_ids))
-                                        $parts_row_total += $stock->quantity;
-                                    else
-                                        $parts_row_total = 0;
+                                    // if(in_array($stock['parts_id'], $parts_ids))
+                                    //     $parts_row_total += $stock['quantity'];
+                                    // else
+                                    //     $parts_row_total = 0;
+
+                                    // print_r($parts_row_total);
 
                                     
                                 @endphp
 
-                                @if(in_array($stock->parts_id, $parts_ids) == false)                               
+                                {{-- @if(in_array($stock['parts_id'], $parts_ids) == false)               --}}                 
                                     
                                 <tr>
-                                    <td> {{$stock->category_name}} </td>
-                                    <td> {{$stock->brand_name}} </td>
-                                    <td> {{$stock->full_code}} </td>
-                                    <td> {{$stock->parts_name}} --- {{$stock->parts_id}}</td>
-                                    <td> {{$stock->sales_price}} </td>
-                                    <td> {{$stock->warranty_period}} </td>
-                                    <td> {{$stock->stock_level}} </td>
-                                    <td> {{$stock->stock_level}} </td>
-                                    <td> {{$parts_row_total}} </td>
-                                </tr>
+                                    <td> {{$stock['category']}} </td>
+                                    <td> {{$stock['brand']}} </td>
+                                    <td> {{$stock['full_code']}} </td>
+                                    <td> {{$stock['parts_name']}} </td>
+                                    <td> {{$stock['sales_price']}} </td>
+                                    <td> {{$stock['warranty_period']}} </td>
+                                    <td> {{$stock['stock_level']}} </td>
+                                    <td> {{$stock['stock_value']}} </td>
+                                    <td> {{$stock['quantity']}} </td>
+
+                                    @foreach ($data['locations'] as $location)
+                                        <?php
+                                            //dmd($location);
+                                          if(in_array($location['id'], $stock['location_ids'])){
+                                             ?>
+                                             <td> {{ $stock['location_ids'][$location['id']] }} </td>
+                                        <?php  }else{
+                                        ?>
+                                            <td> 0 </td>
+                                        <?php
+                                            }
+                                         ?>
+                                      
+                                    @endforeach
+
+                                </tr>                                   
+                                    
+                                {{-- @endif
 
                                 @php
-                                   //$parts_row_total = 0;
-                                @endphp
-
-                                    
-                                    
-                                @endif
-
-                                @php
-                                    // if(in_array($stock->parts_id, $parts_ids))
-                                    //     $parts_row_total += $stock->quantity;
-                                    // else
-                                    //      $parts_row_total = 0;
-
-                                    $parts_ids[] = $stock->parts_id; 
-                                @endphp
+                                    $parts_ids[] = $stock['parts_id'];
+                                @endphp --}}
 
                             @endforeach                            
                         @else

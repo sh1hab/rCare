@@ -72,6 +72,7 @@ class InterchangeController extends Controller
                 $interchange_details->interchange_id = $interchange->id; 
                 $interchange_details->parts_id = $request->get('parts_id_'.$i);  
                 $interchange_details->quantity = $request->get('quantity_'.$i);
+                $interchange_details->instant = (isset($_POST['instant_'.$i]) && $_POST['instant_'.$i])?$_POST['instant_'.$i]:0;
                 $interchange_details->request_date = date('Y-m-d H:i:s');
                 $interchange_details->request_by = Auth::user()->id;
                 $interchange_details->save();                
@@ -81,5 +82,38 @@ class InterchangeController extends Controller
         }else{
                 return redirect()->back()->with('error_message', 'Failed to create new interchange request!!!');
         }
+    }
+
+    public function request_to_others()
+    {
+        $data['interchange_details'] = InterchangeDetails::where('interchanges.ic_from', Auth::user()->location_id)
+                                        ->Leftjoin('interchanges', 'interchanges.id', '=', 'interchange_details.interchange_id')
+                                        ->Leftjoin('locations as from_location', 'from_location.id', '=', 'interchanges.ic_from')
+                                        ->LeftJoin('locations as to_location', 'to_location.id', '=', 'interchanges.ic_to')
+                                        ->LeftJoin('users', 'users.id', '=', 'interchanges.request_by')
+                                        ->LeftJoin('parts', 'parts.id', '=', 'interchange_details.parts_id')
+                                        ->select('*', 'interchange_details.id as id', 'from_location.location_short_name as from_loc', 'to_location.location_short_name as to_loc', 'users.username as request_user')
+                                        ->get();
+                                        //->toArray();
+
+        //dmd($data['interchange_details']);
+        return view('interchange.request_to_others')->with('data', $data);
+    }
+
+
+    public function request_to_me()
+    {
+        $data['interchange_details'] = InterchangeDetails::where('interchanges.ic_to', Auth::user()->location_id)
+                                        ->Leftjoin('interchanges', 'interchanges.id', '=', 'interchange_details.interchange_id')
+                                        ->Leftjoin('locations as from_location', 'from_location.id', '=', 'interchanges.ic_from')
+                                        ->LeftJoin('locations as to_location', 'to_location.id', '=', 'interchanges.ic_to')
+                                        ->LeftJoin('users', 'users.id', '=', 'interchanges.request_by')
+                                        ->LeftJoin('parts', 'parts.id', '=', 'interchange_details.parts_id')
+                                        ->select('*', 'interchange_details.id as id', 'from_location.location_short_name as from_loc', 'to_location.location_short_name as to_loc', 'users.username as request_user')
+                                        ->get();
+                                        //->toArray();
+
+        //dmd($data['interchange_details']);
+        return view('interchange.request_to_me')->with('data', $data);
     }
 }
