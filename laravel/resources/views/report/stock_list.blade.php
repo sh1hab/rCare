@@ -53,74 +53,34 @@
                     </thead>
                     <tbody>
                         @if(count($data['location_data']) > 0)
-                            @php
-                                // $i =1;
-                                // $parts_row_total = 0;
-                                // $total_qty = $total_stock_value = 0;
-                                // $parts_ids = array();
-                            @endphp
-
-                            @foreach($data['location_data'] as $stock)
-
-                                @php
-
-                                    // $loc = $stock['location_id'];
-                                    // $key = array_search($loc, $data['location_ids']);
-                                    // if($key || $key===0) {
-                                    //     $qtys_inner[$key] =  $stock['quantity'];
-                                    // }
-
-                                    // echo "<pre>";
-                                    // print_r($qtys_inner);
-                                    
-                                    // $total_qty +=  $stock['quantity'];
-
-                                    // if(in_array($stock['parts_id'], $parts_ids))
-                                    //     $parts_row_total += $stock['quantity'];
-                                    // else
-                                    //     $parts_row_total = 0;
-
-                                    // print_r($parts_row_total);
-
-                                    
-                                @endphp
-
-                                {{-- @if(in_array($stock['parts_id'], $parts_ids) == false)               --}}                 
-                                    
+                            @foreach($data['location_data'] as $stock)                                    
                                 <tr>
-                                    <td> {{$stock['category']}} </td>
-                                    <td> {{$stock['brand']}} </td>
-                                    <td> {{$stock['full_code']}} </td>
-                                    <td> {{$stock['parts_name']}} </td>
-                                    <td> {{$stock['sales_price']}} </td>
-                                    <td> {{$stock['warranty_period']}} </td>
-                                    <td> {{$stock['stock_level']}} </td>
-                                    <td> {{$stock['stock_value']}} </td>
-                                    <td> {{$stock['quantity']}} </td>
+                                    <td> {{ $stock['category'] }} </td>
+                                    <td> {{ $stock['brand'] }} </td>
+                                    <td> {{ $stock['full_code'] }} </td>
+                                    <td> {{ $stock['parts_name'] }} </td>
+                                    <td> {{ $stock['sales_price'] }} </td>
+                                    <td> {{ $stock['warranty_period'] }} </td>
+                                    <td> {{ $stock['stock_level'] }} </td>
+                                    <td> {{ $stock['stock_value'] }} </td>
+                                    <td> {{ $stock['quantity'] }} </td>
 
                                     @foreach ($data['locations'] as $location)
-                                        <?php
-                                            //dmd($location);
-                                          if(in_array($location['id'], $stock['location_ids'])){
-                                             ?>
+                                        <?php 
+                                            if(in_array($location['id'], $stock['location_ids'])) { 
+                                        ?>
                                              <td> {{ $stock['location_ids'][$location['id']] }} </td>
-                                        <?php  }else{
+                                        <?php
+                                            }else{
                                         ?>
                                             <td> 0 </td>
                                         <?php
                                             }
-                                         ?>
+                                        ?>
                                       
                                     @endforeach
 
-                                </tr>                                   
-                                    
-                                {{-- @endif
-
-                                @php
-                                    $parts_ids[] = $stock['parts_id'];
-                                @endphp --}}
-
+                                </tr> 
                             @endforeach                            
                         @else
                             <tr>
