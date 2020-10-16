@@ -2,33 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Bank;
-use App\Location;
-use App\Service;
-use App\Card;
-use App\BankAccount;
-use App\Category;
-use App\Brand;
-use App\AssetType;
-use App\AssetHead;
-use App\Warranty;
-use App\Item;
-use App\Parts;
-use App\Supplier;
-use App\User;
-use App\CustomerClaim;
 use App\Customer;
-
-use Session;
-use Hash;
+use App\CustomerClaim;
+use App\Item;
+use App\Location;
+use App\Role;
+use App\Service;
+use App\User;
 use Auth;
-use Validator;
-use Redirect;
-use DB;
 use DataTables;
-
+use DB;
+use Hash;
 use Illuminate\Http\Request;
+use Redirect;
+use Session;
+use Validator;
 
 class CustomerController extends Controller
 {
@@ -43,11 +31,11 @@ class CustomerController extends Controller
     	return view('customer.claim')->with('data', $data);
     }
 
-    public function add_claim(Request $request)
+    public function addClaim(Request $request)
     {
-    	//dmd($_POST);
-    	$input_rules['location_id'] = 'required';
-    	$input_rules['service_type_id'] = 'required';
+        //dmd($_POST);
+        $input_rules['location_id'] = 'required';
+        $input_rules['service_type_id'] = 'required';
         $input_rules['invoice_no'] = 'required';
         $input_rules['invoice_date'] = 'required';
         $input_rules['customer_name'] = 'required';
@@ -80,7 +68,7 @@ class CustomerController extends Controller
 	        $customer->customer_address = $request->get('customer_address');
 	        $customer->create_by = Auth::user()->id;
 	        $customer->save();
-        }        
+        }
 
         $invoice_no = $this->create_invoice($request->get('location_id'));
 
@@ -123,13 +111,13 @@ class CustomerController extends Controller
         }
     }
 
-    public function check_customer(Request $request)
+    public function checkCustomer(Request $request)
     {
-    	if(isset($_POST['mobile'])){
-        	$customer = Customer::where('customer_mobile', $request->get('mobile'))->first();
+        if (isset($_POST['mobile'])) {
+            $customer = Customer::where('customer_mobile', $request->get('mobile'))->first();
         }
 
-        if($customer){
+        if ($customer) {
             return response()->json(['status' => true, 'msg' => 'Old/Valuable Customer of RCL']);
         }
         return response()->json(['status' => false, 'msg' => 'New Customer']);
@@ -139,15 +127,15 @@ class CustomerController extends Controller
     {
         $no_1 = $no_2 = '';
         $inv_info = CustomerClaim::where('rcv_location_id', $location_id)
-                                    ->where('rcv_no_1', '!=', '')
-                                    ->orderBy('id', 'desc')
-                                    ->first();      
+            ->where('rcv_no_1', '!=', '')
+            ->orderBy('id', 'desc')
+            ->first();
 
         if($inv_info){
             $no_1 = $inv_info->rcv_no_1;
             $no_2 = $inv_info->rcv_no_2;
         }
-        
+
         if($no_2 == '')
         {
             $rcv_1 = 'AA';
@@ -186,37 +174,37 @@ class CustomerController extends Controller
 
     }
 
-    public function claim_list()
+    public function claimList()
     {
         return view('customer.claim_list');
     }
 
-    public function claim_data(Request $request)
+    public function claimData(Request $request)
     {
         if ($request->ajax()) {
 
             $data = CustomerClaim::LeftJoin('locations', 'locations.id', '=', 'customer_claims.rcv_location_id')
-                        ->LeftJoin('customers', 'customers.id', '=', 'customer_claims.customer_id')
-                        ->LeftJoin('users as engineer', 'engineer.id', '=', 'customer_claims.engineer_id')
-                        ->LeftJoin('services', 'services.id', '=', 'customer_claims.type_id')
-                        ->LeftJoin('items', 'items.id', '=', 'customer_claims.item_type_id')
-                        ->LeftJoin('users as user', 'user.id', '=', 'customer_claims.received_by')
-                        ->select('*', 'customer_claims.id as claim_id', 'customer_claims.status as claim_status', 'engineer.name as engineer_name', 'customer_claims.remarks as claim_remarks')
+                ->LeftJoin('customers', 'customers.id', '=', 'customer_claims.customer_id')
+                ->LeftJoin('users as engineer', 'engineer.id', '=', 'customer_claims.engineer_id')
+                ->LeftJoin('services', 'services.id', '=', 'customer_claims.type_id')
+                ->LeftJoin('items', 'items.id', '=', 'customer_claims.item_type_id')
+                ->LeftJoin('users as user', 'user.id', '=', 'customer_claims.received_by')
+                ->select('*', 'customer_claims.id as claim_id', 'customer_claims.status as claim_status', 'engineer.name as engineer_name', 'customer_claims.remarks as claim_remarks')
                         ->get();
 
             return Datatables::of($data)
-                    ->editColumn('no', function ($data){
-                        return '';
-                    })
-                    ->addColumn('rcv_no', function ($data){
-                        return $data->rcv_no;
-                    })
-                    ->addColumn('claim_date', function ($data){
-                        return date('d-m-Y', strtotime($data->claim_date));
-                    }) 
-                    ->addColumn('approx_date', function ($data){
-                        return date('d-m-Y', strtotime($data->approx_date));
-                    }) 
+                ->editColumn('no', function ($data) {
+                    return '';
+                })
+                ->addColumn('rcv_no', function ($data) {
+                    return $data->rcv_no;
+                })
+                ->addColumn('claim_date', function ($data) {
+                    return date('d-m-Y', strtotime($data->claim_date));
+                })
+                ->addColumn('approx_date', function ($data) {
+                    return date('d-m-Y', strtotime($data->approx_date));
+                })
                     ->addColumn('claim_remarks', function($data){
                         return $data->claim_remarks;
                     })
@@ -228,16 +216,16 @@ class CustomerController extends Controller
                     // })
                     ->addColumn('status', function ($data) {
                        if($data->claim_status == 1){
-                            return 'Pending'; 
+                           return 'Pending';
                         }
                         else if($data->claim_status == 2){
-                            return 'Diagnosis'; 
+                            return 'Diagnosis';
                         }
                         else if($data->claim_status == 3){
-                            return 'Testing'; 
+                            return 'Testing';
                         }
                         else if($data->claim_status == 4){
-                            return 'Ready'; 
+                            return 'Ready';
                         }
                     })
                     ->addColumn('action', function($row){
@@ -245,7 +233,7 @@ class CustomerController extends Controller
                         $action = '<div class="dropdown">
                                     <a class="btn btn-primary" href="" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-angle-down"></i>
-                                    </a>    
+                                    </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="">Add Text</a>
                                         <a class="dropdown-item" href="">Add Text</a>
@@ -253,7 +241,7 @@ class CustomerController extends Controller
                                         <a class="dropdown-item" href="">Add Text</a>
                                     </div>
                                 </div>';
-  
+
                         return $action;
                     })
 
@@ -262,7 +250,7 @@ class CustomerController extends Controller
         }
     }
 
-    public function customer_list()
+    public function customerList()
     {
         $data['customers'] = Customer::all();
         return view('customer.customer_list')->with('data', $data);

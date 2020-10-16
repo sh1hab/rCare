@@ -39,35 +39,34 @@ Route::group(['middleware' => 'auth'], function () {
 
     // ----------------------customer claim---------------------
 
-    Route::get('/customer/claim', 'CustomerController@claim')->name('customer-claim');
-    Route::get('/customer/claim_list', 'CustomerController@claim_list')->name('claim-list');
-    Route::get('/customer/customer_list', 'CustomerController@customer_list')->name('customer-list');
-    Route::get('/customer/claim_data', 'CustomerController@claim_data')->name('claim-data');
+    Route::prefix('customer')->group(function () {
+        Route::get('/claim', 'CustomerController@claim')->name('customer-claim');
+        Route::get('/claim/list', 'CustomerController@claimList')->name('claim-list');
+        Route::get('/customer/list', 'CustomerController@customerList')->name('customer-list');
+        Route::get('/claim/data', 'CustomerController@claimData')->name('claim-data');
+        Route::post('/claim/add', 'CustomerController@addClaim');
+        Route::post('/check', 'CustomerController@checkCustomer');
+    });
 
-    Route::post('/customer/add_claim', 'CustomerController@add_claim');
-    Route::post('/customer/check_customer', 'CustomerController@check_customer');
-
-
-
-	// -----------------------Setup -----------------------------
+    // -----------------------Setup -----------------------------
 
     Route::get('/dashboard', 'SetupController@dashboard')->name('dashboard');
 
-	Route::get('/setup/bank', 'SetupController@bank')->name('add-bank');
-	Route::post('/setup/add_bank', 'SetupController@add_bank');
+    Route::get('/setup/bank', 'SetupController@bank')->name('add-bank');
+    Route::post('/setup/add_bank', 'SetupController@add_bank');
 
-	Route::get('/setup/location', 'SetupController@location')->name('add-location');
-	Route::post('/setup/add_location', 'SetupController@add_location');
+    Route::get('/setup/location', 'SetupController@location')->name('add-location');
+    Route::post('/setup/add_location', 'SetupController@add_location');
 
-	Route::get('/setup/category', 'SetupController@category')->name('category');
-	Route::post('/setup/add_category', 'SetupController@add_category');
-	Route::post('/setup/check_category_code', 'SetupController@check_category_code');
+    Route::get('/setup/category', 'SetupController@category')->name('category');
+    Route::post('/setup/add_category', 'SetupController@add_category');
+    Route::post('/setup/check_category_code', 'SetupController@check_category_code');
 
-	Route::get('/setup/brand', 'SetupController@brand')->name('add-brand');
-	Route::post('/setup/add_brand', 'SetupController@add_brand');
-	Route::post('/setup/check_brand_code', 'SetupController@check_brand_code');
+    Route::get('/setup/brand', 'SetupController@brand')->name('add-brand');
+    Route::post('/setup/add_brand', 'SetupController@add_brand');
+    Route::post('/setup/check_brand_code', 'SetupController@check_brand_code');
 
-	Route::get('/setup/card', 'SetupController@card')->name('add-card');
+    Route::get('/setup/card', 'SetupController@card')->name('add-card');
 	Route::post('/setup/add_card', 'SetupController@add_card');
 
 
