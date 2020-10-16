@@ -30,26 +30,17 @@
         <div class="col-md-4 offset-md-4">
             <form class="form-horizontal" action="{{ URL::to('purchase/request_list') }}" id="" role="form" method="post">
                 @csrf
-
                 <div class="br-section-wrapper" style="padding: 10px">
                     <div class="form-layout form-layout-1 request_search">
 
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
                                 <div class="form-group">
-                                    <label class="form-control-label"> {{ old('supplier_id') }} Supplier </label>
+                                    <label class="form-control-label"> Supplier </label>
                                     <select class="form-control js-example-basic-single" style="width: 100%" data-live-search="true" title="Select Supplier Name" data-placeholder="" tabindex="-1" aria-hidden="true" name="supplier_id">
-                                        {{-- @php
-                                            if(isset($_POST['supplier_id']) && $_POST['supplier_id'])
-                                                $supplier_id = $_POST['supplier_id'];
-                                            else
-                                                $supplier_id = 0;
-
-                                            {{ ($supplier_id == $supplier->id)? 'class="selected active"':'' }}
-                                        @endphp --}}
                                         <option value="0"> ALL Supplier </option>
                                         @foreach ($data['suppliers'] as $supplier)
-                                            <option value="{{ $supplier->id }}" <?php if($supplier->id == old('supplier_id')) { echo "selected"; } ?>> {{ $supplier->supplier_name }} </option>
+                                            <option value="{{ $supplier->id }}" <?php if( $supplier->id == Request::input('supplier_id') ) { echo "selected"; } ?>> {{ $supplier->supplier_name }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -64,7 +55,6 @@
                                 </div>
                             </div><!-- col-4 -->
                         </div><!-- row -->
-
 
                         <div class="form-layout-footer offset-md-4">
                             <button type="submit" class="btn btn-info">Search</button>

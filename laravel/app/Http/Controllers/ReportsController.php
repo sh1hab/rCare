@@ -40,12 +40,15 @@ class ReportsController extends Controller
 
     $data['locations'] = Location::where('status', 1)->get();
 
-    $data['stock_list'] = $stock_list = PartsStockView::select('parts_id', DB::raw('SUM(`quantity`) as total_qty'))
+    $data['stock_list'] = $stock_list = PartsStockView::select('*','parts_id', DB::raw('SUM(`quantity`) as total_qty'))
+                                            ->Leftjoin('parts', 'parts.id', '=', 'parts_stock_views.parts_id')
+                                            ->Leftjoin('locations', 'locations.id', '=', 'parts_stock_views.location_id')
                                            ->groupBy('parts_id')
                                            ->orderBy('parts_id', 'ASC')
                                            ->get()
                                            ->toArray();
 
+    // dmd($stock_list);
     $stock_data = array();
     
     foreach ($data['stock_list'] as $key => $stock) {

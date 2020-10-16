@@ -133,6 +133,9 @@ class SetupController extends Controller
         $location->update_by = Auth::user()->id;
 
         if($location->save()){
+
+            self::insert_location_stock_view($location->id);
+            
             return redirect()->back()->with('success_message', 'Location Successfully Saved');
         }else{
             return redirect()->back()->with('error_message', 'Failed to Save Location');
@@ -502,6 +505,25 @@ class SetupController extends Controller
                 $parts_stock_view = new PartsStockView();
                 $parts_stock_view->parts_id = $parts_id;
                 $parts_stock_view->location_id = $location->id;
+                $parts_stock_view->quantity = 0;
+                $parts_stock_view->save();
+            }
+        }
+    }
+
+
+    static function insert_location_stock_view($location_id)
+    {
+        $parts = Parts::where('status', 1)->get();
+
+        foreach ($parts as $key => $part) {
+            $locations = PartsStockView::where('location_id', $location_id)
+                                    ->where('parts_id', $part->id)
+                                    ->first();
+            if(!$locations){
+                $parts_stock_view = new PartsStockView();
+                $parts_stock_view->parts_id = $part->id;
+                $parts_stock_view->location_id = $location_id;
                 $parts_stock_view->quantity = 0;
                 $parts_stock_view->save();
             }
