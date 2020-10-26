@@ -27,8 +27,12 @@ Auth::routes();
 
 
 
+Route::get('/test/event','HomeController@test');
+
 Route::group(['middleware' => 'auth'], function () {
 
+
+	
     // Route::get('/', function ()    {
     //     // Uses Auth Middleware
     // });
