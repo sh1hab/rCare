@@ -13,7 +13,7 @@
             {{-- <div class="tx-center mg-b-60">The Admin Template For Perfectionist</div> --}}
 
             <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="Enter your username" required="" value="{{old('username')}}" autocomplete="off">                
+                <input type="text" class="form-control" name="email" placeholder="Enter your email" required="" value="{{old('email')}}" autocomplete="off">                
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">

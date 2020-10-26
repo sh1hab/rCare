@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return redirect('login');
-});
+// Route::get('/', function () {
+    // return redirect('login');
+// });
 
 Route::get('logout', 'Auth\LoginController@logout');
 
