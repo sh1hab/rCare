@@ -38,31 +38,31 @@ class ReportsController extends Controller
     public function stock_list()
     {
 
-    $data['locations'] = Location::where('status', 1)->get();
+        $data['locations'] = Location::where('status', 1)->get();
 
-    $data['stock_list'] = $stock_list = PartsStockView::select('*','parts_id', DB::raw('SUM(`quantity`) as total_qty'))
-                                            ->Leftjoin('parts', 'parts.id', '=', 'parts_stock_views.parts_id')
-                                            ->Leftjoin('locations', 'locations.id', '=', 'parts_stock_views.location_id')
-                                           ->groupBy('parts_id')
-                                           ->orderBy('parts_id', 'ASC')
-                                           ->get()
-                                           ->toArray();
+        // don't use select * 
+        $data['stock_list'] = $stock_list = PartsStockView::select('parts_id', DB::raw('SUM(`quantity`) as total_qty'))
+            ->Leftjoin('parts', 'parts.id', '=', 'parts_stock_views.parts_id')
+            ->Leftjoin('locations', 'locations.id', '=', 'parts_stock_views.location_id')
+            ->groupBy('parts_id')
+            ->orderBy('parts_id', 'ASC')
+            ->get()
+            ->toArray();
 
-    // dmd($stock_list);
-    $stock_data = array();
-    
-    foreach ($data['stock_list'] as $key => $stock) {
+        $stock_data = array();
 
-        $parts_info = Parts::where('parts.id', $stock['parts_id'])
-                        ->Leftjoin('categories', 'categories.id', '=', 'parts.category_id')
-                        ->Leftjoin('brands', 'brands.id', '=', 'parts.compatible_brand_id')
-                        ->Leftjoin('warranties', 'warranties.id', '=', 'parts.warranty_id')
-                        ->first()
-                        ->toArray();
+        foreach ($data['stock_list'] as $key => $stock) {
 
-        $parts_details = PartsStockView::where('parts_id', $stock['parts_id'])
-                                                ->join('parts', 'parts.id', '=', 'parts_stock_views.parts_id')
-                                                ->get()->toArray();
+            $parts_info = Parts::where('parts.id', $stock['parts_id'])
+                ->Leftjoin('categories', 'categories.id', '=', 'parts.category_id')
+                ->Leftjoin('brands', 'brands.id', '=', 'parts.compatible_brand_id')
+                ->Leftjoin('warranties', 'warranties.id', '=', 'parts.warranty_id')
+                ->first()
+                ->toArray();
+
+            $parts_details = PartsStockView::where('parts_id', $stock['parts_id'])
+                ->join('parts', 'parts.id', '=', 'parts_stock_views.parts_id')
+                ->get()->toArray();
 
             $stock_data[$key]['category'] = $parts_info['category_name'];
             $stock_data[$key]['brand'] = $parts_info['brand_name'];
@@ -74,22 +74,19 @@ class ReportsController extends Controller
             $stock_data[$key]['stock_level'] = $parts_info['stock_level'];
 
             $quantity = 0;
-            foreach ($parts_details as $key1 => $parts) { 
-                
+            foreach ($parts_details as $key1 => $parts) {
+
                 $stock_data[$key]['location_ids'][$parts['location_id']] = $parts['quantity'];
                 $quantity += $parts['quantity'];
-
             }
 
-            $stock_data[$key]['stock_value'] =  $parts_info['avg_price']*$quantity;
+            $stock_data[$key]['stock_value'] =  $parts_info['avg_price'] * $quantity;
             $stock_data[$key]['quantity'] = $quantity;
-    }
+        }
 
-    $data['location_data'] = $stock_data;
+        $data['location_data'] = $stock_data;
 
-    //dmd($data['location_data']);
-
-	$data['users'] = User::all();
-	return view('report.stock_list')->with('data', $data);
+        $data['users'] = User::all();
+        return view('report.stock_list')->with('data', $data);
     }
 }
